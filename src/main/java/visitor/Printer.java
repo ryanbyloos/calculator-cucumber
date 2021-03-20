@@ -32,10 +32,6 @@ public class Printer extends Visitor{
     public void visit(Variable v) { eval = v.toString(); }
 
     @Override
-    public void visit(Function f) { //TODO
-         }
-
-    @Override
     public void visit(Operation o) {
         String tmp = "";
         switch (notation) {

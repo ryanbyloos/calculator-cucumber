@@ -49,28 +49,15 @@ public class Variable implements Expression {
     }
 
     @Override
-    public Integer countDepth() {
-        //TODO
-        return null;
-    }
+    public Integer countDepth() { return 0; }
 
     @Override
-    public Integer countOps() {
-        //TODO
-        return null;
-    }
+    public Integer countOps() { return 0; }
 
     @Override
-    public Integer countNbs() {
-        //TODO
-        return null;
-    }
+    public Integer countNbs() { return 1; }
 
-    public String getVarName() {
-        return varName;
-    }
+    public String getVarName() { return varName; }
 
-    public MyNumber getValue() {
-        return value;
-    }
+    public int getValue(){ return value.getValue(); }
 }

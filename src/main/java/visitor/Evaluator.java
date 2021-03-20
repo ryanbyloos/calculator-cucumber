@@ -13,16 +13,13 @@ public class Evaluator extends Visitor {
     private int computedValue;
 
     public Integer getResult() { return computedValue; }
-
+    @Override
     public void visit(MyNumber n) {
         computedValue = n.getValue();
     }
-
     @Override
-    public void visit(Variable v) {
-        //TODO
-    }
-
+    public void visit(Variable v) { computedValue = v.getValue(); }
+    @Override
     public void visit(Operation o) {
         ArrayList<Integer> evaluatedArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
@@ -39,10 +36,4 @@ public class Evaluator extends Visitor {
         // store the accumulated result
         computedValue = temp;
     }
-
-    @Override
-    public void visit(Function f) {
-        //TODO
-    }
-
 }

@@ -11,5 +11,4 @@ public abstract class Visitor {
     public abstract void visit(MyNumber n);
     public abstract void visit(Variable v);
     public abstract void visit(Operation o);
-    public abstract void visit(Function f);
 }

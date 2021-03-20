@@ -1,5 +1,6 @@
 package calculator;
 
+import function.Function;
 import visitor.Evaluator;
 
 public class Calculator {
