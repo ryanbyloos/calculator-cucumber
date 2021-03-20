@@ -4,6 +4,8 @@ import calculator.Expression;
 import calculator.MyNumber;
 import calculator.Notation;
 import calculator.Operation;
+import function.Function;
+import function.Variable;
 
 public class Printer extends Visitor{
     private Notation notation;
@@ -25,6 +27,13 @@ public class Printer extends Visitor{
     public void visit(MyNumber n) {
         eval = n.toString();
     }
+
+    @Override
+    public void visit(Variable v) { eval = v.toString(); }
+
+    @Override
+    public void visit(Function f) { //TODO
+         }
 
     @Override
     public void visit(Operation o) {
