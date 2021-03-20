@@ -59,5 +59,5 @@ public class Variable implements Expression {
 
     public String getVarName() { return varName; }
 
-    public int getValue() { return value.getValue(); }
+    public int getValue(){ return value.getValue(); }
 }

@@ -30,9 +30,9 @@ public class TestFunction {
             Collections.addAll(param, x,  secondMember);
             Expression e = new Plus(param, Notation.INFIX);
 
-            Function f = new Function("",varList,e);
+            Function f = new Function("add",varList,e);
             // TEST variable as no value
-            String infix = "( " + x.getVarName() + " + " + secondMember.getValue() + " )";
+            String infix = "add(X):( " + x.getVarName() + " + " + secondMember.getValue() + " )";
 
             assertEquals(infix,f.toString());
 
@@ -43,10 +43,8 @@ public class TestFunction {
             ArrayList<MyNumber> values = new ArrayList<>();
             values.add(xValue);
 
-            f.set(values);
-
-            String infix2 = "( " + xValue.getValue() + " + " + secondMember.getValue() + " )";
-            assertEquals(infix2,f.toString());
+            String infix2 = "add(X):( " + xValue.getValue() + " + " + secondMember.getValue() + " )";
+            assertEquals(infix2,f.toString(values));
 
         }catch(IllegalConstruction exception) {
             System.out.println("cannot create operations without parameters");
@@ -87,39 +85,7 @@ public class TestFunction {
             ArrayList<MyNumber> values = new ArrayList<>();
             values.add(xValue);
 
-            f.set(values);
-
-            assertEquals(14,c.eval(f));
-        }catch(IllegalConstruction exception){
-            System.out.println("cannot create operations without parameters");
-        }
-    }
-
-    @Test
-    public void testFunctionComputeWithoutSet(){
-        try {
-            Calculator c = new Calculator();
-
-            // Init function
-            Variable x = new Variable("X");
-            ArrayList<Variable> varList = new ArrayList<>();
-            varList.add(x);
-
-            MyNumber secondMember = new MyNumber(2);
-
-            List<Expression> param = new ArrayList<>();
-            Collections.addAll(param, x, secondMember);
-            Expression e = new Plus(param, Notation.INFIX);
-
-            Function f = new Function("", varList, e);
-
-            // TEST variable as value
-            MyNumber xValue = new MyNumber(12);
-
-            ArrayList<MyNumber> values = new ArrayList<>();
-            values.add(xValue);
-
-            assertEquals(14,c.eval(f));
+            assertEquals(14,f.compute(values));
         }catch(IllegalConstruction exception){
             System.out.println("cannot create operations without parameters");
         }
