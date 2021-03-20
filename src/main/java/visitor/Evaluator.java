@@ -3,6 +3,8 @@ package visitor;
 import calculator.Expression;
 import calculator.MyNumber;
 import calculator.Operation;
+import function.Function;
+import function.Variable;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,11 @@ public class Evaluator extends Visitor {
 
     public void visit(MyNumber n) {
         computedValue = n.getValue();
+    }
+
+    @Override
+    public void visit(Variable v) {
+        //TODO
     }
 
     public void visit(Operation o) {
@@ -31,6 +38,11 @@ public class Evaluator extends Visitor {
         }
         // store the accumulated result
         computedValue = temp;
+    }
+
+    @Override
+    public void visit(Function f) {
+        //TODO
     }
 
 }
