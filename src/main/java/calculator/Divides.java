@@ -1,7 +1,6 @@
 package calculator;
 
 import visitor.Evaluator;
-import visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;

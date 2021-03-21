@@ -3,6 +3,8 @@ package calculator;
 import function.Function;
 import visitor.Evaluator;
 
+import java.util.List;
+
 public class Calculator {
 
     /*
@@ -36,6 +38,17 @@ public class Calculator {
         // and return the result of the evaluation at the end of the process
         return v.getResult();
     }
+
+    public int eval(List<MyNumber> values,Function f) throws BadAssignment{
+        // create a new visitor to evaluate expressions
+        Evaluator v = new Evaluator();
+        // and ask the expression to accept this visitor to start the evaluation process
+        f.compute(values,v);
+        // and return the result of the evaluation at the end of the process
+        return v.getResult();
+    }
+
+
 
     /*
      We could also have other methods, e.g. to verify whether an expression is syntactically correct

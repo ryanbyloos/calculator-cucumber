@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import calculator.*;
 import function.Function;
 import function.Variable;
+import io.cucumber.java.an.E;
 import org.junit.jupiter.api.*;
+import visitor.Evaluator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,10 +18,9 @@ public class TestFunction {
 
     @Test
     public void testFunctionDisplayPlus(){
-//        Function f = new Function();
-
         try {
-            Variable x = new Variable("X");
+            String varName = "X";
+            Variable x = new Variable(varName);
 
             ArrayList<Variable> varList = new ArrayList<>();
             varList.add(x);
@@ -43,11 +44,15 @@ public class TestFunction {
             ArrayList<MyNumber> values = new ArrayList<>();
             values.add(xValue);
 
-            String infix2 = "add(X):( " + xValue.getValue() + " + " + secondMember.getValue() + " )";
-            assertEquals(infix2,f.toString(values));
+            String infix2 = "add(X:12):( " + varName + " + " + secondMember.getValue() + " )";
+            try {
+                assertEquals(infix2, f.toString(values));
+            }catch (BadAssignment exception){
+                fail();
+            }
 
         }catch(IllegalConstruction exception) {
-            System.out.println("cannot create operations without parameters");
+            fail();
         }
     }
 
@@ -57,8 +62,35 @@ public class TestFunction {
     }
 
     @Test
-    public void testBadAssignement(){
-        //TODO
+    public void testBadAssignment(){
+        Function f;
+
+        Variable x = new Variable("X");
+
+        ArrayList<Variable> varList = new ArrayList<>();
+        varList.add(x);
+
+        MyNumber secondMember = new MyNumber(2);
+
+        List<Expression> param = new ArrayList<>();
+        Collections.addAll(param, x, secondMember);
+
+        try {
+            Expression e = new Plus(param, Notation.INFIX);
+
+            f = new Function("add", varList, e);
+        }catch (IllegalConstruction exception){
+            fail();
+            return;
+        }
+        // TEST variable as value
+        ArrayList<MyNumber> values = new ArrayList<>();
+
+        // test bad assignment to string
+        assertThrows(BadAssignment.class, () -> f.toString(values));
+        // test bad assignment to string
+        Evaluator v = new Evaluator();
+        assertThrows(BadAssignment.class, () -> f.compute(values,v));
     }
 
     @Test
@@ -85,9 +117,40 @@ public class TestFunction {
             ArrayList<MyNumber> values = new ArrayList<>();
             values.add(xValue);
 
-            assertEquals(14,f.compute(values));
+            Evaluator v = new Evaluator();
+            try {
+                assertEquals(14, f.compute(values, v));
+            }catch(BadAssignment exception){
+                fail();
+            }
         }catch(IllegalConstruction exception){
-            System.out.println("cannot create operations without parameters");
+            fail();
         }
+    }
+
+    @Test
+    public void testVarNotInParamFunction(){
+        Expression e;
+        ArrayList<Variable> varList;
+        try{
+            // Init function
+            Variable x = new Variable("X");
+            varList = new ArrayList<>();
+            varList.add(x);
+
+
+            Variable y = new Variable("Y");
+
+            MyNumber secondMember = new MyNumber(2);
+
+            List<Expression> param = new ArrayList<>();
+            Collections.addAll(param, y, secondMember);
+            e = new Plus(param, Notation.INFIX);
+        }catch(IllegalConstruction exception){
+            fail();
+            return;
+        }
+        assertThrows(IllegalConstruction.class, () -> new Function("", varList, e));
+
     }
 }

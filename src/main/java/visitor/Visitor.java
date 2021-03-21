@@ -2,7 +2,6 @@ package visitor;
 
 import calculator.MyNumber;
 import calculator.Operation;
-import function.Function;
 import function.Variable;
 
 /* Visitor design pattern

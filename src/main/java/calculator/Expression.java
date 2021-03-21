@@ -1,6 +1,5 @@
 package calculator;
 
-import visitor.Printer;
 import visitor.Visitor;
 
 public interface Expression {

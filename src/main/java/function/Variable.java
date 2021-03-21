@@ -5,7 +5,7 @@ import calculator.MyNumber;
 import visitor.Visitor;
 
 public class Variable implements Expression {
-    private String varName;
+    private final String varName;
     private MyNumber value;
 
     public Variable(String name){
@@ -37,9 +37,12 @@ public class Variable implements Expression {
 
     @Override
     public String toString() {
-        if(this.asValue())
-            return value.toString();
         return varName;
+    }
+
+    public String completeString(){
+        if (value == null) return varName;
+        return varName+":"+value.toString();
     }
 
     @Override
@@ -59,5 +62,7 @@ public class Variable implements Expression {
 
     public String getVarName() { return varName; }
 
-    public int getValue(){ return value.getValue(); }
+    public int getValue(){
+        return value.getValue();
+    }
 }
