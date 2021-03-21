@@ -1,6 +1,5 @@
 package visitor;
 
-import calculator.Expression;
 import calculator.MyNumber;
 import calculator.Operation;
 import function.Function;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 
 public class Validator extends Visitor{
     private boolean valid = true;
-    private ArrayList<Variable> vars;
+    private final ArrayList<Variable> vars;
 
     public Validator(Function f){
         vars = f.getVars();
@@ -26,8 +25,7 @@ public class Validator extends Visitor{
 
     @Override
     public void visit(Variable v) {
-        if (vars == null) valid = false;
-        if(!vars.contains(v)) valid = false;
+        if (vars == null || !vars.contains(v)) valid = false;
     }
 
     @Override

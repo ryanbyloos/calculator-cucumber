@@ -1,16 +1,11 @@
 package junit5tests;
 
-import calculator.IllegalConstruction;
 import calculator.MyNumber;
-import calculator.Times;
 import function.Variable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestVariable {
 

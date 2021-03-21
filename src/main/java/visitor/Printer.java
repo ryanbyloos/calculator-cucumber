@@ -4,11 +4,10 @@ import calculator.Expression;
 import calculator.MyNumber;
 import calculator.Notation;
 import calculator.Operation;
-import function.Function;
 import function.Variable;
 
 public class Printer extends Visitor{
-    private Notation notation;
+    private final Notation notation;
 
     private String eval;
 
@@ -33,31 +32,31 @@ public class Printer extends Visitor{
 
     @Override
     public void visit(Operation o) {
-        String tmp = "";
+        StringBuilder tmp = new StringBuilder();
         switch (notation) {
-            case INFIX  : tmp+="( "; break;
-            case PREFIX : tmp+=o.getSymbol()+" ("; break;
-            case POSTFIX: tmp+="("; break;
+            case INFIX  : tmp.append("( "); break;
+            case PREFIX : tmp.append(o.getSymbol()).append(" ("); break;
+            case POSTFIX: tmp.append("("); break;
         }
 
         for(Expression a:o.args.subList(0,o.args.size()-1)) {
             a.accept(this);
             if(notation == Notation.INFIX)
             {
-                tmp += eval + " " + o.getSymbol() + " ";
+                tmp.append(eval).append(" ").append(o.getSymbol()).append(" ");
             } else {
-                tmp += eval+ ", ";
+                tmp.append(eval).append(", ");
             }
         }
 
         o.args.get(o.args.size()-1).accept(this);
-        tmp += eval ;
+        tmp.append(eval);
 
         switch (notation) {
-            case INFIX  : tmp += " )"; break;
-            case PREFIX : tmp +=  ")"; break;
-            case POSTFIX: tmp += ") "+o.getSymbol(); break;
+            case INFIX  : tmp.append(" )"); break;
+            case PREFIX : tmp.append(")"); break;
+            case POSTFIX: tmp.append(") ").append(o.getSymbol()); break;
         }
-        eval = tmp;
+        eval = tmp.toString();
     }
 }

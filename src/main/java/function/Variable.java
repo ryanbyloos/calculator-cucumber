@@ -60,9 +60,24 @@ public class Variable implements Expression {
     @Override
     public Integer countNbs() { return 1; }
 
-    public String getVarName() { return varName; }
-
     public int getValue(){
         return value.getValue();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // No object should be equal to null (not including this check can result in an exception if a MyNumber is tested against null)
+        if (o == null) return false;
+
+        // If the object is compared to itself then return true
+        if (o == this) {
+            return true;
+        }
+
+        // If the object is of another type then return false
+        if (!(o instanceof Variable)) {
+            return false;
+        }
+        return this.varName.equals(((Variable) o).varName);
     }
 }

@@ -11,15 +11,12 @@ import java.util.Arrays;
 
 public class TestEvaluator {
 
-    @SuppressWarnings("unused")
-    private Evaluator visitor;
     private Calculator calc;
     private int value1, value2;
     private Expression op;
 
     @BeforeEach
     public void setUp() {
-        visitor = new Evaluator();
         calc = new Calculator();
         value1 = 8;
         value2 = 6;

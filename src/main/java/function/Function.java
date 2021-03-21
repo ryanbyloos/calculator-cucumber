@@ -13,9 +13,14 @@ public class Function {
     private final ArrayList<Variable> vars; // list of variables
     private final Expression e;
 
-    private boolean isAssign = false;
-
     public Function(String name,ArrayList<Variable> vars,Expression e) throws  IllegalConstruction{
+        // If find duplicate throw an IllegalConstruction
+        for(int i = 0 ; i < vars.size() ; i++){
+            for(int j = i+1 ; j < vars.size() ; j++){
+                if(vars.get(i).equals(vars.get(j))) throw new IllegalConstruction();
+            }
+        }
+
         this.name = name;
         this.vars = vars;
         this.e = e;
@@ -40,22 +45,18 @@ public class Function {
             for(int i = 0 ; i < values.size() ; i++){
                 vars.get(i).assignValue(values.get(i));
             }
-            isAssign = true;
         }else throw new BadAssignment();
     }
 
     /**
      * Clear variable
      */
-    private void clear(){
-        for(Variable v : vars) v.clear();
-        isAssign = false;
-    }
+    private void clear(){ for(Variable v : vars) v.clear(); }
 
     @Override
     public String toString() {
         StringBuilder tmp = new StringBuilder();
-        if (vars.size() >= 0){
+        if (vars.size() > 0){
             tmp = new StringBuilder(vars.get(0).completeString());
             for(int i = 1 ; i < vars.size() ; i++)
                 tmp.append(",").append(vars.get(i).completeString());
