@@ -33,14 +33,26 @@ public class Function {
     }
 
     public BigInteger compute(List<MyNumber> values, EvaluatorInteger v) throws  BadAssignment{
+        // set value
         set(values);
+
+        // verify if assignation is valid
+        Validator validator =  new Validator(this, Calculator.Mode.INTEGER);
+        if (!validator.isValid()) throw new BadAssignment();
+
         e.accept(v);
         clear();
         return v.getResult();
     }
 
     public BigDecimal compute(List<MyNumber> values, EvaluatorReal v) throws  BadAssignment{
+        // set value
         set(values);
+
+        // verify if assignation is valid
+        Validator validator =  new Validator(this, Calculator.Mode.REAL);
+        if (!validator.isValid()) throw new BadAssignment();
+
         e.accept(v);
         clear();
         return v.getResult();

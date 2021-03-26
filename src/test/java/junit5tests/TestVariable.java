@@ -1,9 +1,13 @@
 package junit5tests;
 
+import calculator.Divides;
+import calculator.Expression;
 import calculator.IntegerNumber;
 import function.Variable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -46,5 +50,21 @@ public class TestVariable {
         IntegerNumber n = new IntegerNumber(Integer.toString(i));
         var.assignValue(n);
         assertEquals(name+":"+i, var.completeString());
+    }
+
+    @Test
+    public void testVariableFirstDivide(){
+        ArrayList<Expression> l = new ArrayList<>();
+        l.add(new Variable("X"));
+        l.add(new IntegerNumber("12"));
+        assertDoesNotThrow(() -> new Divides(l));
+    }
+
+    @Test
+    public void testVariableSecondDivide(){
+        ArrayList<Expression> l = new ArrayList<>();
+        l.add(new IntegerNumber("12"));
+        l.add(new Variable("X"));
+        assertDoesNotThrow(() -> new Divides(l));
     }
 }

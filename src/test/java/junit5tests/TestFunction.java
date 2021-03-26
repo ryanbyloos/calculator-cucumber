@@ -261,4 +261,29 @@ public class TestFunction {
             fail();
         }
     }
+    @Test
+    public void testFunctionDivideVarZero(){
+        try {
+            ArrayList<Variable> vars = new ArrayList<>();
+            vars.add(x);
+
+            Expression two = new IntegerNumber("2");
+            ArrayList<Expression> el = new ArrayList<>();
+            el.add(two);
+            el.add(x);
+
+            Expression e = new Divides(el);
+
+            Function f = new Function("2/n", vars, e);
+
+            ArrayList<MyNumber> values = new ArrayList<>();
+            values.add(new RealNumber("0.0"));
+
+            Calculator c = new Calculator(Calculator.Mode.REAL);
+            assertThrows(BadAssignment.class,() -> c.eval(values,f));
+
+        }catch (IllegalConstruction e){
+            fail();
+        }
+    }
 }
