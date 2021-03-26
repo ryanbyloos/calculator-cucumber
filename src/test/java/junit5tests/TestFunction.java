@@ -7,8 +7,10 @@ import calculator.*;
 import function.Function;
 import function.Variable;
 import org.junit.jupiter.api.*;
-import visitor.Evaluator;
+import visitor.EvaluatorInteger;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +21,7 @@ public class TestFunction {
     private Variable x,y;
 
     @BeforeEach
-    public void set_up(){
+    public void setUp(){
         x = new Variable(x_var_name);
         y = new Variable(y_var_name);
     }
@@ -30,7 +32,7 @@ public class TestFunction {
             ArrayList<Variable> varList = new ArrayList<>();
             varList.add(x);
 
-            MyNumber secondMember = new MyNumber(2);
+            MyNumber secondMember = new IntegerNumber("2");
 
             List<Expression> param = new ArrayList<>();
             Collections.addAll(param, x,  secondMember);
@@ -38,18 +40,18 @@ public class TestFunction {
 
             Function f = new Function("add",varList,e);
             // TEST variable as no value
-            String infix = "add("+x_var_name+"):( " +x_var_name + " + " + secondMember.getValue() + " )";
+            String infix = "add("+x_var_name+"):( " +x_var_name + " + " + secondMember.toString() + " )";
 
             assertEquals(infix,f.toString());
 
 
             // TEST variable as value
-            MyNumber xValue = new MyNumber(12);
+            MyNumber xValue = new IntegerNumber("12");
 
             ArrayList<MyNumber> values = new ArrayList<>();
             values.add(xValue);
 
-            String infix2 = "add("+x_var_name+":"+xValue.getValue()+"):( " + x_var_name + " + " + secondMember.getValue() + " )";
+            String infix2 = "add("+x_var_name+":"+xValue.toString()+"):( " + x_var_name + " + " + secondMember.toString() + " )";
             try {
                 assertEquals(infix2, f.toString(values));
             }catch (BadAssignment exception){
@@ -81,8 +83,8 @@ public class TestFunction {
 
 
             // TEST variable as value
-            MyNumber xValue = new MyNumber(12);
-            MyNumber yValue = new MyNumber(3);
+            MyNumber xValue = new IntegerNumber("12");
+            MyNumber yValue = new IntegerNumber("3");
 
             ArrayList<MyNumber> values = new ArrayList<>();
             values.add(xValue);
@@ -127,7 +129,7 @@ public class TestFunction {
         ArrayList<Variable> varList = new ArrayList<>();
         varList.add(x);
 
-        MyNumber secondMember = new MyNumber(2);
+        MyNumber secondMember = new IntegerNumber("2");
 
         List<Expression> param = new ArrayList<>();
         Collections.addAll(param, x, secondMember);
@@ -146,7 +148,7 @@ public class TestFunction {
         // test bad assignment to string
         assertThrows(BadAssignment.class, () -> f.toString(values));
         // test bad assignment to string
-        Evaluator v = new Evaluator();
+        EvaluatorInteger v = new EvaluatorInteger();
         assertThrows(BadAssignment.class, () -> f.compute(values,v));
     }
 
@@ -157,7 +159,7 @@ public class TestFunction {
             ArrayList<Variable> varList = new ArrayList<>();
             varList.add(x);
 
-            MyNumber secondMember = new MyNumber(2);
+            MyNumber secondMember = new IntegerNumber("2");
 
             List<Expression> param = new ArrayList<>();
             Collections.addAll(param, x, secondMember);
@@ -166,14 +168,14 @@ public class TestFunction {
             Function f = new Function("", varList, e);
 
             // TEST variable as value
-            MyNumber xValue = new MyNumber(12);
+            MyNumber xValue = new IntegerNumber("12");
 
             ArrayList<MyNumber> values = new ArrayList<>();
             values.add(xValue);
 
-            Evaluator v = new Evaluator();
+            EvaluatorInteger v = new EvaluatorInteger();
             try {
-                assertEquals(14, f.compute(values, v));
+                assertEquals(new BigInteger("14"), f.compute(values, v));
             }catch(BadAssignment exception){
                 fail();
             }
@@ -191,7 +193,7 @@ public class TestFunction {
             varList = new ArrayList<>();
             varList.add(x);
 
-            MyNumber secondMember = new MyNumber(2);
+            MyNumber secondMember = new IntegerNumber("2");
 
             List<Expression> param = new ArrayList<>();
             Collections.addAll(param, y, secondMember);
@@ -209,7 +211,7 @@ public class TestFunction {
             ArrayList<Variable> vars = new ArrayList<>();
             vars.add(x);
 
-            Expression two = new MyNumber(2);
+            Expression two = new IntegerNumber("2");
             ArrayList<Expression> el = new ArrayList<>();
             el.add(two);
             el.add(x);
@@ -219,12 +221,12 @@ public class TestFunction {
             Function f = new Function("2times", vars, e);
 
             ArrayList<MyNumber> values = new ArrayList<>();
-            MyNumber seven = new MyNumber(7);
+            MyNumber seven = new IntegerNumber("7");
             values.add(seven);
 
-            Calculator c = new Calculator();
+            Calculator c = new Calculator(Calculator.Mode.INTEGER);
             try {
-                assertEquals(14,c.eval(values, f));
+                assertEquals(new BigDecimal(14),c.eval(values, f));
             }catch (BadAssignment exception){
                 fail();
             }
@@ -240,7 +242,7 @@ public class TestFunction {
             ArrayList<Variable> vars = new ArrayList<>();
             vars.add(x);
 
-            Expression two = new MyNumber(2);
+            Expression two = new IntegerNumber("2");
             ArrayList<Expression> el = new ArrayList<>();
             el.add(two);
             el.add(x);
@@ -251,7 +253,7 @@ public class TestFunction {
 
             ArrayList<MyNumber> values = new ArrayList<>();
 
-            Calculator c = new Calculator();
+            Calculator c = new Calculator(Calculator.Mode.INTEGER);
 
             assertThrows(BadAssignment.class,() -> c.eval(values,f));
 

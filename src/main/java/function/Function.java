@@ -1,9 +1,12 @@
 package function;
 
 import calculator.*;
-import visitor.Evaluator;
+import visitor.EvaluatorInteger;
+import visitor.EvaluatorReal;
 import visitor.Validator;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +32,14 @@ public class Function {
         if(!v.isValid()) throw  new IllegalConstruction();
     }
 
-    public int compute(List<MyNumber> values,Evaluator v) throws  BadAssignment{
+    public BigInteger compute(List<MyNumber> values, EvaluatorInteger v) throws  BadAssignment{
+        set(values);
+        e.accept(v);
+        clear();
+        return v.getResult();
+    }
+
+    public BigDecimal compute(List<MyNumber> values, EvaluatorReal v) throws  BadAssignment{
         set(values);
         e.accept(v);
         clear();

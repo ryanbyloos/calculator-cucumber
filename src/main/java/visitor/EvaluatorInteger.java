@@ -1,33 +1,44 @@
 package visitor;
 
 import calculator.Expression;
-import calculator.MyNumber;
+import calculator.IntegerNumber;
 import calculator.Operation;
+import calculator.RealNumber;
 import function.Variable;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
-public class Evaluator extends Visitor {
+public class EvaluatorInteger extends Visitor {
 
-    private int computedValue;
+    private BigInteger computedValue;
 
-    public Integer getResult() { return computedValue; }
+    public BigInteger getResult() { return computedValue; }
     @Override
-    public void visit(MyNumber n) {
+    public void visit(IntegerNumber n) {
         computedValue = n.getValue();
     }
+
     @Override
-    public void visit(Variable v) { computedValue = v.getValue(); }
+    public void visit(RealNumber n) {
+        computedValue = n.getValue().toBigInteger(); // TODO NOT CORRECT WE NEED TO VERIFY IF THAT CAN BE CAST
+    }
+
+    @Override
+    public void visit(Variable v) {
+        if(v.asValue()) // TODO HANDLE VALUE NOT DEFINED
+            v.getValue().accept(this);
+    }
     @Override
     public void visit(Operation o) {
-        ArrayList<Integer> evaluatedArgs = new ArrayList<>();
+        ArrayList<BigInteger> evaluatedArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
         for(Expression a:o.args) {
             a.accept(this);
             evaluatedArgs.add(computedValue);
         }
         //second loop to accummulate all the evaluated subresults
-        int temp = evaluatedArgs.get(0);
+        BigInteger temp = evaluatedArgs.get(0);
         int max = evaluatedArgs.size();
         for(int counter=1; counter<max; counter++) {
             temp = o.op(temp,evaluatedArgs.get(counter));

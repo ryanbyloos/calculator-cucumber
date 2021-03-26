@@ -1,9 +1,6 @@
 package visitor;
 
-import calculator.Expression;
-import calculator.MyNumber;
-import calculator.Notation;
-import calculator.Operation;
+import calculator.*;
 import function.Variable;
 
 public class Printer extends Visitor{
@@ -23,7 +20,12 @@ public class Printer extends Visitor{
     }
 
     @Override
-    public void visit(MyNumber n) {
+    public void visit(IntegerNumber n) {
+        eval = n.toString();
+    }
+
+    @Override
+    public void visit(RealNumber n) {
         eval = n.toString();
     }
 

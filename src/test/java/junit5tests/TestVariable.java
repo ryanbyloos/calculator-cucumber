@@ -1,6 +1,6 @@
 package junit5tests;
 
-import calculator.MyNumber;
+import calculator.IntegerNumber;
 import function.Variable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,7 +43,7 @@ public class TestVariable {
     @Test
     public void testToStringWithAssignment() {
         int i = 2;
-        MyNumber n = new MyNumber(i);
+        IntegerNumber n = new IntegerNumber(Integer.toString(i));
         var.assignValue(n);
         assertEquals(name+":"+i, var.completeString());
     }

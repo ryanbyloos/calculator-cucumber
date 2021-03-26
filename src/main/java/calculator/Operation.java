@@ -3,10 +3,13 @@ package calculator;
 import visitor.Printer;
 import visitor.Visitor;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Operation implements Expression {
+    public static int CONST_ROUNDED = 10;
     public List<Expression> args;
     protected String symbol;
     protected int neutral; // the neutral element of the operation (e.g. 1 for *, 0 for +)
@@ -33,7 +36,8 @@ public abstract class Operation implements Expression {
         notation = n;
     }
 
-    abstract public int op(int l, int r);
+    abstract public BigInteger op(BigInteger l, BigInteger r);
+    abstract public BigDecimal op(BigDecimal l, BigDecimal r);
     // the operation itself is specified in the subclasses
 
     // add more arguments to the existing list of arguments args
@@ -96,16 +100,6 @@ public abstract class Operation implements Expression {
 
         Operation other = (Operation) o;
         return this.args.equals(other.getArgs());
-    }
-
-    // The method hashCode also needs to be overridden it the equals method is overridden; otherwise there may be problems when you use your object in hashed collections such as HashMap, HashSet, LinkedHashSet
-    @Override
-    public int hashCode() {
-        int result = 5, prime = 31;
-        result = prime * result + neutral;
-        result = prime * result + symbol.hashCode();
-        result = prime * result + args.hashCode();
-        return result;
     }
 
     public String getSymbol() {

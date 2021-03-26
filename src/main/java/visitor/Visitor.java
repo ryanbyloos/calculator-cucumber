@@ -1,13 +1,15 @@
 package visitor;
 
-import calculator.MyNumber;
+import calculator.IntegerNumber;
 import calculator.Operation;
+import calculator.RealNumber;
 import function.Variable;
 
 /* Visitor design pattern
  */
 public abstract class Visitor {
-    public abstract void visit(MyNumber n);
+    public abstract void visit(IntegerNumber n);
+    public abstract void visit(RealNumber n);
     public abstract void visit(Variable v);
     public abstract void visit(Operation o);
 }

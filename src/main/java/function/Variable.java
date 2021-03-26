@@ -60,8 +60,8 @@ public class Variable implements Expression {
     @Override
     public Integer countNbs() { return 1; }
 
-    public int getValue(){
-        return value.getValue();
+    public MyNumber getValue(){
+        return value;
     }
 
     @Override
