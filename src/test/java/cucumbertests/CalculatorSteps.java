@@ -19,14 +19,14 @@ public class CalculatorSteps {
 	private Calculator c;
 
 	@Before
-    public void resetMemoryBeforeEachScenario() {
+	public void resetMemoryBeforeEachScenario() {
 		params = null;
 		op = null;
 	}
 
 	@Given("I initialise a calculator")
 	public void givenIInitialiseACalculator() {
-		c = new Calculator();
+		c = new Calculator(Calculator.Mode.INTEGER);
 	}
 
 	@Given("an integer operation {string}")
@@ -55,22 +55,21 @@ public class CalculatorSteps {
 		params = new ArrayList<>();
 		// Since we only use one line of input, we use get(0) to take the first line of the list,
 		// which is a list of strings, that we will manually convert to integers:
-		numbers.get(0).forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
-	    params.forEach(n -> System.out.println("value ="+ n));
+		numbers.get(0).forEach(n -> params.add(new IntegerNumber(n)));
+		params.forEach(n -> System.out.println("value ="+ n));
 		op = null;
 	}
 
 	// The string in the Given annotation shows how to use regular expressions...
 	// In this example, the notation d+ is used to represent numbers, i.e. nonempty sequences of digits
-	@Given("^the sum of two numbers (\\d+) and (\\d+)$")
 	// The alternative, and in this case simpler, notation would be:
-	// @Given("the sum of two numbers {int} and {int}")
-	public void givenTheSum(int n1, int n2) {
+	 @Given("the sum of two numbers {word} and {word}")
+	public void givenTheSum(String n1, String n2) {
 		try {
 			params = new ArrayList<>();
-		    params.add(new MyNumber(n1));
-		    params.add(new MyNumber(n2));
-		    op = new Plus(params);}
+			params.add(new IntegerNumber(n1));
+			params.add(new IntegerNumber(n2));
+			op = new Plus(params);}
 		catch(IllegalConstruction e) { fail(); }
 	}
 
@@ -83,13 +82,13 @@ public class CalculatorSteps {
 		else fail(notation + " is not a correct notation! ");
 	}
 
-	@When("^I provide a (.*) number (\\d+)$")
-	public void whenIProvideANumber(String s, int val) {
-		params.add(new MyNumber(val));
+	@When("I provide a {word} number {word}")
+	public void whenIProvideANumber(String s, String val) {
+		params.add(new IntegerNumber(val));
 	}
 
-	@Then("^the (.*) is (\\d+)$")
-	public void thenTheOperationIs(String s, int val) {
+	@Then("the {word} is {word}")
+	public void thenTheOperationIs(String s, String val) {
 		try {
 			switch (s) {
 				case "sum": { op = new Plus(params); break; }
@@ -104,13 +103,11 @@ public class CalculatorSteps {
 		}
 	}
 
-	@Then("the operation evaluates to {int}")
-	public void thenTheOperationEvaluatesTo(int val) {
+	@Then("the operation evaluates to {word}")
+	public void thenTheOperationEvaluatesTo(String val) {
 		//During previous @When steps, extra parameters may have been added to the operation
 		//so we complete its parameter list here:
 		op.addMoreParams(params);
 		assertEquals(val, c.eval(op));
-
 	}
-
 }

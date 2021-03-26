@@ -5,38 +5,40 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
 import calculator.*;
-import visitor.Evaluator;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.Arrays;
 
 public class TestEvaluator {
 
-    @SuppressWarnings("unused")
-    private Evaluator visitor;
     private Calculator calc;
     private int value1, value2;
     private Expression op;
 
     @BeforeEach
     public void setUp() {
-        visitor = new Evaluator();
-        calc = new Calculator();
+        calc = new Calculator(Calculator.Mode.REAL);
         value1 = 8;
         value2 = 6;
     }
 
     @Test
     public void testEvaluatorMyNumber() {
-        assertEquals( value1,
-                      calc.eval(new MyNumber(value1)));
+        assertEquals( Integer.toString(value1),
+                      calc.eval(new IntegerNumber(Integer.toString(value1))));
     }
 
     @Test
     public void testEvaluatorDivides() {
-        try { op = new Divides(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
-          assertEquals( value1 / value2,
+        try { op = new Divides(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
+            BigDecimal expected = new BigDecimal("1.33333");
+            Operation.CONST_ROUNDED = 5;
+            expected.divide(new BigDecimal(6), 2, RoundingMode.HALF_UP);
+            assertEquals( expected.toString() ,
                         calc.eval(op) );
-          }
+            }
         catch(IllegalConstruction e) {
             fail();
         }
@@ -44,8 +46,9 @@ public class TestEvaluator {
 
     @Test
     public void testEvaluatorPlus() {
-        try { op = new Plus(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
-            assertEquals( value1 + value2,
+        try { op = new Plus(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
+            BigInteger expected = new BigInteger("14");
+            assertEquals( expected.toString(),
                     calc.eval(op) );
         }
         catch(IllegalConstruction e) {
@@ -55,8 +58,9 @@ public class TestEvaluator {
 
     @Test
     public void testEvaluatorMinus() {
-        try { op = new Minus(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
-            assertEquals( value1 - value2,
+        try { op = new Minus(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
+            BigInteger expected = new BigInteger("2");
+            assertEquals( expected.toString(),
                     calc.eval(op) );
         }
         catch(IllegalConstruction e) {
@@ -66,8 +70,9 @@ public class TestEvaluator {
 
     @Test
     public void testEvaluatorTimes() {
-        try { op = new Times(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
-            assertEquals( value1 * value2,
+        try { op = new Times(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
+            BigInteger expected = new BigInteger("48");
+            assertEquals( expected.toString(),
                     calc.eval(op) );
         }
         catch(IllegalConstruction e) {

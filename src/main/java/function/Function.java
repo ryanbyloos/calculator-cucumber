@@ -1,31 +1,45 @@
 package function;
 
-import calculator.Expression;
-import calculator.IllegalConstruction;
-import calculator.MyNumber;
-import visitor.Evaluator;
-import visitor.Visitor;
+import calculator.*;
+import visitor.EvaluatorInteger;
+import visitor.EvaluatorReal;
+import visitor.Validator;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Function {
 
-    private String name; // name of the function
-    private ArrayList<Variable> vars; // list of variables
-    private Expression e;
+    private final String name; // name of the function
+    private final ArrayList<Variable> vars; // list of variables
+    private final Expression e;
 
-    private boolean isAssign = false;
+    public Function(String name,ArrayList<Variable> vars,Expression e) throws  IllegalConstruction{
+        // If find duplicate throw an IllegalConstruction
+        for(int i = 0 ; i < vars.size() ; i++){
+            for(int j = i+1 ; j < vars.size() ; j++){
+                if(vars.get(i).equals(vars.get(j))) throw new IllegalConstruction();
+            }
+        }
 
-    public Function(String name,ArrayList<Variable> vars,Expression e){
         this.name = name;
         this.vars = vars;
         this.e = e;
+
+        Validator v = new Validator(this);
+        if(!v.isValid()) throw  new IllegalConstruction();
     }
 
-    public int compute(List<MyNumber> values) throws  IllegalConstruction{
-        Evaluator v = new Evaluator();
+    public BigInteger compute(List<MyNumber> values, EvaluatorInteger v) throws  BadAssignment{
+        set(values);
+        e.accept(v);
+        clear();
+        return v.getResult();
+    }
 
+    public BigDecimal compute(List<MyNumber> values, EvaluatorReal v) throws  BadAssignment{
         set(values);
         e.accept(v);
         clear();
@@ -36,42 +50,38 @@ public class Function {
      * Set value to variable
      * @param values
      */
-    private void set(List<MyNumber> values) throws IllegalConstruction{
+    private void set(List<MyNumber> values) throws BadAssignment {
         if(values.size() == vars.size()){
             for(int i = 0 ; i < values.size() ; i++){
                 vars.get(i).assignValue(values.get(i));
             }
-            isAssign = true;
-        }else throw new IllegalConstruction();
+        }else throw new BadAssignment();
     }
 
     /**
      * Clear variable
      */
-    private void clear(){
-        for(Variable v : vars) v.clear();
-        isAssign = false;
-    }
-
-    public void accept(Visitor v){
-        e.accept(v);
-    }
+    private void clear(){ for(Variable v : vars) v.clear(); }
 
     @Override
     public String toString() {
-        String tmp = "";
-        if (vars.size() >= 0){
-            tmp = vars.get(0).getVarName();
+        StringBuilder tmp = new StringBuilder();
+        if (vars.size() > 0){
+            tmp = new StringBuilder(vars.get(0).completeString());
             for(int i = 1 ; i < vars.size() ; i++)
-                tmp+=","+vars.get(i).getVarName();
+                tmp.append(",").append(vars.get(i).completeString());
         }
         return name+"("+tmp+")"+":"+e.toString();
     }
 
-    public String toString(List<MyNumber> values) throws  IllegalConstruction {
+    public String toString(List<MyNumber> values) throws BadAssignment {
         set(values);
         String tmp = toString();
         clear();
         return tmp;
     }
+
+    public ArrayList<Variable> getVars() { return vars; }
+
+    public Expression getExpression() { return e; }
 }
