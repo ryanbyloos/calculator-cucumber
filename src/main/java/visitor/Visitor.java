@@ -1,9 +1,12 @@
 package visitor;
 
 import calculator.IntegerNumber;
+import calculator.MyNumber;
 import calculator.Operation;
 import calculator.RealNumber;
 import function.Variable;
+
+import java.sql.Time;
 
 /* Visitor design pattern
  */

@@ -19,6 +19,7 @@ public class Printer extends Visitor{
         return eval;
     }
 
+
     @Override
     public void visit(IntegerNumber n) {
         eval = n.toString();
@@ -28,6 +29,8 @@ public class Printer extends Visitor{
     public void visit(RealNumber n) {
         eval = n.toString();
     }
+
+    public void visit(MyNumber n) {  eval = n.toString();}
 
     @Override
     public void visit(Variable v) { eval = v.toString(); }
