@@ -2,6 +2,7 @@ package visitor;
 
 import calculator.*;
 import function.Variable;
+import time.Time;
 
 public class Printer extends Visitor{
     private final Notation notation;
@@ -19,6 +20,8 @@ public class Printer extends Visitor{
         return eval;
     }
 
+    @Override
+    public void visit(Time n) {eval = n.toString();}
 
     @Override
     public void visit(IntegerNumber n) {

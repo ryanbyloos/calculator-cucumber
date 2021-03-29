@@ -38,14 +38,22 @@ public class TestConvert {
     }
     @Test
     public void testEquals() {
-        // Two similar expressions, constructed separately (and using different constructors) should be equal
-        ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
         RealNumber e = new RealNumber("10.0");
         BigDecimal eval = calc.evalReal(e);
-        eval = eval.divide(Unit.Meter.getratio(),Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
-        eval = eval.multiply(Unit.Meter.getratio());
-        int bool = eval.compareTo(e.getValue());
-        assertEquals(0,bool);
+        for (Unit unit : Unit.values())
+        {
+
+            eval = eval.divide(unit.getratio(),Operation.CONST_ROUNDED, RoundingMode.HALF_DOWN);
+            eval = eval.multiply(unit.getratio()).setScale(Operation.CONST_ROUNDED,RoundingMode.HALF_UP);
+            BigDecimal res = eval.subtract(e.getValue()) ;
+            float tested = res.floatValue();
+            Boolean bool = Math.abs(tested )< 0.000001 ;
+//            System.out.println(unit );
+//            System.out.println(eval + " Eval");
+//            System.out.println(e.getValue() + " base");
+            assertTrue(bool);
+        }
+
     }
 
 }

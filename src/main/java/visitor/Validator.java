@@ -3,6 +3,7 @@ package visitor;
 import calculator.*;
 import function.Function;
 import function.Variable;
+import time.Time;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,11 @@ public class Validator extends Visitor{
 
     @Override
     public void visit(Operation o) {
+
+    }
+
+    @Override
+    public void visit(Time time) {
 
     }
 }
