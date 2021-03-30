@@ -1,37 +1,37 @@
 package function;
 
 import calculator.*;
+import calculator.exceptions.BadAssignment;
+import calculator.exceptions.IllegalConstruction;
 import visitor.EvaluatorInteger;
-import visitor.EvaluatorReal;
-import visitor.Validator;
+import visitor.FunctionValidator;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * Class that represents a function with one variable x
+ */
 public class Function {
     private final Variable var;
     private final Expression e;
 
-    public Function(Variable var,Expression e) throws  IllegalConstruction{
+    public Function(Variable var,Expression e) throws IllegalConstruction {
         this.var = var;
         this.e = e;
 
         // check if there are only the same var in e
-        Validator v = new Validator();
-        v.visit(this);
-        if(!v.isValid()) throw  new IllegalConstruction();
+        FunctionValidator v = new FunctionValidator();
+
+        if(!v.verify(this,null)) throw  new IllegalConstruction();
     }
 
-    public BigInteger compute(MyNumber value, EvaluatorInteger v) throws  BadAssignment{
+    public BigInteger compute(MyNumber value, EvaluatorInteger v) throws BadAssignment {
         // set value
         var.assignValue(value);
 
         // verify if assignation is valid
-        Validator validator =  new Validator(Calculator.Mode.INTEGER);
-        validator.visit(this);
-        if (!validator.isValid()) throw new BadAssignment();
+        FunctionValidator validator =  new FunctionValidator();
+        if (!validator.verify(this, Calculator.Mode.INTEGER)) throw new BadAssignment();
 
         e.accept(v);
         var.clear();

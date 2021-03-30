@@ -1,12 +1,13 @@
 package junit5tests;
 import calculator.*;
 import Converter.*;
+import calculator.exceptions.ComputeError;
+import calculator.exceptions.IllegalConvertionArgument;
+import calculator.operations.Operation;
 import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,11 +40,17 @@ public class TestConvert {
     @Test
     public void testEquals() {
         RealNumber e = new RealNumber("10.0");
-        BigDecimal eval = calc.evalReal(e);
+        BigDecimal eval;
+        try {
+            eval = calc.evalReal(e).getValue();
+        }catch (ComputeError ce){
+            fail();
+            return;
+        }
         for (Unit unit : Unit.values())
         {
 
-            eval = eval.divide(unit.getratio(),Operation.CONST_ROUNDED, RoundingMode.HALF_DOWN);
+            eval = eval.divide(unit.getratio(), Operation.CONST_ROUNDED, RoundingMode.HALF_DOWN);
             eval = eval.multiply(unit.getratio()).setScale(Operation.CONST_ROUNDED,RoundingMode.HALF_UP);
             BigDecimal res = eval.subtract(e.getValue()) ;
             float tested = res.floatValue();

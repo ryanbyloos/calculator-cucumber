@@ -1,5 +1,9 @@
-package calculator;
+package calculator.operations;
 
+import calculator.Expression;
+import calculator.Notation;
+import calculator.exceptions.ComputeError;
+import calculator.exceptions.IllegalConstruction;
 import visitor.Printer;
 import visitor.Visitor;
 
@@ -16,7 +20,7 @@ public abstract class Operation implements Expression {
     public Notation notation = Notation.INFIX; //by default, expressions are rendered as strings using infix notation
 
     // It is not allowed to create operation that have a null list of arguments.
-    // Note that it is allowed to have an EMPTY list of arguments.
+    // Note that it is allowed to have an EMPTY list of arguments. // TODO
     public /*constructor*/ Operation(List<Expression> elist)
             throws IllegalConstruction {
         if (elist == null) {
@@ -36,8 +40,8 @@ public abstract class Operation implements Expression {
         notation = n;
     }
 
-    abstract public BigInteger op(BigInteger l, BigInteger r);
-    abstract public BigDecimal op(BigDecimal l, BigDecimal r);
+    abstract public BigInteger op(BigInteger l, BigInteger r) throws ComputeError;
+    abstract public BigDecimal op(BigDecimal l, BigDecimal r) throws ComputeError;
     // the operation itself is specified in the subclasses
 
     // add more arguments to the existing list of arguments args

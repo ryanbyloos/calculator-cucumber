@@ -1,7 +1,12 @@
-package calculator;
+package calculator.operations;
+
+import calculator.Expression;
+import calculator.Notation;
+import calculator.exceptions.IllegalConstruction;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 final public class Plus extends Operation

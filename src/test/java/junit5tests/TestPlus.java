@@ -8,6 +8,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.*;
+import calculator.exceptions.IllegalConstruction;
+import calculator.operations.Plus;
+import calculator.operations.Times;
 import org.junit.jupiter.api.*;
 
 

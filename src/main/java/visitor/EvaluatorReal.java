@@ -2,7 +2,8 @@ package visitor;
 
 import calculator.Expression;
 import calculator.IntegerNumber;
-import calculator.Operation;
+import calculator.exceptions.ComputeError;
+import calculator.operations.Operation;
 import calculator.RealNumber;
 import function.Variable;
 import time.Time;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 
 public class EvaluatorReal extends Visitor{
     private BigDecimal computedValue;
+    private ComputeError exception; // if the expression throw an exception
 
     public BigDecimal getResult() { return computedValue; }
 
@@ -42,7 +44,11 @@ public class EvaluatorReal extends Visitor{
         BigDecimal temp = evaluatedArgs.get(0);
         int max = evaluatedArgs.size();
         for(int counter=1; counter<max; counter++) {
-            temp = o.op(temp,evaluatedArgs.get(counter));
+            try{
+                temp = o.op(temp,evaluatedArgs.get(counter));
+            }catch (ComputeError e){
+                exception = e;
+            }
         }
         // store the accumulated result
         computedValue = temp;
@@ -52,4 +58,6 @@ public class EvaluatorReal extends Visitor{
     public void visit(Time time) {
 
     }
+
+    public ComputeError getException() { return exception; }
 }

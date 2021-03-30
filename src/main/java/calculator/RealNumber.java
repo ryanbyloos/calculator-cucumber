@@ -3,6 +3,7 @@ package calculator;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 public class RealNumber extends MyNumber{
     private final BigDecimal value;
@@ -17,16 +18,36 @@ public class RealNumber extends MyNumber{
         v.visit(this);
     }
 
+    public BigInteger toBigInteger() throws ArithmeticException{
+        return value.toBigIntegerExact();
+    }
+
     @Override
     public String toString(){
         String res = value.toString();
-        if(res.split("\\.").length == 1 && res.length()>7){
+        System.out.println(res);
+        String[] splited = res.split("\\.");
+
+        if(splited.length == 1 && res.length()>7){
             int exp = 0; // counter of zero number
-            for (int i = res.length()-1 ; i>0 ; i-- ){
+            for (int i = res.length()-1 ; i>=0 ; i-- ){
                 if(res.charAt(i) == '0') exp+=1;
                 else break;
             }
             return String.format("%c.%sE%d",res.charAt(0),res.substring(1,res.length()-exp),res.length()-1);
+        }else if (splited.length == 2 ){
+            int exp = 0; // counter of zero number
+            System.out.println("I  L "+(splited[1].length()-1) );
+            for (int i = splited[1].length()-1 ; i>=0 ; i-- ){
+                if(splited[1].charAt(i) == '0') exp+=1;
+                else break;
+            }
+            System.out.println(exp);
+            if(exp == splited[1].length()){ // if decimal part is full of zero return integer part
+                return splited[0];
+            }else{
+                return String.format("%s.%s",splited[0], splited[1].substring(0,splited[1].length()-exp));
+            }
         }
         return res;
     }

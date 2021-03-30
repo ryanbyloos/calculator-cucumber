@@ -1,5 +1,10 @@
-package calculator;
+package calculator.operations;
 
+import calculator.Expression;
+import calculator.Notation;
+import calculator.exceptions.DivisionByZeroError;
+import calculator.exceptions.DivisionByZeroException;
+import calculator.exceptions.IllegalConstruction;
 import visitor.EvaluatorReal;
 
 import java.math.BigDecimal;
@@ -15,7 +20,7 @@ final public class Divides extends Operation {
         EvaluatorReal evaluator = new EvaluatorReal(); //TODO adapt for
         for (int i = 1; i < elist.size(); i++) {
             elist.get(i).accept(evaluator);
-            if (evaluator.getResult() != null && evaluator.getResult().compareTo(new BigDecimal(0)) == 0 ) { // If equals to 0
+            if (evaluator.getResult() != null && evaluator.getResult().compareTo(new BigDecimal("0")) == 0 ) { // If equals to 0
                 throw new DivisionByZeroException();
             } else {
                 args = new ArrayList<>(elist);
@@ -30,7 +35,7 @@ final public class Divides extends Operation {
         EvaluatorReal evaluator = new EvaluatorReal(); //TODO adapt for
         for (int i = 1; i < elist.size(); i++) {
             elist.get(i).accept(evaluator);
-            if (evaluator.getResult() != null && evaluator.getResult().compareTo(new BigDecimal(0)) == 0) {  // If equals to 0
+            if (evaluator.getResult() != null && evaluator.getResult().compareTo(new BigDecimal("0")) == 0) {  // If equals to 0
                 throw new DivisionByZeroException();
             } else {
                 args = new ArrayList<>(elist);
@@ -41,7 +46,11 @@ final public class Divides extends Operation {
     }
 
     public BigInteger op(BigInteger l, BigInteger r) { return l.divide(r); }
-    public BigDecimal op(BigDecimal l, BigDecimal r) {
-        return l.divide(r, Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
+    public BigDecimal op(BigDecimal l, BigDecimal r) throws DivisionByZeroError {
+        try {
+            return l.divide(r, Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
+        }catch (ArithmeticException e){
+            throw new DivisionByZeroError();
+        }
     }
 }

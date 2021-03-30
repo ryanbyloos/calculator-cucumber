@@ -4,12 +4,18 @@ package junit5tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.*;
+import calculator.exceptions.BadAssignment;
+import calculator.exceptions.DivisionByZeroException;
+import calculator.exceptions.IllegalConstruction;
+import calculator.operations.Divides;
+import calculator.operations.Operation;
+import calculator.operations.Plus;
+import calculator.operations.Times;
 import function.Function;
 import function.Variable;
 import org.junit.jupiter.api.*;
 import visitor.EvaluatorInteger;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -186,6 +192,29 @@ public class TestFunction {
             fail();
         }
     }
+
+    @Test
+    public void testFunctionDivideResOne(){
+        try {
+            Expression two = new IntegerNumber("2");
+            ArrayList<Expression> el = new ArrayList<>();
+            el.add(two);
+            el.add(var1);
+
+            Expression e = new Divides(el);
+
+            Function f = new Function(var1, e);
+
+            Calculator c = new Calculator(Calculator.Mode.REAL);
+
+            assertEquals("1",c.eval(new IntegerNumber("2") ,f));
+
+        }catch (Exception e){
+            System.out.println(e.getClass());
+            fail();
+        }
+    }
+
     @Test
     public void testFunctionDivideVarZero(){
         try {
@@ -201,9 +230,11 @@ public class TestFunction {
             RealNumber zero = new RealNumber("0.0");
 
             Calculator c = new Calculator(Calculator.Mode.REAL);
-            assertThrows(BadAssignment.class,() -> c.eval(zero ,f));
+            System.out.println(c.eval(new IntegerNumber("2") ,f));
 
-        }catch (IllegalConstruction e){
+            assertEquals("ERROR : Division By Zero Error",c.eval(zero ,f));
+
+        }catch (Exception e){
             fail();
         }
     }

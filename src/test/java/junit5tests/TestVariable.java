@@ -1,6 +1,6 @@
 package junit5tests;
 
-import calculator.Divides;
+import calculator.operations.Divides;
 import calculator.Expression;
 import calculator.IntegerNumber;
 import function.Variable;

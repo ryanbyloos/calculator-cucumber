@@ -1,7 +1,12 @@
-package calculator;
+package calculator.operations;
+
+import calculator.Expression;
+import calculator.Notation;
+import calculator.exceptions.IllegalConstruction;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 final public class Minus extends Operation
@@ -17,7 +22,7 @@ final public class Minus extends Operation
 		symbol = "-";
 		neutral = 0;
 	}
-  
+
 	public BigInteger op(BigInteger l, BigInteger r) {
 	return l.add(r.negate());
 	}

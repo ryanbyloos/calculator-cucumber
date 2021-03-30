@@ -1,19 +1,25 @@
 package calculator;
 
+import calculator.exceptions.BadAssignment;
+import calculator.exceptions.ComputeError;
+import calculator.exceptions.IllegalConvertionArgument;
+import calculator.operations.Operation;
 import function.Function;
 import visitor.EvaluatorInteger;
 import visitor.EvaluatorReal;
-import visitor.Validator;
+import visitor.FunctionValidator;
 import Converter.Unit;
 
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
-import java.util.List;
+import java.util.HashMap;
 
 public class Calculator {
     public enum Mode {INTEGER,REAL,CONVERSION}
+
+    private HashMap<String,Function> storedFun;
 
     private final Mode mode;
     /*
@@ -27,53 +33,77 @@ public class Calculator {
 
     public Calculator(Mode m){
         mode = m;
+        storedFun = new HashMap<>();
     }
     public Calculator(Mode m,int round){
-        mode = m;
+        this(m);
         Operation.CONST_ROUNDED =round;
     }
 
 
-    public void print(Expression e) {
-        System.out.println("The result of evaluating expression " + e);
-        if(mode == Mode.INTEGER)
-            System.out.println("is: " + evalInteger(e) + ".");
-        else if( mode == Mode.REAL)
-            System.out.println("is: " + evalReal(e) + ".");
-        System.out.println();
-    }
+//    public void print(Expression e) {
+//        System.out.println("The result of evaluating expression " + e);
+//        if(mode == Mode.INTEGER)
+//            System.out.println("is: " + evalInteger(e) + ".");
+//        else if( mode == Mode.REAL)
+//            System.out.println("is: " + evalReal(e) + ".");
+//        System.out.println();
+//    }
 
-    public void printExpressionDetails(Expression e) {
-        print(e);
-        System.out.print("It contains " + e.countDepth() + " levels of nested expressions, ");
-        System.out.print(e.countOps() + " operations");
-        System.out.println(" and " + e.countNbs() + " numbers.");
-        System.out.println();
-    }
+//    public void printExpressionDetails(Expression e) {
+//        print(e);
+//        System.out.print("It contains " + e.countDepth() + " levels of nested expressions, ");
+//        System.out.print(e.countOps() + " operations");
+//        System.out.println(" and " + e.countNbs() + " numbers.");
+//        System.out.println();
+//    }
 
     public String eval(Expression e){
-        if(mode == Mode.INTEGER)
-            return evalInteger(e).toString();
-        else if(mode == Mode.REAL)
-            return evalReal(e).toString();
+        try {
+            if (mode == Mode.INTEGER)
+                return evalInteger(e).toString();
+            else if (mode == Mode.REAL)
+                return evalReal(e).toString();
+        }catch(ComputeError ce){
+            return "Error"+ce.getMessage();
+        }
 
         return null; // TODO handle ERROR CASE
     }
 
-    public String eval(MyNumber value,Function f) throws BadAssignment{
+    public void addFunction(String key,Function f) throws BadAssignment{
+
+    }
+
+    /**
+     * Return value of function or error message as string
+     * @param value value of
+     * @param f
+     * @return
+     * @throws BadAssignment
+     */
+    public String eval(MyNumber value,Function f) throws BadAssignment {
         String res;
         f.setValue(value);
 
-        Validator validator =  new Validator(mode);
-        validator.visit(f);
-        if (!validator.isValid()) throw new BadAssignment();
+        FunctionValidator v =  new FunctionValidator();
+
+        if (!v.verify(f,mode)) throw new BadAssignment();
 
         switch (mode){
             case INTEGER:
-                res = evalInteger(f.getExpression()).toString();
+                try {
+                    res = evalInteger(f.getExpression()).toString();
+                }catch (ComputeError ce){
+                    return "ERROR : "+ce.getMessage();
+                }
                 break;
             case REAL:
-                res = evalReal(f.getExpression()).toString();
+                try {
+                    res = evalReal(f.getExpression()).toString();
+                }catch (ComputeError ce){
+                    return "ERROR : "+ce.getMessage();
+                }
                 break;
             default:
                 throw new BadAssignment(); // Should not be here
@@ -84,7 +114,7 @@ public class Calculator {
     }
 
 
-    public String convert(Expression e,Unit base, Unit aimed) throws IllegalConvertionArgument{
+    public String convert(Expression e,Unit base, Unit aimed) throws IllegalConvertionArgument {
         if(base.getType() != aimed.getType()){
             throw new IllegalConvertionArgument();
         }
@@ -95,11 +125,16 @@ public class Calculator {
     //        eval = eval.divide(base.getratio(),Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
     //        return "0";
     //    }
-        BigDecimal eval = evalReal(e);
-        eval = eval.divide(base.getratio(),Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
-        eval = eval.multiply(aimed.getratio());
-        String res = eval.toString() + aimed.getFullName();
-        return res;
+        try {
+            BigDecimal eval = evalReal(e).getValue();
+
+            eval = eval.divide(base.getratio(), Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
+            eval = eval.multiply(aimed.getratio());
+            String res = eval.toString() + aimed.getFullName();
+            return res;
+        }catch (ComputeError ce){
+            return "ERROR: "+ce.getMessage();// TODO AVERTIR NICOLO
+        }
     }
 
 /*    public BigInteger convert(Expression e, Unit unit ) {
@@ -113,22 +148,24 @@ public class Calculator {
     }
 */
 
-    public BigInteger evalInteger(Expression e) {
+    public IntegerNumber evalInteger(Expression e) throws ComputeError{
         // create a new visitor to evaluate expressions
         EvaluatorInteger v = new EvaluatorInteger();
         // and ask the expression to accept this visitor to start the evaluation process
         e.accept(v);
+        if(v.getException() != null ) throw v.getException();
         // and return the result of the evaluation at the end of the process
-        return v.getResult();
+        return new IntegerNumber(v.getResult().toString());
     }
 
-    public BigDecimal evalReal(Expression e) {
+    public RealNumber evalReal(Expression e)  throws ComputeError {
         // create a new visitor to evaluate expressions
         EvaluatorReal v = new EvaluatorReal();
         // and ask the expression to accept this visitor to start the evaluation process
         e.accept(v);
+        if(v.getException() != null ) throw v.getException();
         // and return the result of the evaluation at the end of the process
-        return v.getResult();
+        return new RealNumber(v.getResult().toString());
     }
 
     /*

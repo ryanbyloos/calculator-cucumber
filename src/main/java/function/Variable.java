@@ -4,6 +4,9 @@ import calculator.Expression;
 import calculator.MyNumber;
 import visitor.Visitor;
 
+/**
+ *
+ */
 public class Variable implements Expression {
     public final String varName = "X";
     private MyNumber value;
