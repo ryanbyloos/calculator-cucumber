@@ -99,12 +99,6 @@ public enum Unit {
 
 
 
-    /////////////////////////////Temperature///////////////////////////////////////////////
-    /*
-    Celsius("Temperature", "Degree Celius", new BigDecimal("1")),
-    Fahrenheit("Temperature", "Degree Fahrenheit", new BigDecimal("32")),
-    Kelvin ("Temperature", "Degree Kelvin", new BigDecimal("273.15"));
-*/
 
 
 
@@ -112,7 +106,7 @@ public enum Unit {
     private final String name;
     private final BigDecimal value;
 
-    private Unit(String type, String name, BigDecimal value) {
+    Unit(String type, String name, BigDecimal value) {
         this.type = type;
         this.name = name;
         this.value = value;
