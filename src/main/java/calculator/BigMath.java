@@ -3,6 +3,7 @@ package calculator;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 public class BigMath implements Expression {
 
@@ -63,6 +64,11 @@ public class BigMath implements Expression {
 
     public RealNumber inverse(RealNumber n) {
         return new RealNumber("0");
+    }
+
+    public IntegerNumber changeBase(IntegerNumber n, int from, int to) {
+        String newN = new BigInteger(n.toString(), from).toString(to);
+        return new IntegerNumber(newN);
     }
 
     public RealNumber random() {
