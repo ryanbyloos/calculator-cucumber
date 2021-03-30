@@ -3,6 +3,7 @@ package visitor;
 import calculator.*;
 import function.Function;
 import function.Variable;
+import time.Time;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -68,5 +69,10 @@ public class Validator extends Visitor{
         for(int i = 1 ; i < o.getArgs().size() ; i++) {
             o.getArgs().get(i).accept(this);
         }
+    }
+
+    @Override
+    public void visit(Time time) {
+
     }
 }

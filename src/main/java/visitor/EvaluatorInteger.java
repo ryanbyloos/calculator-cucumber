@@ -5,6 +5,7 @@ import calculator.IntegerNumber;
 import calculator.Operation;
 import calculator.RealNumber;
 import function.Variable;
+import time.Time;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -46,4 +47,11 @@ public class EvaluatorInteger extends Visitor {
         // store the accumulated result
         computedValue = temp;
     }
+
+    @Override
+    public void visit(Time time) {
+
+    }
+
+
 }
