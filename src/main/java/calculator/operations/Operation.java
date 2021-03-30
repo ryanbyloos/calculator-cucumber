@@ -1,5 +1,8 @@
-package calculator;
+package calculator.operations;
 
+import calculator.Expression;
+import calculator.IllegalConstruction;
+import calculator.Notation;
 import visitor.Printer;
 import visitor.Visitor;
 

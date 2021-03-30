@@ -2,7 +2,7 @@ package junit5tests;
 
 import calculator.Expression;
 import calculator.IllegalConstruction;
-import calculator.Plus;
+import calculator.operations.Plus;
 import function.Function;
 import function.Variable;
 import org.junit.jupiter.api.BeforeEach;

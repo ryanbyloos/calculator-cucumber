@@ -4,6 +4,7 @@ package junit5tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.*;
+import calculator.operations.Times;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;

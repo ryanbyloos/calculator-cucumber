@@ -4,6 +4,8 @@ package junit5tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.operations.Divides;
+import calculator.operations.Times;
 import org.junit.jupiter.api.*;
 
 import calculator.*;

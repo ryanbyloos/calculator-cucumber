@@ -1,6 +1,7 @@
 package visitor;
 
 import calculator.*;
+import calculator.operations.Operation;
 import function.Function;
 import function.Variable;
 

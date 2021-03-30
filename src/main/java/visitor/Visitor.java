@@ -1,7 +1,7 @@
 package visitor;
 
 import calculator.IntegerNumber;
-import calculator.Operation;
+import calculator.operations.Operation;
 import calculator.RealNumber;
 import function.Variable;
 

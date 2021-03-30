@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.operations.Operation;
 import function.Function;
 import visitor.EvaluatorInteger;
 import visitor.EvaluatorReal;

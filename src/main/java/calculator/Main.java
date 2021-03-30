@@ -1,5 +1,10 @@
 package calculator;
 
+import calculator.operations.Divides;
+import calculator.operations.Minus;
+import calculator.operations.Plus;
+import calculator.operations.Times;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

@@ -1,5 +1,10 @@
-package calculator;
+package calculator.operations;
 
+import calculator.DivisionByZeroException;
+import calculator.Expression;
+import calculator.IllegalConstruction;
+import calculator.Notation;
+import calculator.operations.Operation;
 import visitor.EvaluatorReal;
 
 import java.math.BigDecimal;

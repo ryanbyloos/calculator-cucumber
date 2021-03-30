@@ -1,4 +1,9 @@
-package calculator;
+package calculator.operations;
+
+import calculator.Expression;
+import calculator.IllegalConstruction;
+import calculator.Notation;
+import calculator.operations.Operation;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
