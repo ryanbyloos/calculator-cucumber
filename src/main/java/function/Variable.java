@@ -5,12 +5,8 @@ import calculator.MyNumber;
 import visitor.Visitor;
 
 public class Variable implements Expression {
-    private final String varName;
+    public final String varName = "X";
     private MyNumber value;
-
-    public Variable(String name){
-        this.varName = name;
-    }
 
     /**
      * Set the value
@@ -62,22 +58,5 @@ public class Variable implements Expression {
 
     public MyNumber getValue(){
         return value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        // No object should be equal to null (not including this check can result in an exception if a MyNumber is tested against null)
-        if (o == null) return false;
-
-        // If the object is compared to itself then return true
-        if (o == this) {
-            return true;
-        }
-
-        // If the object is of another type then return false
-        if (!(o instanceof Variable)) {
-            return false;
-        }
-        return this.varName.equals(((Variable) o).varName);
     }
 }

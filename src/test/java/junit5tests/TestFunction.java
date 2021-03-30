@@ -16,31 +16,26 @@ import java.util.Collections;
 import java.util.List;
 
 public class TestFunction {
-    private final String x_var_name = "X";
-    private final String y_var_name = "Y";
-    private Variable x,y;
+    private Variable var1,var2;
 
     @BeforeEach
     public void setUp(){
-        x = new Variable(x_var_name);
-        y = new Variable(y_var_name);
+        var1 = new Variable();
+        var2 = new Variable();
     }
 
     @Test
     public void testFunctionDisplayPlus(){
         try {
-            ArrayList<Variable> varList = new ArrayList<>();
-            varList.add(x);
-
             MyNumber secondMember = new IntegerNumber("2");
 
             List<Expression> param = new ArrayList<>();
-            Collections.addAll(param, x,  secondMember);
+            Collections.addAll(param, var1,  secondMember);
             Expression e = new Plus(param, Notation.INFIX);
 
-            Function f = new Function("add",varList,e);
+            Function f = new Function(var1,e);
             // TEST variable as no value
-            String infix = "add("+x_var_name+"):( " +x_var_name + " + " + secondMember.toString() + " )";
+            String infix = "( " + var1.varName + " + " + secondMember.toString() + " )";
 
             assertEquals(infix,f.toString());
 
@@ -48,12 +43,8 @@ public class TestFunction {
             // TEST variable as value
             MyNumber xValue = new IntegerNumber("12");
 
-            ArrayList<MyNumber> values = new ArrayList<>();
-            values.add(xValue);
-
-            String infix2 = "add("+x_var_name+":"+xValue.toString()+"):( " + x_var_name + " + " + secondMember.toString() + " )";
             try {
-                assertEquals(infix2, f.toString(values));
+                assertEquals(infix, f.toString(xValue));
             }catch (BadAssignment exception){
                 fail();
             }
@@ -64,53 +55,10 @@ public class TestFunction {
     }
 
     @Test
-    public void testFunctionDisplayPlusMultipleParam(){
-        try {
-            ArrayList<Variable> varList = new ArrayList<>();
-            varList.add(x);
-            varList.add(y);
-
-
-            List<Expression> param = new ArrayList<>();
-            Collections.addAll(param, x,  y);
-            Expression e = new Plus(param, Notation.INFIX);
-
-            Function f = new Function("add",varList,e);
-            // TEST variable as no value
-            String infix = "add("+x_var_name+","+y_var_name+"):( " + x_var_name + " + " + y_var_name + " )";
-
-            assertEquals(infix,f.toString());
-
-
-            // TEST variable as value
-            MyNumber xValue = new IntegerNumber("12");
-            MyNumber yValue = new IntegerNumber("3");
-
-            ArrayList<MyNumber> values = new ArrayList<>();
-            values.add(xValue);
-            values.add(yValue);
-
-            String infix2 = "add("+x_var_name+":"+xValue+","+y_var_name+":"+yValue+"):( " + x_var_name + " + " + y_var_name + " )";
-            try {
-                assertEquals(infix2, f.toString(values));
-            }catch (BadAssignment exception){
-                fail();
-            }
-
-        }catch(IllegalConstruction exception) {
-            fail();
-        }
-    }
-
-    @Test
-    public void testFunctionDuplicateVariable(){
-        ArrayList<Variable> vars = new ArrayList<>();
-        vars.add(x);
-        vars.add(x);
-
+    public void testFunctionVariableDifferent(){
         ArrayList<Expression> el = new ArrayList<>();
-        el.add(x);
-        el.add(x);
+        el.add(new IntegerNumber("2"));
+        el.add(var2);
 
         Expression e;
         try {
@@ -119,63 +67,53 @@ public class TestFunction {
             fail();
             return;
         }
-        assertThrows(IllegalConstruction.class,() -> new Function("square",vars,e));
+        assertThrows(IllegalConstruction.class,() -> new Function(var1,e));
     }
 
 
     @Test
     public void testBadAssignment(){
         Function f;
-        ArrayList<Variable> varList = new ArrayList<>();
-        varList.add(x);
 
         MyNumber secondMember = new IntegerNumber("2");
 
         List<Expression> param = new ArrayList<>();
-        Collections.addAll(param, x, secondMember);
+        Collections.addAll(param, var1, secondMember);
 
         try {
             Expression e = new Plus(param, Notation.INFIX);
 
-            f = new Function("add", varList, e);
+            f = new Function(var1, e);
         }catch (IllegalConstruction exception){
             fail();
             return;
         }
-        // TEST variable as value
-        ArrayList<MyNumber> values = new ArrayList<>();
 
         // test bad assignment to string
-        assertThrows(BadAssignment.class, () -> f.toString(values));
+        assertThrows(BadAssignment.class, () -> f.toString(null));
         // test bad assignment to string
         EvaluatorInteger v = new EvaluatorInteger();
-        assertThrows(BadAssignment.class, () -> f.compute(values,v));
+        assertThrows(BadAssignment.class, () -> f.compute(new RealNumber("1.5"),v));
     }
 
     @Test
     public void testFunctionCompute(){
         try {
-            // Init function
-            ArrayList<Variable> varList = new ArrayList<>();
-            varList.add(x);
 
             MyNumber secondMember = new IntegerNumber("2");
 
             List<Expression> param = new ArrayList<>();
-            Collections.addAll(param, x, secondMember);
+            Collections.addAll(param, var1, secondMember);
             Expression e = new Plus(param, Notation.INFIX);
 
-            Function f = new Function("", varList, e);
+            Function f = new Function(var1, e);
 
             // TEST variable as value
             MyNumber xValue = new IntegerNumber("12");
 
-            ArrayList<MyNumber> values = new ArrayList<>();
-            values.add(xValue);
-
             EvaluatorInteger v = new EvaluatorInteger();
             try {
-                assertEquals(new BigInteger("14"), f.compute(values, v));
+                assertEquals(new BigInteger("14"), f.compute(xValue, v));
             }catch(BadAssignment exception){
                 fail();
             }
@@ -189,44 +127,36 @@ public class TestFunction {
         Expression e;
         ArrayList<Variable> varList;
         try{
-            // Init function
-            varList = new ArrayList<>();
-            varList.add(x);
 
             MyNumber secondMember = new IntegerNumber("2");
 
             List<Expression> param = new ArrayList<>();
-            Collections.addAll(param, y, secondMember);
+            Collections.addAll(param, var2, secondMember);
             e = new Plus(param, Notation.INFIX);
         }catch(IllegalConstruction exception){
             fail();
             return;
         }
-        assertThrows(IllegalConstruction.class, () -> new Function("", varList, e));
+        assertThrows(IllegalConstruction.class, () -> new Function(var1, e));
     }
 
     @Test
     public void testFunctionCalculator(){
         try {
-            ArrayList<Variable> vars = new ArrayList<>();
-            vars.add(x);
-
             Expression two = new IntegerNumber("2");
             ArrayList<Expression> el = new ArrayList<>();
             el.add(two);
-            el.add(x);
+            el.add(var1);
 
             Expression e = new Times(el);
 
-            Function f = new Function("2times", vars, e);
+            Function f = new Function(var1, e);
 
-            ArrayList<MyNumber> values = new ArrayList<>();
             MyNumber seven = new IntegerNumber("7");
-            values.add(seven);
 
             Calculator c = new Calculator(Calculator.Mode.INTEGER);
             try {
-                assertEquals(new BigDecimal(14),c.eval(values, f));
+                assertEquals("14",c.eval(seven, f));
             }catch (BadAssignment exception){
                 fail();
             }
@@ -239,23 +169,18 @@ public class TestFunction {
     @Test
     public void testFunctionCalculatorBadAssignment(){
         try {
-            ArrayList<Variable> vars = new ArrayList<>();
-            vars.add(x);
-
             Expression two = new IntegerNumber("2");
             ArrayList<Expression> el = new ArrayList<>();
             el.add(two);
-            el.add(x);
+            el.add(var1);
 
             Expression e = new Times(el);
 
-            Function f = new Function("2times", vars, e);
-
-            ArrayList<MyNumber> values = new ArrayList<>();
+            Function f = new Function(var1, e);
 
             Calculator c = new Calculator(Calculator.Mode.INTEGER);
 
-            assertThrows(BadAssignment.class,() -> c.eval(values,f));
+            assertThrows(BadAssignment.class,() -> c.eval(new RealNumber("23.5"),f));
 
         }catch (IllegalConstruction exception){
             fail();
@@ -264,23 +189,19 @@ public class TestFunction {
     @Test
     public void testFunctionDivideVarZero(){
         try {
-            ArrayList<Variable> vars = new ArrayList<>();
-            vars.add(x);
-
             Expression two = new IntegerNumber("2");
             ArrayList<Expression> el = new ArrayList<>();
             el.add(two);
-            el.add(x);
+            el.add(var1);
 
             Expression e = new Divides(el);
 
-            Function f = new Function("2/n", vars, e);
+            Function f = new Function(var1, e);
 
-            ArrayList<MyNumber> values = new ArrayList<>();
-            values.add(new RealNumber("0.0"));
+            RealNumber zero = new RealNumber("0.0");
 
             Calculator c = new Calculator(Calculator.Mode.REAL);
-            assertThrows(BadAssignment.class,() -> c.eval(values,f));
+            assertThrows(BadAssignment.class,() -> c.eval(zero ,f));
 
         }catch (IllegalConstruction e){
             fail();

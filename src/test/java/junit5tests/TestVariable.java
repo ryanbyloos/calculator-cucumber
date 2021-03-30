@@ -13,12 +13,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestVariable {
 
-    private final String name = "X";
     private Variable var;
 
     @BeforeEach
     public void setUp() {
-        var = new Variable(name);
+        var = new Variable();
     }
 
 
@@ -42,20 +41,20 @@ public class TestVariable {
 
     @Test
     public void testToString() {
-        assertEquals(name, var.toString());
+        assertEquals("X", var.toString());
     }
     @Test
     public void testToStringWithAssignment() {
         int i = 2;
         IntegerNumber n = new IntegerNumber(Integer.toString(i));
         var.assignValue(n);
-        assertEquals(name+":"+i, var.completeString());
+        assertEquals("X"+":"+i, var.completeString());
     }
 
     @Test
     public void testVariableFirstDivide(){
         ArrayList<Expression> l = new ArrayList<>();
-        l.add(new Variable("X"));
+        l.add(new Variable());
         l.add(new IntegerNumber("12"));
         assertDoesNotThrow(() -> new Divides(l));
     }
@@ -64,7 +63,7 @@ public class TestVariable {
     public void testVariableSecondDivide(){
         ArrayList<Expression> l = new ArrayList<>();
         l.add(new IntegerNumber("12"));
-        l.add(new Variable("X"));
+        l.add(new Variable());
         assertDoesNotThrow(() -> new Divides(l));
     }
 }

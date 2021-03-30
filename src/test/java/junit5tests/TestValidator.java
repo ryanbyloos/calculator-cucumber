@@ -3,6 +3,7 @@ package junit5tests;
 import calculator.Expression;
 import calculator.IllegalConstruction;
 import calculator.Plus;
+import calculator.RealNumber;
 import function.Function;
 import function.Variable;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,24 +14,12 @@ import visitor.Validator;
 import java.util.ArrayList;
 
 public class TestValidator {
-
     private Validator v;
-    String x_var_name,y_var_name;
-    Variable x,y;
-    ArrayList<Variable> vars;
+    Variable x;
 
     @BeforeEach
     public void setUp() {
-
-        x_var_name = "X";
-        y_var_name = "Y";
-
-        x = new Variable(x_var_name);
-        y = new Variable(y_var_name);
-
-        vars = new ArrayList<>();
-        vars.add(x);
-        vars.add(y);
+        x = new Variable();
     }
 
     @Test
@@ -41,8 +30,9 @@ public class TestValidator {
 
             Expression e = new Plus(el);
 
-            Function f = new Function("", vars, e);
-            v = new Validator(f);
+            Function f = new Function(x, e);
+            v = new Validator();
+            v.visit(f);
             assertTrue(v.isValid());
         }catch (IllegalConstruction exception){
             fail();
@@ -54,12 +44,13 @@ public class TestValidator {
         try {
             ArrayList<Expression> el = new ArrayList<>();
             el.add(x);
-            el.add(y);
+            el.add(new RealNumber("1.5"));
 
             Expression e = new Plus(el);
 
-            Function f = new Function("", vars, e);
-            v = new Validator(f);
+            Function f = new Function(x, e);
+            v = new Validator();
+            v.visit(f);
             assertTrue(v.isValid());
         }catch (IllegalConstruction exception){
             fail();

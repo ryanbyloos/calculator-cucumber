@@ -10,40 +10,28 @@ import java.util.ArrayList;
 
 public class Validator extends Visitor{
     private boolean valid = true;
-    private final ArrayList<Variable> vars;
+    private Variable var;
 
     Calculator.Mode mode;
 
     /**
      * Verify if there are creation error
-     * @param f
      */
-    public Validator(Function f){
-        mode = null;
-        vars = f.getVars();
-        f.getExpression().accept(this);
-    }
+    public Validator(){ mode = null; }
 
     /**
      * Verify if there are computation error
      * (ex : Divide by zero )
-     * @param f
      * @param m
      */
-    public Validator(Function f,Calculator.Mode m){
-        mode = m;
-        vars = f.getVars();
-        f.getExpression().accept(this);
-    }
-
-    public Validator(Calculator.Mode m, Expression e){
-        mode = m;
-        e.accept(this);
-        vars = new ArrayList<>();
-    }
+    public Validator(Calculator.Mode m){ mode = m; }
 
     public boolean isValid(){ return valid; }
 
+    public void visit(Function f){
+        var = f.getVar();
+        f.getExpression().accept(this);
+    }
 
     @Override
     public void visit(IntegerNumber n) { }
@@ -55,9 +43,7 @@ public class Validator extends Visitor{
     }
 
     @Override
-    public void visit(Variable v) {
-        if (vars == null || !vars.contains(v)) valid = false;
-    }
+    public void visit(Variable v) { if (var == null || var != v) valid = false; }
 
     @Override
     public void visit(Operation o) {

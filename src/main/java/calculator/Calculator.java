@@ -3,6 +3,7 @@ package calculator;
 import function.Function;
 import visitor.EvaluatorInteger;
 import visitor.EvaluatorReal;
+import visitor.Validator;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -56,6 +57,29 @@ public class Calculator {
         return null; // TODO handle ERROR CASE
     }
 
+    public String eval(MyNumber value,Function f) throws BadAssignment{
+        String res;
+        f.setValue(value);
+
+        Validator validator =  new Validator(mode);
+        validator.visit(f);
+        if (!validator.isValid()) throw new BadAssignment();
+
+        switch (mode){
+            case INTEGER:
+                res = evalInteger(f.getExpression()).toString();
+                break;
+            case REAL:
+                res = evalReal(f.getExpression()).toString();
+                break;
+            default:
+                throw new BadAssignment(); // Should not be here
+        }
+
+        f.clearValue();
+        return res;
+    }
+
     public BigInteger evalInteger(Expression e) {
         // create a new visitor to evaluate expressions
         EvaluatorInteger v = new EvaluatorInteger();
@@ -73,17 +97,6 @@ public class Calculator {
         // and return the result of the evaluation at the end of the process
         return v.getResult();
     }
-
-    public BigDecimal eval(List<MyNumber> values,Function f) throws BadAssignment{
-        // create a new visitor to evaluate expressions
-        EvaluatorReal v = new EvaluatorReal();
-        // and ask the expression to accept this visitor to start the evaluation process
-        f.compute(values,v);
-        // and return the result of the evaluation at the end of the process
-        return v.getResult();
-    }
-
-
 
     /*
      We could also have other methods, e.g. to verify whether an expression is syntactically correct
