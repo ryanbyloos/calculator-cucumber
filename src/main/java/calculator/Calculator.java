@@ -4,6 +4,7 @@ import calculator.exceptions.BadAssignment;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConvertionArgument;
 import calculator.operations.Operation;
+import Converter.Temperature;
 import function.Function;
 import visitor.EvaluatorInteger;
 import visitor.EvaluatorReal;
@@ -15,6 +16,9 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Calculator {
     public enum Mode {INTEGER,REAL,CONVERSION}
@@ -115,6 +119,7 @@ public class Calculator {
 
 
     public String convert(Expression e,Unit base, Unit aimed) throws IllegalConvertionArgument {
+    public BigDecimal convert(Expression e,Unit base, Unit aimed) throws IllegalConvertionArgument{
         if(base.getType() != aimed.getType()){
             throw new IllegalConvertionArgument();
         }
@@ -135,18 +140,40 @@ public class Calculator {
         }catch (ComputeError ce){
             return "ERROR: "+ce.getMessage();// TODO AVERTIR NICOLO
         }
+        BigDecimal eval = evalReal(e);
+        eval = eval.divide(base.getratio(),Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
+        eval = eval.multiply(aimed.getratio());
+        return eval;
+    }
+    public String converttoString(Expression e,Unit base, Unit aimed) throws IllegalConvertionArgument{
+        if(base.getType() != aimed.getType()){
+            throw new IllegalConvertionArgument();
+        }
+
+        BigDecimal eval = convert(e,base,aimed);
+        String res = eval.toString() + aimed.getFullName();
+        return res;
     }
 
-/*    public BigInteger convert(Expression e, Unit unit ) {
-        // create a new visitor to evaluate expressions
-        EvaluatorInteger v = new EvaluatorInteger();
-        // and ask the expression to accept this visitor to start the evaluation process
-        e.accept(v);
-        // and return the result of the evaluation at the end of the process
-        BigInteger Bd = v.getResult();
+    public BigDecimal convert(Expression e, Temperature base, Temperature aimed) {
 
+        BigDecimal eval = evalReal(e);
+        eval = eval.subtract(base.getConstant());
+        eval = eval.divide(base.getRatio(),Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
+        eval = eval.multiply(aimed.getRatio());
+        eval = eval.add(aimed.getConstant());
+
+        return eval;
     }
-*/
+
+    public String converttoString(Expression e, Temperature base, Temperature aimed) {
+
+
+        BigDecimal eval = convert(e,base,aimed);
+        String res = eval.toString() + " "+aimed.getFullName();
+        return res;
+    }
+
 
     public IntegerNumber evalInteger(Expression e) throws ComputeError{
         // create a new visitor to evaluate expressions
