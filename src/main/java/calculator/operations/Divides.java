@@ -7,6 +7,8 @@ import calculator.RealNumber;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.DivisionByZeroError;
 import calculator.exceptions.IllegalConstruction;
+import calculator.exceptions.UselessComputation;
+import time.MyDate;
 import visitor.EvaluatorReal;
 
 import java.math.BigDecimal;
@@ -52,5 +54,11 @@ final public class Divides extends Operation {
     }
     public RealNumber op(RealNumber l, RealNumber r) throws DivisionByZeroError {
         return l.divide(r);
+    }
+
+
+    @Override
+    public MyDate op(MyDate l, MyDate r) throws ComputeError {
+        throw new UselessComputation() ;
     }
 }

@@ -6,6 +6,7 @@ import calculator.Notation;
 import calculator.RealNumber;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConstruction;
+import time.MyDate;
 import visitor.Printer;
 import visitor.Visitor;
 
@@ -44,6 +45,7 @@ public abstract class Operation implements Expression {
 
     abstract public IntegerNumber op(IntegerNumber l, IntegerNumber r) throws ComputeError;
     abstract public RealNumber op(RealNumber l, RealNumber r) throws ComputeError;
+    abstract public MyDate op (MyDate l , MyDate r) throws ComputeError;
     // the operation itself is specified in the subclasses
 
     // add more arguments to the existing list of arguments args

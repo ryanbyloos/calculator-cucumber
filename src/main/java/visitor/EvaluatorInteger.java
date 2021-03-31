@@ -2,17 +2,13 @@ package visitor;
 
 import calculator.Expression;
 import calculator.IntegerNumber;
-import calculator.MyNumber;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.ImpossibleConversionError;
 import calculator.operations.Operation;
 import calculator.RealNumber;
-import calculator.exceptions.BadAssignment;
 import function.Variable;
-import time.Date;
-import time.Time;
+import time.MyDate;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class EvaluatorInteger extends Evaluator {
@@ -60,12 +56,9 @@ public class EvaluatorInteger extends Evaluator {
     }
 
     @Override
-    public void visit(Date date) {
+    public void visit(MyDate date) {
 
     }
 
-    @Override
-    public void visit(Time time) {
 
-    }
 }

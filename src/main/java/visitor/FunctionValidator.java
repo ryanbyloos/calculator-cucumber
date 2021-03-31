@@ -5,8 +5,8 @@ import calculator.exceptions.ImpossibleConversionError;
 import calculator.operations.Operation;
 import function.Function;
 import function.Variable;
-import time.Date;
-import time.Time;
+
+import time.MyDate;
 
 /**
  * Verify if a function contain only is variable.
@@ -55,10 +55,9 @@ public class FunctionValidator extends Visitor{
     }
 
     @Override
-    public void visit(Date date) {
+    public void visit(MyDate date) {
 
     }
 
-    @Override
-    public void visit(Time time) { }
+
 }

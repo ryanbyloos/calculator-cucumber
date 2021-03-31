@@ -10,7 +10,8 @@ import time.MyDate;
 
 import java.util.ArrayList;
 
-public class EvaluatorReal extends Evaluator{
+public class EvaluatorDate extends Evaluator{
+
 
     @Override
     public void visit(IntegerNumber n) {
@@ -51,6 +52,5 @@ public class EvaluatorReal extends Evaluator{
     public void visit(MyDate date) {
 
     }
-
 
 }
