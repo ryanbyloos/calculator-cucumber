@@ -21,7 +21,7 @@ final public class Divides extends Operation {
 
     public /*constructor*/ Divides(List<Expression> elist) throws IllegalConstruction {
         super(elist);
-        EvaluatorReal evaluator = new EvaluatorReal(); //TODO adapt for
+        EvaluatorReal evaluator = new EvaluatorReal();
         for (int i = 1; i < elist.size(); i++) {
             elist.get(i).accept(evaluator);
             if (evaluator.getResult() != null && evaluator.getResult().equals(new RealNumber("0"))) { // If equals to 0
@@ -36,7 +36,7 @@ final public class Divides extends Operation {
 
     public Divides(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist, n);
-        EvaluatorReal evaluator = new EvaluatorReal(); //TODO adapt for
+        EvaluatorReal evaluator = new EvaluatorReal();
         for (int i = 1; i < elist.size(); i++) {
             elist.get(i).accept(evaluator);
             if (evaluator.getResult() != null && evaluator.getResult().equals(new RealNumber("0"))) {  // If equals to 0

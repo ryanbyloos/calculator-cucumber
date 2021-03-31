@@ -82,7 +82,6 @@ public class IntegerNumber extends MyNumber{
         }else if (o instanceof RealNumber){
             try{
                 IntegerNumber n = ((RealNumber) o).toIntegerNumber();
-                System.out.println("ddd");
                 return this.value.compareTo(n.value) == 0;
             }catch (Exception e){
                 return false;
