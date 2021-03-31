@@ -1,7 +1,10 @@
 package calculator.operations;
 
 import calculator.Expression;
+import calculator.IntegerNumber;
 import calculator.Notation;
+import calculator.RealNumber;
+import calculator.exceptions.ComputeError;
 import calculator.exceptions.DivisionByZeroError;
 import calculator.exceptions.IllegalConstruction;
 import visitor.EvaluatorReal;
@@ -19,7 +22,7 @@ final public class Divides extends Operation {
         EvaluatorReal evaluator = new EvaluatorReal(); //TODO adapt for
         for (int i = 1; i < elist.size(); i++) {
             elist.get(i).accept(evaluator);
-            if (evaluator.getResult() != null && evaluator.getResult().compareTo(new BigDecimal("0")) == 0 ) { // If equals to 0
+            if (evaluator.getResult() != null && evaluator.getResult().equals(new RealNumber("0"))) { // If equals to 0
                 throw new DivisionByZeroError();
             } else {
                 args = new ArrayList<>(elist);
@@ -34,7 +37,7 @@ final public class Divides extends Operation {
         EvaluatorReal evaluator = new EvaluatorReal(); //TODO adapt for
         for (int i = 1; i < elist.size(); i++) {
             elist.get(i).accept(evaluator);
-            if (evaluator.getResult() != null && evaluator.getResult().compareTo(new BigDecimal("0")) == 0) {  // If equals to 0
+            if (evaluator.getResult() != null && evaluator.getResult().equals(new RealNumber("0"))) {  // If equals to 0
                 throw new DivisionByZeroError();
             } else {
                 args = new ArrayList<>(elist);
@@ -44,12 +47,10 @@ final public class Divides extends Operation {
         neutral = 1;
     }
 
-    public BigInteger op(BigInteger l, BigInteger r) { return l.divide(r); }
-    public BigDecimal op(BigDecimal l, BigDecimal r) throws DivisionByZeroError {
-        try {
-            return l.divide(r, Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
-        }catch (ArithmeticException e){
-            throw new DivisionByZeroError();
-        }
+    public IntegerNumber op(IntegerNumber l, IntegerNumber r) throws DivisionByZeroError {
+        return l.divide(r);
+    }
+    public RealNumber op(RealNumber l, RealNumber r) throws DivisionByZeroError {
+        return l.divide(r);
     }
 }

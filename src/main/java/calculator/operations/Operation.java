@@ -1,7 +1,9 @@
 package calculator.operations;
 
 import calculator.Expression;
+import calculator.IntegerNumber;
 import calculator.Notation;
+import calculator.RealNumber;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConstruction;
 import visitor.Printer;
@@ -40,8 +42,8 @@ public abstract class Operation implements Expression {
         notation = n;
     }
 
-    abstract public BigInteger op(BigInteger l, BigInteger r) throws ComputeError;
-    abstract public BigDecimal op(BigDecimal l, BigDecimal r) throws ComputeError;
+    abstract public IntegerNumber op(IntegerNumber l, IntegerNumber r) throws ComputeError;
+    abstract public RealNumber op(RealNumber l, RealNumber r) throws ComputeError;
     // the operation itself is specified in the subclasses
 
     // add more arguments to the existing list of arguments args

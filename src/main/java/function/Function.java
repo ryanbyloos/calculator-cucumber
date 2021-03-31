@@ -25,19 +25,6 @@ public class Function {
         if(!v.verify(this,null)) throw  new IllegalConstruction();
     }
 
-    public BigInteger compute(MyNumber value, EvaluatorInteger v) throws BadAssignment {
-        // set value
-        var.assignValue(value);
-
-        // verify if assignation is valid
-        FunctionValidator validator =  new FunctionValidator();
-        if (!validator.verify(this, Calculator.Mode.INTEGER)) throw new BadAssignment();
-
-        e.accept(v);
-        var.clear();
-        return v.getResult();
-    }
-
     public void setValue(MyNumber n) throws BadAssignment{
         if (n == null) throw new BadAssignment();
         var.assignValue(n);

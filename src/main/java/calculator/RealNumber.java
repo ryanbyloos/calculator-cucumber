@@ -1,9 +1,12 @@
 package calculator;
 
+import calculator.exceptions.DivisionByZeroError;
+import calculator.operations.Operation;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 
 public class RealNumber extends MyNumber{
     private final BigDecimal value;
@@ -21,6 +24,26 @@ public class RealNumber extends MyNumber{
     public void accept(Visitor v) {
         v.visit(this);
     }
+
+    public RealNumber divide(RealNumber n2) throws DivisionByZeroError {
+        try {
+            return new RealNumber(value.divide(n2.getValue(), Operation.CONST_ROUNDED, RoundingMode.HALF_UP));
+        }catch (ArithmeticException e){
+            throw new DivisionByZeroError();
+        }
+    }
+
+    public RealNumber plus(RealNumber n2){
+        return new RealNumber(value.add(n2.getValue()));
+    }
+
+    public RealNumber minus(RealNumber n2){
+        return new RealNumber(value.add(n2.getValue().negate()));
+    }
+    public RealNumber times(RealNumber n2){
+        return new RealNumber(value.multiply(n2.getValue()));
+    }
+
 
     public BigInteger toBigInteger() throws ArithmeticException{
         return value.toBigIntegerExact();

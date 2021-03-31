@@ -1,7 +1,10 @@
 package calculator.operations;
 
 import calculator.Expression;
+import calculator.IntegerNumber;
 import calculator.Notation;
+import calculator.RealNumber;
+import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConstruction;
 
 import java.math.BigDecimal;
@@ -23,10 +26,6 @@ final public class Minus extends Operation
 		neutral = 0;
 	}
 
-	public BigInteger op(BigInteger l, BigInteger r) {
-	return l.add(r.negate());
-	}
-	public BigDecimal op(BigDecimal l, BigDecimal r) {
-		return l.add(r.negate());
-	}
+	public IntegerNumber op(IntegerNumber l, IntegerNumber r) { return l.minus(r); }
+	public RealNumber op(RealNumber l, RealNumber r) { return l.minus(r); }
 }

@@ -1,7 +1,9 @@
 package calculator.operations;
 
 import calculator.Expression;
+import calculator.IntegerNumber;
 import calculator.Notation;
+import calculator.RealNumber;
 import calculator.exceptions.IllegalConstruction;
 
 import java.math.BigDecimal;
@@ -22,6 +24,6 @@ final public class Times extends Operation
 		neutral = 1;
 	}
 
-	public BigInteger op(BigInteger l, BigInteger r) { return l.multiply(r); }
-  	public BigDecimal op(BigDecimal l, BigDecimal r) { return l.multiply(r); }
+	public IntegerNumber op(IntegerNumber l, IntegerNumber r){ return l.times(r); }
+	public RealNumber op(RealNumber l, RealNumber r){ return l.times(r); }
 }

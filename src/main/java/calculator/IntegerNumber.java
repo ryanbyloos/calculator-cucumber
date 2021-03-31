@@ -1,7 +1,9 @@
 package calculator;
 
+import calculator.exceptions.DivisionByZeroError;
 import visitor.Visitor;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class IntegerNumber extends MyNumber{
@@ -12,10 +14,36 @@ public class IntegerNumber extends MyNumber{
     public IntegerNumber(String s){
         value = new BigInteger(s);
     }
+    public IntegerNumber(BigInteger b){
+        value = b;
+    }
 
     public void accept(Visitor v) {
         v.visit(this);
     }
+
+    public RealNumber toRealNumber() throws ArithmeticException{
+        return new RealNumber(new BigDecimal(value));
+    }
+
+    public IntegerNumber divide(IntegerNumber n2) throws DivisionByZeroError {
+        try {
+            return new IntegerNumber(value.divide(n2.getValue()));
+        }catch (ArithmeticException e){
+            throw new DivisionByZeroError();
+        }
+    }
+    public IntegerNumber plus(IntegerNumber n2){
+        return new IntegerNumber(value.add(n2.getValue()));
+    }
+
+    public IntegerNumber minus(IntegerNumber n2){
+        return new IntegerNumber(value.add(n2.getValue().negate()));
+    }
+    public IntegerNumber times(IntegerNumber n2){
+        return new IntegerNumber(value.multiply(n2.getValue()));
+    }
+
 
     @Override
     public String toString(){ return value.toString(); }

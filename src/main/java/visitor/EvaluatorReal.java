@@ -11,22 +11,16 @@ import time.Time;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class EvaluatorReal extends Visitor{
-    private BigDecimal computedValue;
-    private ComputeError exception; // if the expression throw an exception
-
-    public BigDecimal getResult() { return computedValue; }
+public class EvaluatorReal extends Evaluator{
 
     @Override
     public void visit(IntegerNumber n) {
         // convert Integer to decimal number
-        computedValue = new BigDecimal(n.toString());
+        setComputedValue(n.toRealNumber());
     }
 
     @Override
-    public void visit(RealNumber n) {
-        computedValue = n.getValue();
-    }
+    public void visit(RealNumber n) { setComputedValue(n); }
     @Override
     public void visit(Variable v) {
         if(v.asValue()) // TODO HANDLE VALUE NOT DEFINED
@@ -34,30 +28,28 @@ public class EvaluatorReal extends Visitor{
     }
     @Override
     public void visit(Operation o) {
-        ArrayList<BigDecimal> evaluatedArgs = new ArrayList<>();
+        ArrayList<RealNumber> evaluatedArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
         for(Expression a:o.args) {
             a.accept(this);
-            evaluatedArgs.add(computedValue);
+            evaluatedArgs.add((RealNumber) getComputedValue());
         }
         //second loop to accummulate all the evaluated subresults
-        BigDecimal temp = evaluatedArgs.get(0);
+        RealNumber temp = evaluatedArgs.get(0);
         int max = evaluatedArgs.size();
         for(int counter=1; counter<max; counter++) {
             try{
                 temp = o.op(temp,evaluatedArgs.get(counter));
             }catch (ComputeError e){
-                exception = e;
+                setException(e);
             }
         }
         // store the accumulated result
-        computedValue = temp;
+        setComputedValue(temp);
     }
 
     @Override
     public void visit(Time time) {
 
     }
-
-    public ComputeError getException() { return exception; }
 }

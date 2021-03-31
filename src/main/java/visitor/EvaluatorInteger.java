@@ -2,6 +2,7 @@ package visitor;
 
 import calculator.Expression;
 import calculator.IntegerNumber;
+import calculator.MyNumber;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.ImpossibleConversionError;
 import calculator.operations.Operation;
@@ -13,23 +14,19 @@ import time.Time;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
-public class EvaluatorInteger extends Visitor {
-    private BigInteger computedValue;
-    private ComputeError exception; // if the expression throw an exception
+public class EvaluatorInteger extends Evaluator {
 
-    public BigInteger getResult() { return computedValue; }
+
     @Override
-    public void visit(IntegerNumber n) {
-        computedValue = n.getValue();
-    }
+    public void visit(IntegerNumber n) { setComputedValue(n); }
 
     @Override
     public void visit(RealNumber n) {
         // try to convert else raise an exception
         try {
-            computedValue = n.toBigInteger();
+            setComputedValue(new IntegerNumber(n.toBigInteger()));
         }catch (ArithmeticException e){
-            exception = new ImpossibleConversionError();
+            setException(new ImpossibleConversionError());
         }
     }
 
@@ -40,34 +37,29 @@ public class EvaluatorInteger extends Visitor {
     }
     @Override
     public void visit(Operation o) {
-        ArrayList<BigInteger> evaluatedArgs = new ArrayList<>();
+        ArrayList<IntegerNumber> evaluatedArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
         for(Expression a:o.args) {
             a.accept(this);
-            evaluatedArgs.add(computedValue);
+            evaluatedArgs.add((IntegerNumber) getComputedValue());
         }
         //second loop to accummulate all the evaluated subresults
-        BigInteger temp = evaluatedArgs.get(0);
-
-        // TODO VERIFY IF LIST IS GOOD
-        // CONVERT
+        IntegerNumber temp = evaluatedArgs.get(0);
 
         int max = evaluatedArgs.size();
         for(int counter=1; counter<max; counter++) {
             try {
                 temp = o.op(temp, evaluatedArgs.get(counter));
             }catch (ComputeError e){
-                exception = e;
+                setException(e);
             }
         }
         // store the accumulated result
-        computedValue = temp;
+        setComputedValue(temp);
     }
 
     @Override
     public void visit(Time time) {
 
     }
-
-    public ComputeError getException() { return exception; }
 }
