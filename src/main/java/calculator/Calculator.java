@@ -11,14 +11,9 @@ import visitor.EvaluatorReal;
 import visitor.FunctionValidator;
 import Converter.Unit;
 
-
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Calculator {
     public enum Mode {INTEGER,REAL,CONVERSION}
@@ -118,30 +113,13 @@ public class Calculator {
     }
 
 
-    public String convert(Expression e,Unit base, Unit aimed) throws IllegalConvertionArgument {
-    public BigDecimal convert(Expression e,Unit base, Unit aimed) throws IllegalConvertionArgument{
+    public BigDecimal convert(Expression e,Unit base, Unit aimed) throws IllegalConvertionArgument,ComputeError{
         if(base.getType() != aimed.getType()){
             throw new IllegalConvertionArgument();
         }
 
-    //    if(mode == Mode.INTEGER)
-    //    {
-    //        BigInteger eval = evalInteger(e);
-    //        eval = eval.divide(base.getratio(),Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
-    //        return "0";
-    //    }
-        try {
-            BigDecimal eval = evalReal(e).getValue();
-
-            eval = eval.divide(base.getratio(), Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
-            eval = eval.multiply(aimed.getratio());
-            String res = eval.toString() + aimed.getFullName();
-            return res;
-        }catch (ComputeError ce){
-            return "ERROR: "+ce.getMessage();// TODO AVERTIR NICOLO
-        }
-        BigDecimal eval = evalReal(e);
-        eval = eval.divide(base.getratio(),Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
+        BigDecimal eval = evalReal(e).getValue();
+        eval = eval.divide(base.getratio(), Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
         eval = eval.multiply(aimed.getratio());
         return eval;
     }
@@ -150,14 +128,17 @@ public class Calculator {
             throw new IllegalConvertionArgument();
         }
 
-        BigDecimal eval = convert(e,base,aimed);
-        String res = eval.toString() + aimed.getFullName();
-        return res;
+        try {
+            BigDecimal eval = convert(e, base, aimed);
+            String res = eval.toString() + aimed.getFullName();
+            return res;
+        }catch(ComputeError ce){
+            return "ERROR : "+ce.getMessage();
+        }
     }
 
-    public BigDecimal convert(Expression e, Temperature base, Temperature aimed) {
-
-        BigDecimal eval = evalReal(e);
+    public BigDecimal convert(Expression e, Temperature base, Temperature aimed) throws  ComputeError {
+        BigDecimal eval = evalReal(e).getValue();
         eval = eval.subtract(base.getConstant());
         eval = eval.divide(base.getRatio(),Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
         eval = eval.multiply(aimed.getRatio());
@@ -167,11 +148,13 @@ public class Calculator {
     }
 
     public String converttoString(Expression e, Temperature base, Temperature aimed) {
-
-
-        BigDecimal eval = convert(e,base,aimed);
-        String res = eval.toString() + " "+aimed.getFullName();
-        return res;
+        try {
+            BigDecimal eval = convert(e,base,aimed);
+            String res = eval.toString() + " "+aimed.getFullName();
+            return res;
+        }catch (ComputeError ce){
+            return "ERROR : "+ce.getMessage();
+        }
     }
 
 

@@ -24,7 +24,7 @@ public class TestConvert {
         try{
             calc.convert(test1,Unit.Yard,Unit.Kilometer);
         }
-        catch(IllegalConvertionArgument e )
+        catch(Exception e )
         {
             fail();
         }
@@ -39,32 +39,26 @@ public class TestConvert {
             });
     }
     @Test
-    public void testEquals() throws IllegalConvertionArgument {
-        RealNumber e = new RealNumber("10.0");
-        BigDecimal eval = calc.evalReal(e);
-        Operation.CONST_ROUNDED = 15;
-        BigDecimal eval;
+    public void testEquals(){
         try {
-            eval = calc.evalReal(e).getValue();
-        }catch (ComputeError ce){
-            fail();
-            return;
-        }
-        for (Unit unit : Unit.values())
-        {
-            try {
-                eval = calc.convert(e,unit,unit);
-                BigDecimal res = eval.subtract(e.getValue()) ;
-                float tested = res.floatValue();
-                Boolean bool = Math.abs(tested )< 0.000001 ;
-                assertTrue(bool);
-            }
-            catch (IllegalConvertionArgument argument)
+            RealNumber e = new RealNumber("10.0");
+            BigDecimal eval = calc.evalReal(e).getValue();
+            Operation.CONST_ROUNDED = 15;
+            for (Unit unit : Unit.values())
             {
-                fail();
-            }
-        }
 
+                    eval = calc.convert(e,unit,unit);
+                    BigDecimal res = eval.subtract(e.getValue()) ;
+                    float tested = res.floatValue();
+                    Boolean bool = Math.abs(tested )< 0.000001 ;
+                    assertTrue(bool);
+                }
+
+            }
+        catch (Exception e)
+        {
+            fail();
+        }
     }
 
 
@@ -79,82 +73,104 @@ public class TestConvert {
     @Test
     public void testTemperature2()
     {
-        //Test Celsius to Fahrenheit
-        Temperature temp1 = Temperature.Celsius;
-        Temperature temp2 = Temperature.Fahrenheit;
-        BigDecimal eval = calc.convert(e,temp1,temp2);
-        RealNumber compared = new RealNumber("50");
-        BigDecimal res = eval.subtract(compared.getValue()) ;
-        float tested = res.floatValue();
-        Boolean bool = Math.abs(tested )< 0.000001 ;
-        assertTrue(bool);
+        try {
+            //Test Celsius to Fahrenheit
+            Temperature temp1 = Temperature.Celsius;
+            Temperature temp2 = Temperature.Fahrenheit;
+            BigDecimal eval = calc.convert(e, temp1, temp2);
+            RealNumber compared = new RealNumber("50");
+            BigDecimal res = eval.subtract(compared.getValue());
+            float tested = res.floatValue();
+            Boolean bool = Math.abs(tested) < 0.000001;
+            assertTrue(bool);
+        }catch (Exception e){
+            fail();
+        }
     }
 
     @Test
     public void testTemperature3()
     {    //Test Celsius to Kelvin
-
-        Temperature temp1 = Temperature.Celsius;
-        Temperature temp2 = Temperature.Kelvin;
-        BigDecimal eval = calc.convert(e,temp1,temp2);
-        RealNumber compared = new RealNumber("283.15");
-        BigDecimal res = eval.subtract(compared.getValue()) ;
-        float tested = res.floatValue();
-        Boolean bool = Math.abs(tested )< 0.1 ;
-        assertTrue(bool);
+        try{
+            Temperature temp1 = Temperature.Celsius;
+            Temperature temp2 = Temperature.Kelvin;
+            BigDecimal eval = calc.convert(e,temp1,temp2);
+            RealNumber compared = new RealNumber("283.15");
+            BigDecimal res = eval.subtract(compared.getValue()) ;
+            float tested = res.floatValue();
+            Boolean bool = Math.abs(tested )< 0.1 ;
+            assertTrue(bool);
+        }catch (Exception e){
+            fail();
+        }
     }
     @Test
     public void testTemperature4()
     {
-        //Test Fahrenheit to Celsius
-        Temperature temp1 = Temperature.Fahrenheit;
-        Temperature temp2 = Temperature.Celsius;
-        BigDecimal eval = calc.convert(e,temp1,temp2);
-        RealNumber compared = new RealNumber("-12.2222");
-        BigDecimal res = eval.subtract(compared.getValue()) ;
-        float tested = res.floatValue();
-        Boolean bool = Math.abs(tested )< 0.1 ;
-        assertTrue(bool);
+        try{
+            //Test Fahrenheit to Celsius
+            Temperature temp1 = Temperature.Fahrenheit;
+            Temperature temp2 = Temperature.Celsius;
+            BigDecimal eval = calc.convert(e,temp1,temp2);
+            RealNumber compared = new RealNumber("-12.2222");
+            BigDecimal res = eval.subtract(compared.getValue()) ;
+            float tested = res.floatValue();
+            Boolean bool = Math.abs(tested )< 0.1 ;
+            assertTrue(bool);
+        }catch (Exception e){
+            fail();
+        }
     }
 
     @Test
     public void testTemperature5()
     {
-        //Test Fahrenheit to Kelvin
-        Temperature temp1 = Temperature.Fahrenheit;
-        Temperature temp2 = Temperature.Kelvin;
-        BigDecimal eval = calc.convert(e,temp1,temp2);
-        RealNumber compared = new RealNumber("260.928");
-        BigDecimal res = eval.subtract(compared.getValue()) ;
-        float tested = res.floatValue();
-        Boolean bool = Math.abs(tested )< 0.1 ;
-        assertTrue(bool);
+        try{
+            //Test Fahrenheit to Kelvin
+            Temperature temp1 = Temperature.Fahrenheit;
+            Temperature temp2 = Temperature.Kelvin;
+            BigDecimal eval = calc.convert(e,temp1,temp2);
+            RealNumber compared = new RealNumber("260.928");
+            BigDecimal res = eval.subtract(compared.getValue()) ;
+            float tested = res.floatValue();
+            Boolean bool = Math.abs(tested )< 0.1 ;
+            assertTrue(bool);
+        }catch (Exception e){
+            fail();
+        }
     }
     @Test
     public void testTemperature6()
     {
-        //Test Kelvin to Celsius
-        Temperature temp1 = Temperature.Kelvin;
-        Temperature temp2 = Temperature.Celsius;
-        BigDecimal eval = calc.convert(e,temp1,temp2);
-        RealNumber compared = new RealNumber("-263.15");
-        BigDecimal res = eval.subtract(compared.getValue()) ;
-        float tested = res.floatValue();
-        Boolean bool = Math.abs(tested )< 0.1 ;
-        assertTrue(bool);
+        try{
+            //Test Kelvin to Celsius
+            Temperature temp1 = Temperature.Kelvin;
+            Temperature temp2 = Temperature.Celsius;
+            BigDecimal eval = calc.convert(e,temp1,temp2);
+            RealNumber compared = new RealNumber("-263.15");
+            BigDecimal res = eval.subtract(compared.getValue()) ;
+            float tested = res.floatValue();
+            Boolean bool = Math.abs(tested )< 0.1 ;
+            assertTrue(bool);
+        }catch (Exception e){
+            fail();
+        }
     }
     @Test
     public void testTemperature7()
     {
-        //Test Kelvin to Fahrenheit
-        Temperature temp1 = Temperature.Kelvin;
-        Temperature temp2 = Temperature.Fahrenheit;
-        BigDecimal eval = calc.convert(e,temp1,temp2);
-        RealNumber compared = new RealNumber("-441.67");
-        BigDecimal res = eval.subtract(compared.getValue()) ;
-        float tested = res.floatValue();
-        Boolean bool = Math.abs(tested )< 0.1 ;
-        assertTrue(bool);
+        try{
+            //Test Kelvin to Fahrenheit
+            Temperature temp1 = Temperature.Kelvin;
+            Temperature temp2 = Temperature.Fahrenheit;
+            BigDecimal eval = calc.convert(e,temp1,temp2);
+            RealNumber compared = new RealNumber("-441.67");
+            BigDecimal res = eval.subtract(compared.getValue()) ;
+            float tested = res.floatValue();
+            Boolean bool = Math.abs(tested )< 0.1 ;
+            assertTrue(bool);
+        }catch (Exception e){
+            fail();
+        }
     }
-
 }
