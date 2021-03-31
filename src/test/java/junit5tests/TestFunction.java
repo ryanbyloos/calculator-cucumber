@@ -5,10 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.*;
 import calculator.exceptions.BadAssignment;
-import calculator.exceptions.DivisionByZeroException;
 import calculator.exceptions.IllegalConstruction;
 import calculator.operations.Divides;
-import calculator.operations.Operation;
 import calculator.operations.Plus;
 import calculator.operations.Times;
 import function.Function;
@@ -210,7 +208,6 @@ public class TestFunction {
             assertEquals("1",c.eval(new IntegerNumber("2") ,f));
 
         }catch (Exception e){
-            System.out.println(e.getClass());
             fail();
         }
     }
@@ -230,10 +227,8 @@ public class TestFunction {
             RealNumber zero = new RealNumber("0.0");
 
             Calculator c = new Calculator(Calculator.Mode.REAL);
-            System.out.println(c.eval(new IntegerNumber("2") ,f));
 
             assertEquals("ERROR : Division By Zero Error",c.eval(zero ,f));
-
         }catch (Exception e){
             fail();
         }

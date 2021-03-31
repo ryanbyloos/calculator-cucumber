@@ -3,7 +3,6 @@ package calculator.operations;
 import calculator.Expression;
 import calculator.Notation;
 import calculator.exceptions.DivisionByZeroError;
-import calculator.exceptions.DivisionByZeroException;
 import calculator.exceptions.IllegalConstruction;
 import visitor.EvaluatorReal;
 
@@ -21,7 +20,7 @@ final public class Divides extends Operation {
         for (int i = 1; i < elist.size(); i++) {
             elist.get(i).accept(evaluator);
             if (evaluator.getResult() != null && evaluator.getResult().compareTo(new BigDecimal("0")) == 0 ) { // If equals to 0
-                throw new DivisionByZeroException();
+                throw new DivisionByZeroError();
             } else {
                 args = new ArrayList<>(elist);
             }
@@ -36,7 +35,7 @@ final public class Divides extends Operation {
         for (int i = 1; i < elist.size(); i++) {
             elist.get(i).accept(evaluator);
             if (evaluator.getResult() != null && evaluator.getResult().compareTo(new BigDecimal("0")) == 0) {  // If equals to 0
-                throw new DivisionByZeroException();
+                throw new DivisionByZeroError();
             } else {
                 args = new ArrayList<>(elist);
             }

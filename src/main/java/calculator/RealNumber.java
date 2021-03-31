@@ -25,32 +25,37 @@ public class RealNumber extends MyNumber{
     @Override
     public String toString(){
         String res = value.toString();
-        System.out.println(res);
-        String[] splited = res.split("\\.");
+        String[] splitNumber = res.split("\\.");
 
-        if(splited.length == 1 && res.length()>7){
-            int exp = 0; // counter of zero number
-            for (int i = res.length()-1 ; i>=0 ; i-- ){
-                if(res.charAt(i) == '0') exp+=1;
-                else break;
-            }
+        if(splitNumber.length == 1 && res.length()>7){ // if it has only integer part and has more than 7 digit
+            // use Exponent notation
+            int exp = countZeroesAtEndOfString(res);
             return String.format("%c.%sE%d",res.charAt(0),res.substring(1,res.length()-exp),res.length()-1);
-        }else if (splited.length == 2 ){
-            int exp = 0; // counter of zero number
-            System.out.println("I  L "+(splited[1].length()-1) );
-            for (int i = splited[1].length()-1 ; i>=0 ; i-- ){
-                if(splited[1].charAt(i) == '0') exp+=1;
-                else break;
-            }
-            System.out.println(exp);
-            if(exp == splited[1].length()){ // if decimal part is full of zero return integer part
-                return splited[0];
-            }else{
-                return String.format("%s.%s",splited[0], splited[1].substring(0,splited[1].length()-exp));
+        }else if (splitNumber.length == 2 ){ // if has a decimal part
+            int exp = countZeroesAtEndOfString(splitNumber[1]);
+            if(exp == splitNumber[1].length()){ // if it decimal part is full of zero return integer part
+                return splitNumber[0];
+            }else{ // else remove useless zeroes
+                return String.format("%s.%s",splitNumber[0], splitNumber[1].substring(0,splitNumber[1].length()-exp));
             }
         }
         return res;
     }
+
+    /**
+     * Return the number of consecutive zeroes at the end of the string
+     * @param s String to count zeroes at the end
+     * @return number of consecutive zeroes at the end
+     */
+    private int countZeroesAtEndOfString(String s){
+        int exp = 0; // counter of zero number
+        for (int i = s.length()-1 ; i>=0 ; i-- ){
+            if(s.charAt(i) == '0') exp+=1;
+            else return exp;
+        }
+        return exp;
+    }
+
 
     //Two MyNumber expressions are equal if the values they contain are equal
     @Override

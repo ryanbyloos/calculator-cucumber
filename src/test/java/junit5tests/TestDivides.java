@@ -4,7 +4,7 @@ package junit5tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import calculator.exceptions.DivisionByZeroException;
+import calculator.exceptions.DivisionByZeroError;
 import calculator.exceptions.IllegalConstruction;
 import calculator.operations.Divides;
 import calculator.operations.Times;
@@ -54,7 +54,7 @@ public class TestDivides {
     @Test
     public void testDivisionByZero1() {
         ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value3))));
-        assertThrows(DivisionByZeroException.class, () -> {
+        assertThrows(DivisionByZeroError.class, () -> {
             op = new Divides(p);
         });
     }
@@ -62,7 +62,7 @@ public class TestDivides {
     @Test
     public void testDivisionByZero2() {
         ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2)), new IntegerNumber(Integer.toString(value3))));
-        assertThrows(DivisionByZeroException.class, () -> {
+        assertThrows(DivisionByZeroError.class, () -> {
             op = new Divides(p);
         });
     }
