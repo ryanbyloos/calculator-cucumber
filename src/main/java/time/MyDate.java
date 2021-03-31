@@ -1,6 +1,7 @@
 package time;
 import calculator.MyNumber;
 import calculator.RealNumber;
+import calculator.exceptions.IllegalConstruction;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
@@ -25,21 +26,22 @@ public class MyDate extends MyNumber {
 
     public MyDate(long y, long m , long d)
     {
+
         LocalDate tmp =  LocalDate.of(0,1,1);
         tmp=tmp.plus(y,ChronoUnit.YEARS);
-        tmp=tmp.plus(m,ChronoUnit.MONTHS);
-        tmp=tmp.plus(d,ChronoUnit.DAYS);
+        tmp=tmp.plus(m-1,ChronoUnit.MONTHS);
+        tmp=tmp.plus(d-1,ChronoUnit.DAYS);
         this.lDate = tmp;
     }
 
     public MyDate plus(MyDate n2){
         LocalDate tmp = this.lDate.plusYears(n2.lDate.getYear());
-        tmp = tmp.plusMonths(n2.lDate.getMonthValue() -1);
-        tmp = tmp.plusDays(n2.lDate.getDayOfMonth() -1 );
+        tmp = tmp.plusMonths(n2.lDate.getMonthValue());
+        tmp = tmp.plusDays(n2.lDate.getDayOfMonth() );
         return new MyDate( tmp);
     }
 
-    public MyDate dif(MyDate n2){
+    public MyDate Minus(MyDate n2){
         LocalDate tmp = this.lDate.minusYears(n2.lDate.getYear());
         tmp = tmp.minusMonths(n2.lDate.getMonthValue());
         tmp = tmp.minusDays(n2.lDate.getDayOfMonth());
@@ -73,7 +75,6 @@ public static void main (String [] args)
 
 
 
-
     LocalDate l1 = LocalDate.of(1999,12,6);
     LocalDate l2 = LocalDate.of(1998,3,3);
    // LocalDate l3 = LocalDate.of(27,48,999);
@@ -83,13 +84,18 @@ public static void main (String [] args)
   //  L4.plus(999,ChronoUnit.DAYS);
 
     MyDate testouille = new MyDate(0,0,1);
+    System.out.println("CACA");
+    System.out.println(testouille.lDate);
+    System.out.println("CACA");
+
+
     MyDate aurelien = new MyDate(l1);
     MyDate nicolo = new MyDate(l2);
     MyDate testouille1 = new MyDate(2,9,3);
    // nicolo.plus(testouille);
    // MyDate test = new MyDate(l3);
-
-    MyDate res = aurelien.dif(testouille1);
+    System.out.println(testouille.lDate);
+    MyDate res = aurelien.Minus(testouille);
  //   MyDate caca = nicolo.plus(test);
    System.out.println(res.lDate);
 
