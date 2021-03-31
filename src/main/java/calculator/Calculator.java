@@ -40,22 +40,26 @@ public class Calculator {
     }
 
 
-//    public void print(Expression e) {
-//        System.out.println("The result of evaluating expression " + e);
-//        if(mode == Mode.INTEGER)
-//            System.out.println("is: " + evalInteger(e) + ".");
-//        else if( mode == Mode.REAL)
-//            System.out.println("is: " + evalReal(e) + ".");
-//        System.out.println();
-//    }
+    public void print(Expression e) {
+        try {
+            System.out.println("The result of evaluating expression " + e);
+            if (mode == Mode.INTEGER)
+                System.out.println("is: " + evalInteger(e) + ".");
+            else if (mode == Mode.REAL)
+                System.out.println("is: " + evalReal(e) + ".");
+            System.out.println();
+        }catch (ComputeError ce){
+            System.out.println(ce.getMessage());
+        }
+    }
 
-//    public void printExpressionDetails(Expression e) {
-//        print(e);
-//        System.out.print("It contains " + e.countDepth() + " levels of nested expressions, ");
-//        System.out.print(e.countOps() + " operations");
-//        System.out.println(" and " + e.countNbs() + " numbers.");
-//        System.out.println();
-//    }
+    public void printExpressionDetails(Expression e) {
+        print(e);
+        System.out.print("It contains " + e.countDepth() + " levels of nested expressions, ");
+        System.out.print(e.countOps() + " operations");
+        System.out.println(" and " + e.countNbs() + " numbers.");
+        System.out.println();
+    }
 
     public String eval(Expression e){
         try {
@@ -71,17 +75,19 @@ public class Calculator {
     }
 
     public void addFunction(String key,Function f) throws BadAssignment{
-
+        storedFun.put(key,f);
     }
 
     /**
      * Return value of function or error message as string
      * @param value value of
-     * @param f
+     * @param key
      * @return
      * @throws BadAssignment
      */
-    public String eval(MyNumber value,Function f) throws BadAssignment {
+    public String eval(MyNumber value,String key) throws BadAssignment {
+        if(!storedFun.containsKey(key)) return "No Such Function";
+        Function f = storedFun.get(key);
         String res;
         f.setValue(value);
 
