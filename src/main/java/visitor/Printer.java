@@ -3,8 +3,8 @@ package visitor;
 import calculator.*;
 import calculator.operations.Operation;
 import function.Variable;
-import time.Date;
-import time.Time;
+import time.MyDate;
+
 
 public class Printer extends Visitor{
     private final Notation notation;
@@ -21,9 +21,6 @@ public class Printer extends Visitor{
         e.accept(this);
         return eval;
     }
-
-    @Override
-    public void visit(Time n) {eval = n.toString();}
 
     @Override
     public void visit(IntegerNumber n) {
@@ -71,7 +68,8 @@ public class Printer extends Visitor{
     }
 
     @Override
-    public void visit(Date date) {
+    public void visit(MyDate date) {
 
     }
+
 }

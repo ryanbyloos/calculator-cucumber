@@ -4,7 +4,10 @@ import calculator.Expression;
 import calculator.IntegerNumber;
 import calculator.Notation;
 import calculator.RealNumber;
+import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConstruction;
+import calculator.exceptions.UselessComputation;
+import time.MyDate;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -26,4 +29,10 @@ final public class Times extends Operation
 
 	public IntegerNumber op(IntegerNumber l, IntegerNumber r){ return l.times(r); }
 	public RealNumber op(RealNumber l, RealNumber r){ return l.times(r); }
+
+	@Override
+	public MyDate op(MyDate l, MyDate r) throws ComputeError {
+		return null;
+	}
+
 }
