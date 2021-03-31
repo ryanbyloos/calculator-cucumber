@@ -123,14 +123,15 @@ public class Calculator {
         eval = eval.multiply(aimed.getratio());
         return eval;
     }
-    public String convertToString(Expression e, Unit base, Unit aimed) throws IllegalConvertionArgument{
+    public String convertToString(Expression e,Unit base, Unit aimed) throws IllegalConvertionArgument{
         if(base.getType() != aimed.getType()){
             throw new IllegalConvertionArgument();
         }
 
         try {
             RealNumber eval = new RealNumber(convert(e, base, aimed));
-            String res = eval.toString() + aimed.getFullName();
+            String res = eval.toString() +  " " +aimed.getFullName();
+
             return res;
         }catch(ComputeError ce){
             return "ERROR : "+ce.getMessage();
