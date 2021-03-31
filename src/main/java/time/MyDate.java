@@ -10,29 +10,7 @@ import java.time.temporal.TemporalUnit;
 
 
 public class MyDate extends MyNumber {
-    public enum DaysAMonths {
-        January(31),
-        February(28),
-        March(31),
-        April(30),
-        May(31),
-        June(30),
-        July(31),
-        August(31),
-        September(30),
-        October(31),
-        November(30),
-        December(31);
 
-        private final int nbr;
-        DaysAMonths(int nbr) {
-            this.nbr = nbr;
-
-        }
-    }
-
-
-    //ZonedDateTime zonedDateTime;
     LocalDate lDate;
 
     @Override
@@ -44,42 +22,29 @@ public class MyDate extends MyNumber {
     {
         this.lDate =  ldate;
     }
-/*
-    public MyDate (ZonedDateTime zonedDateTime){
-        this.zonedDateTime = zonedDateTime;
-    }
 
-    public MyDate(LocalDateTime time)
+    public MyDate(long y, long m , long d)
     {
-        LocalDateTime local = time;
-        ZoneId zone = ZoneId.of("Europe/Paris");
-        this.zonedDateTime = ZonedDateTime.of(time,zone);
+        LocalDate tmp =  LocalDate.of(0,1,1);
+        tmp=tmp.plus(y,ChronoUnit.YEARS);
+        tmp=tmp.plus(m,ChronoUnit.MONTHS);
+        tmp=tmp.plus(d,ChronoUnit.DAYS);
+        this.lDate = tmp;
     }
-    public MyDate(int year,int month,int day)
-    {
-        LocalDate lDate = LocalDate.of(year,month,day);
-        LocalTime lTime = LocalTime.of(0,0,0);
-        LocalDateTime lDateTime = LocalDateTime.of(lDate,lTime);
-        ZoneId zone = ZoneId.of("Europe/Paris");
-        this.zonedDateTime = ZonedDateTime.of(lDateTime,zone);
-    }
-    public MyDate (String zonedDateTime){
 
-        ZonedDateTime tmp = ZonedDateTime.of(1,2,3,4,5,6,7,ZoneId.of( "Europe/Oslo" ));
-
-        //this.zonedDateTime = zonedDateTime;
-    }
-*/
     public MyDate plus(MyDate n2){
-        int days = n2.lDate.getDayOfYear() + 365*(n2.lDate.getYear()-1);
-        return new MyDate( this.lDate.plus(days,ChronoUnit.DAYS));
+        LocalDate tmp = this.lDate.plusYears(n2.lDate.getYear());
+        tmp = tmp.plusMonths(n2.lDate.getMonthValue() -1);
+        tmp = tmp.plusDays(n2.lDate.getDayOfMonth() -1 );
+        return new MyDate( tmp);
     }
 
-    public MyDate minus(MyDate n2){
-        int days = n2.lDate.getDayOfYear() + 365*(n2.lDate.getYear()-1);
-        return new MyDate( this.lDate.minus(days,ChronoUnit.DAYS));
+    public MyDate dif(MyDate n2){
+        LocalDate tmp = this.lDate.minusYears(n2.lDate.getYear());
+        tmp = tmp.minusMonths(n2.lDate.getMonthValue());
+        tmp = tmp.minusDays(n2.lDate.getDayOfMonth());
+        return new MyDate( tmp);
     }
-
 
     public MyDate times(MyDate n2){
         return null;
@@ -111,15 +76,23 @@ public static void main (String [] args)
 
     LocalDate l1 = LocalDate.of(1999,12,6);
     LocalDate l2 = LocalDate.of(1998,3,3);
-    LocalDate l3 = LocalDate.of(0,1,1);
+   // LocalDate l3 = LocalDate.of(27,48,999);
+  LocalDate L4 = LocalDate.of(0,1,1);
+    //L4.plus(27,ChronoUnit.YEARS);
+   // L4.plus(48,ChronoUnit.MONTHS);
+  //  L4.plus(999,ChronoUnit.DAYS);
 
-
+    MyDate testouille = new MyDate(0,0,1);
     MyDate aurelien = new MyDate(l1);
     MyDate nicolo = new MyDate(l2);
-    MyDate test = new MyDate(l3);
-    MyDate plusplus = nicolo.plus(test);
-    MyDate res = aurelien.minus(nicolo);
-    System.out.println(plusplus.lDate);
+    MyDate testouille1 = new MyDate(2,9,3);
+   // nicolo.plus(testouille);
+   // MyDate test = new MyDate(l3);
+
+    MyDate res = aurelien.dif(testouille1);
+ //   MyDate caca = nicolo.plus(test);
+   System.out.println(res.lDate);
+
 }
 
 }
