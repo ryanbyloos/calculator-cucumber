@@ -22,8 +22,10 @@ public class TestMinus {
 
 	@BeforeEach
 	public void setUp() {
-		  params = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)),new IntegerNumber(Integer.toString(value2))));
-		  try { op = new Minus(params); }
+		  try {
+		  	params = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)),new IntegerNumber(Integer.toString(value2))));
+		  	op = new Minus(params);
+		  }
 		  catch(IllegalConstruction e) { fail(); }
 	}
 
@@ -47,8 +49,8 @@ public class TestMinus {
 	@Test
 	public void testEquals() {
 		// Two similar expressions, constructed separately (and using different constructors) should not be equal
-		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
 		try {
+			ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
 			Minus e = new Minus(p, Notation.INFIX);
 			assertEquals(op, e);
 		}

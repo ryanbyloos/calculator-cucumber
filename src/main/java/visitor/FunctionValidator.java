@@ -1,6 +1,7 @@
 package visitor;
 
 import calculator.*;
+import calculator.exceptions.ImpossibleConversionError;
 import calculator.operations.Operation;
 import function.Function;
 import function.Variable;
@@ -36,8 +37,8 @@ public class FunctionValidator extends Visitor{
         if ( mode == Calculator.Mode.INTEGER ){
             // Try to convert to int
             try{
-                n.toBigInteger();
-            }catch(ArithmeticException e){
+                n.toIntegerNumber();
+            }catch(ImpossibleConversionError e){
                 valid = false;
             }
         }

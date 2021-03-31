@@ -25,9 +25,9 @@ public class EvaluatorInteger extends Evaluator {
     public void visit(RealNumber n) {
         // try to convert else raise an exception
         try {
-            setComputedValue(new IntegerNumber(n.toBigInteger()));
-        }catch (ArithmeticException e){
-            setException(new ImpossibleConversionError());
+            setComputedValue(n.toIntegerNumber());
+        }catch (ImpossibleConversionError e){
+            setException(e);
         }
     }
 

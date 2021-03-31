@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.exceptions.DivisionByZeroError;
+import calculator.exceptions.NotAnIntegerNumber;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
@@ -11,8 +12,12 @@ public class IntegerNumber extends MyNumber{
 
     public BigInteger getValue() { return value; }
 
-    public IntegerNumber(String s){
-        value = new BigInteger(s);
+    public IntegerNumber(String s) throws NotAnIntegerNumber {
+        try {
+            value = new BigInteger(s);
+        }catch (Exception e){
+            throw new NotAnIntegerNumber(s);
+        }
     }
     public IntegerNumber(BigInteger b){
         value = b;
@@ -46,7 +51,18 @@ public class IntegerNumber extends MyNumber{
 
 
     @Override
-    public String toString(){ return value.toString(); }
+    public String toString(){
+        int MAX_SIZE = 7;
+        String res = value.toString();
+        if (res.length() <= MAX_SIZE) return res;
+
+        int exp = 0;
+        for (int i = res.length()-1 ; i > 0 ; i--){
+            if(res.charAt(i) == '0') exp+=1;
+            else break;
+        }
+        return String.format("%sE%d",res.substring(0,res.length()-exp),exp);
+    }
 
     //Two MyNumber expressions are equal if the values they contain are equal
     @Override
@@ -60,10 +76,18 @@ public class IntegerNumber extends MyNumber{
         }
 
         // If the object is of another type then return false
-        if (!(o instanceof IntegerNumber)) {
-            return false;
+        if (o instanceof IntegerNumber) {
+            return this.value.compareTo(((IntegerNumber)o).value) == 0;
+            // .compareTo is needed for BigInteger
+        }else if (o instanceof RealNumber){
+            try{
+                IntegerNumber n = ((RealNumber) o).toIntegerNumber();
+                System.out.println("ddd");
+                return this.value.compareTo(n.value) == 0;
+            }catch (Exception e){
+                return false;
+            }
         }
-        return this.value.compareTo(((IntegerNumber)o).value) == 0;
-        // .compareTo is needed for BigInteger
+        return false;
     }
 }

@@ -4,6 +4,7 @@ package junit5tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.exceptions.IllegalConstruction;
+import calculator.exceptions.NotAnIntegerNumber;
 import calculator.operations.*;
 import org.junit.jupiter.api.*;
 
@@ -15,7 +16,6 @@ import java.math.RoundingMode;
 import java.util.Arrays;
 
 public class TestEvaluator {
-
     private Calculator calc;
     private int value1, value2;
     private Expression op;
@@ -29,8 +29,12 @@ public class TestEvaluator {
 
     @Test
     public void testEvaluatorMyNumber() {
-        assertEquals( Integer.toString(value1),
-                      calc.eval(new IntegerNumber(Integer.toString(value1))));
+        try {
+            assertEquals(Integer.toString(value1),
+                    calc.eval(new IntegerNumber(Integer.toString(value1))));
+        }catch (NotAnIntegerNumber e){
+            fail();
+        }
     }
 
     @Test

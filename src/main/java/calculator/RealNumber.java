@@ -1,6 +1,8 @@
 package calculator;
 
 import calculator.exceptions.DivisionByZeroError;
+import calculator.exceptions.ImpossibleConversionError;
+import calculator.exceptions.NotARealNumber;
 import calculator.operations.Operation;
 import visitor.Visitor;
 
@@ -13,8 +15,12 @@ public class RealNumber extends MyNumber{
 
     public BigDecimal getValue() { return value; }
 
-    public RealNumber(String s){
-        value = new BigDecimal(s);
+    public RealNumber(String s) throws NotARealNumber {
+        try {
+            value = new BigDecimal(s);
+        }catch (Exception e){
+            throw new NotARealNumber(s);
+        }
     }
 
     public RealNumber(BigDecimal b){
@@ -45,20 +51,32 @@ public class RealNumber extends MyNumber{
     }
 
 
-    public BigInteger toBigInteger() throws ArithmeticException{
-        return value.toBigIntegerExact();
+    public IntegerNumber toIntegerNumber() throws ImpossibleConversionError{
+        try {
+            return new IntegerNumber(value.toBigIntegerExact());
+        }catch (Exception e){
+            throw new ImpossibleConversionError();
+        }
     }
 
     @Override
     public String toString(){
-        String res = value.toString();
+        int MAX_SIZE = 7;
+
+        String res = value.toPlainString();
         String[] splitNumber = res.split("\\.");
 
-        if(splitNumber.length == 1 && res.length()>7){ // if it has only integer part and has more than 7 digit
+        if(splitNumber.length == 1 && res.length()>MAX_SIZE){ // if it has only integer part and has more than 7 digit
             // use Exponent notation
             int exp = countZeroesAtEndOfString(res);
             return String.format("%c.%sE%d",res.charAt(0),res.substring(1,res.length()-exp),res.length()-1);
         }else if (splitNumber.length == 2 ){ // if has a decimal part
+
+            // if too presice
+            if(splitNumber[0].length() == 1 && splitNumber[0].charAt(0) == '0'){
+                return value.toString();
+            }
+
             int exp = countZeroesAtEndOfString(splitNumber[1]);
             if(exp == splitNumber[1].length()){ // if it decimal part is full of zero return integer part
                 return splitNumber[0];
@@ -96,10 +114,13 @@ public class RealNumber extends MyNumber{
         }
 
         // If the object is of another type then return false
-        if (!(o instanceof RealNumber)) {
-            return false;
+        if (o instanceof RealNumber) {
+            return this.value.compareTo(((RealNumber)o).value) == 0;
+            // .compareTo is needed for BigDecimal
+        }else if(o instanceof  IntegerNumber){
+            RealNumber n = ((IntegerNumber) o).toRealNumber();
+            return this.value.compareTo(n.value) == 0;
         }
-        return this.value.compareTo(((RealNumber)o).value) == 0;
-        // .compareTo is needed for BigDecimal
+        return false;
     }
 }

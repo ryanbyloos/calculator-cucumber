@@ -2,6 +2,7 @@ package cucumbertests;
 
 import calculator.*;
 import calculator.exceptions.IllegalConstruction;
+import calculator.exceptions.NotAnIntegerNumber;
 import calculator.operations.*;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -54,12 +55,21 @@ public class CalculatorSteps {
 	//  is a list of lists.
 	@Given("the following list of integer numbers")
 	public void givenTheFollowingListOfNumbers(List<List<String>> numbers) {
-		params = new ArrayList<>();
-		// Since we only use one line of input, we use get(0) to take the first line of the list,
-		// which is a list of strings, that we will manually convert to integers:
-		numbers.get(0).forEach(n -> params.add(new IntegerNumber(n)));
-		params.forEach(n -> System.out.println("value ="+ n));
-		op = null;
+
+			params = new ArrayList<>();
+			// Since we only use one line of input, we use get(0) to take the first line of the list,
+			// which is a list of strings, that we will manually convert to integers:
+			numbers.get(0).forEach(n -> {
+						try {
+							params.add(new IntegerNumber(n));
+						} catch (NotAnIntegerNumber e) {
+							fail();
+						}
+					}
+			);
+			params.forEach(n -> System.out.println("value ="+ n));
+			op = null;
+
 	}
 
 	// The string in the Given annotation shows how to use regular expressions...
@@ -86,7 +96,11 @@ public class CalculatorSteps {
 
 	@When("I provide a {word} number {word}")
 	public void whenIProvideANumber(String s, String val) {
-		params.add(new IntegerNumber(val));
+		try {
+			params.add(new IntegerNumber(val));
+		}catch (NotAnIntegerNumber e){
+			fail();
+		}
 	}
 
 	@Then("the {word} is {word}")

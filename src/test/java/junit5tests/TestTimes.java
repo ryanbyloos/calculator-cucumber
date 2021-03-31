@@ -22,8 +22,11 @@ public class TestTimes {
 
 	@BeforeEach
 	public void setUp() {
-		  params = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)),new IntegerNumber(Integer.toString(value2))));
-		  try { op = new Times(params); }
+
+		  try {
+			params = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)),new IntegerNumber(Integer.toString(value2))));
+			op = new Times(params);
+		  }
 		  catch(IllegalConstruction e) { fail(); }
 	}
 
@@ -47,8 +50,8 @@ public class TestTimes {
 	@Test
 	public void testEquals() {
 		// Two similar expressions, constructed separately (and using different constructors) should not be equal
-		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
 		try {
+			ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
 			Times e = new Times(p, Notation.INFIX);
 			assertEquals(op, e);
 		}

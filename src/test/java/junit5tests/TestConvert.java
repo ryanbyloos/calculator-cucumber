@@ -2,6 +2,7 @@ package junit5tests;
 import calculator.*;
 import Converter.*;
 import calculator.exceptions.IllegalConvertionArgument;
+import calculator.exceptions.NotARealNumber;
 import calculator.operations.Operation;
 import org.junit.jupiter.api.*;
 
@@ -10,11 +11,22 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestConvert {
-    public Calculator calc = new Calculator(Calculator.Mode.REAL);
-    RealNumber e = new RealNumber("10");
-    public RealNumber test1 = new RealNumber("1");
-    public RealNumber test2 = new RealNumber("0");
+    private Calculator calc;
+    private RealNumber e;
+    private RealNumber test1;
+    private RealNumber test2;
 
+    @BeforeEach
+    public void setUp(){
+        calc = new Calculator(Calculator.Mode.REAL);
+        try {
+            e = new RealNumber("10");
+            test1 = new RealNumber("1");
+            test2 = new RealNumber("0");
+        }catch (NotARealNumber e){
+            fail();
+        }
+    }
 
     @Test
     public void test1()

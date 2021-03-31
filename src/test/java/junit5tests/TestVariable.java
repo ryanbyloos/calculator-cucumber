@@ -1,5 +1,6 @@
 package junit5tests;
 
+import calculator.exceptions.NotAnIntegerNumber;
 import calculator.operations.Divides;
 import calculator.Expression;
 import calculator.IntegerNumber;
@@ -45,25 +46,37 @@ public class TestVariable {
     }
     @Test
     public void testToStringWithAssignment() {
-        int i = 2;
-        IntegerNumber n = new IntegerNumber(Integer.toString(i));
-        var.assignValue(n);
-        assertEquals("X"+":"+i, var.completeString());
+        try {
+            int i = 2;
+            IntegerNumber n = new IntegerNumber(Integer.toString(i));
+            var.assignValue(n);
+            assertEquals("X"+":"+i, var.completeString());
+        }catch (NotAnIntegerNumber e){
+            fail();
+        }
     }
 
     @Test
     public void testVariableFirstDivide(){
-        ArrayList<Expression> l = new ArrayList<>();
-        l.add(new Variable());
-        l.add(new IntegerNumber("12"));
-        assertDoesNotThrow(() -> new Divides(l));
+        try {
+            ArrayList<Expression> l = new ArrayList<>();
+            l.add(new Variable());
+            l.add(new IntegerNumber("12"));
+            assertDoesNotThrow(() -> new Divides(l));
+        }catch (NotAnIntegerNumber e){
+            fail();
+        }
     }
 
     @Test
     public void testVariableSecondDivide(){
-        ArrayList<Expression> l = new ArrayList<>();
-        l.add(new IntegerNumber("12"));
-        l.add(new Variable());
-        assertDoesNotThrow(() -> new Divides(l));
+        try {
+            ArrayList<Expression> l = new ArrayList<>();
+            l.add(new IntegerNumber("12"));
+            l.add(new Variable());
+            assertDoesNotThrow(() -> new Divides(l));
+        }catch (NotAnIntegerNumber e){
+            fail();
+        }
     }
 }

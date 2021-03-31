@@ -7,6 +7,7 @@ import calculator.*;
 import calculator.exceptions.BadAssignment;
 import calculator.exceptions.IllegalConstruction;
 import calculator.exceptions.ImpossibleConversionError;
+import calculator.exceptions.NotARealNumber;
 import calculator.operations.Divides;
 import calculator.operations.Plus;
 import calculator.operations.Times;
@@ -14,9 +15,7 @@ import function.Function;
 import function.Variable;
 import org.junit.jupiter.api.*;
 import visitor.EvaluatorInteger;
-import visitor.Visitor;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -62,12 +61,11 @@ public class TestFunction {
 
     @Test
     public void testFunctionVariableDifferent(){
-        ArrayList<Expression> el = new ArrayList<>();
-        el.add(new IntegerNumber("2"));
-        el.add(var2);
-
         Expression e;
         try {
+            ArrayList<Expression> el = new ArrayList<>();
+            el.add(new IntegerNumber("2"));
+            el.add(var2);
             e = new Times(el);
         }catch (IllegalConstruction exception){
             fail();
@@ -79,13 +77,11 @@ public class TestFunction {
     @Test
     public void testUnassigned(){
         Function f;
-
-        MyNumber secondMember = new IntegerNumber("2");
-
-        List<Expression> param = new ArrayList<>();
-        Collections.addAll(param, var1, secondMember);
-
         try {
+            MyNumber secondMember = new IntegerNumber("2");
+
+            List<Expression> param = new ArrayList<>();
+            Collections.addAll(param, var1, secondMember);
             Expression e = new Plus(param, Notation.INFIX);
 
             f = new Function(var1, e);
@@ -105,7 +101,7 @@ public class TestFunction {
             f.getExpression().accept(ev);
             assertEquals(ImpossibleConversionError.class,ev.getException().getClass());
 
-        }catch (BadAssignment e){
+        }catch (BadAssignment | NotARealNumber e){
             fail();
         }
     }
@@ -113,13 +109,11 @@ public class TestFunction {
     @Test
     public void testBadAssignment(){
         Function f;
-
-        MyNumber secondMember = new IntegerNumber("2");
-
-        List<Expression> param = new ArrayList<>();
-        Collections.addAll(param, var1, secondMember);
-
         try {
+            MyNumber secondMember = new IntegerNumber("2");
+
+            List<Expression> param = new ArrayList<>();
+            Collections.addAll(param, var1, secondMember);
             Expression e = new Plus(param, Notation.INFIX);
 
             f = new Function(var1, e);
@@ -139,7 +133,7 @@ public class TestFunction {
             f.getExpression().accept(ev);
             assertEquals(ImpossibleConversionError.class,ev.getException().getClass());
 
-        }catch (BadAssignment e){
+        }catch (BadAssignment | NotARealNumber e){
             fail();
         }
     }

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.exceptions.DivisionByZeroError;
 import calculator.exceptions.IllegalConstruction;
+import calculator.exceptions.NotAnIntegerNumber;
 import calculator.operations.Divides;
 import calculator.operations.Times;
 import org.junit.jupiter.api.*;
@@ -25,8 +26,8 @@ public class TestDivides {
 
     @BeforeEach
     public void setUp() {
-        params = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
         try {
+            params = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
             op = new Divides(params);
             op.notation = Notation.INFIX; // reset the notation to infix (which is the default) before each test
         } catch (IllegalConstruction e) {
@@ -53,33 +54,45 @@ public class TestDivides {
 
     @Test
     public void testDivisionByZero1() {
-        ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value3))));
-        assertThrows(DivisionByZeroError.class, () -> {
-            op = new Divides(p);
-        });
+        try {
+            ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value3))));
+            assertThrows(DivisionByZeroError.class, () -> {
+                op = new Divides(p);
+            });
+        }catch (NotAnIntegerNumber e){
+            fail();
+        }
     }
 
     @Test
     public void testDivisionByZero2() {
-        ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2)), new IntegerNumber(Integer.toString(value3))));
-        assertThrows(DivisionByZeroError.class, () -> {
-            op = new Divides(p);
-        });
+        try {
+            ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2)), new IntegerNumber(Integer.toString(value3))));
+            assertThrows(DivisionByZeroError.class, () -> {
+                op = new Divides(p);
+            });
+        }catch (NotAnIntegerNumber e){
+            fail();
+        }
     }
 
     @Test
     public void testDivisionByZero3() {
-        ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value3)), new IntegerNumber(Integer.toString(value2)), new IntegerNumber(Integer.toString(value1))));
-        assertDoesNotThrow(() -> {
-            op = new Divides(p);
-        });
+        try {
+            ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value3)), new IntegerNumber(Integer.toString(value2)), new IntegerNumber(Integer.toString(value1))));
+            assertDoesNotThrow(() -> {
+                op = new Divides(p);
+            });
+        }catch (NotAnIntegerNumber e){
+
+        }
     }
 
     @Test
     public void testEquals() {
         // Two similar expressions, constructed separately (and using different constructors) should be equal
-        ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
         try {
+            ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
             Divides d = new Divides(p, Notation.INFIX);
             assertEquals(op, d);
         } catch (IllegalConstruction e) {
