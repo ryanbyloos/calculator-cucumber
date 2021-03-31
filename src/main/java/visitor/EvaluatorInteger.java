@@ -9,6 +9,7 @@ import calculator.operations.Operation;
 import calculator.RealNumber;
 import calculator.exceptions.BadAssignment;
 import function.Variable;
+import time.Date;
 import time.Time;
 
 import java.math.BigInteger;
@@ -56,6 +57,11 @@ public class EvaluatorInteger extends Evaluator {
         }
         // store the accumulated result
         setComputedValue(temp);
+    }
+
+    @Override
+    public void visit(Date date) {
+
     }
 
     @Override

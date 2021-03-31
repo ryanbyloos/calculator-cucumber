@@ -6,6 +6,7 @@ import calculator.exceptions.ComputeError;
 import calculator.operations.Operation;
 import calculator.RealNumber;
 import function.Variable;
+import time.Date;
 import time.Time;
 
 import java.math.BigDecimal;
@@ -46,6 +47,11 @@ public class EvaluatorReal extends Evaluator{
         }
         // store the accumulated result
         setComputedValue(temp);
+    }
+
+    @Override
+    public void visit(Date date) {
+
     }
 
     @Override

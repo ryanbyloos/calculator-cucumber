@@ -3,6 +3,7 @@ package visitor;
 import calculator.*;
 import calculator.operations.Operation;
 import function.Variable;
+import time.Date;
 import time.Time;
 
 public class Printer extends Visitor{
@@ -67,5 +68,10 @@ public class Printer extends Visitor{
             case POSTFIX: tmp.append(") ").append(o.getSymbol()); break;
         }
         eval = tmp.toString();
+    }
+
+    @Override
+    public void visit(Date date) {
+
     }
 }

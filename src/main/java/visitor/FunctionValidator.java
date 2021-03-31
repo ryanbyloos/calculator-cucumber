@@ -4,6 +4,7 @@ import calculator.*;
 import calculator.operations.Operation;
 import function.Function;
 import function.Variable;
+import time.Date;
 import time.Time;
 
 /**
@@ -50,6 +51,11 @@ public class FunctionValidator extends Visitor{
         for(int i = 1 ; i < o.getArgs().size() ; i++) {
             o.getArgs().get(i).accept(this);
         }
+    }
+
+    @Override
+    public void visit(Date date) {
+
     }
 
     @Override
