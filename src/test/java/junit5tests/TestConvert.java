@@ -1,13 +1,11 @@
 package junit5tests;
 import calculator.*;
 import Converter.*;
-import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConvertionArgument;
 import calculator.operations.Operation;
 import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,7 +63,7 @@ public class TestConvert {
     @Test
     public void testTemperature1()
     {
-        String res = calc.converttoString(test2,Temperature.Celsius,Temperature.Kelvin);
+        String res = calc.convertToString(test2,Temperature.Celsius,Temperature.Kelvin);
         assertNotNull(res);
     }
 

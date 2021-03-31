@@ -123,13 +123,13 @@ public class Calculator {
         eval = eval.multiply(aimed.getratio());
         return eval;
     }
-    public String converttoString(Expression e,Unit base, Unit aimed) throws IllegalConvertionArgument{
+    public String convertToString(Expression e, Unit base, Unit aimed) throws IllegalConvertionArgument{
         if(base.getType() != aimed.getType()){
             throw new IllegalConvertionArgument();
         }
 
         try {
-            BigDecimal eval = convert(e, base, aimed);
+            RealNumber eval = new RealNumber(convert(e, base, aimed));
             String res = eval.toString() + aimed.getFullName();
             return res;
         }catch(ComputeError ce){
@@ -147,9 +147,9 @@ public class Calculator {
         return eval;
     }
 
-    public String converttoString(Expression e, Temperature base, Temperature aimed) {
+    public String convertToString(Expression e, Temperature base, Temperature aimed) {
         try {
-            BigDecimal eval = convert(e,base,aimed);
+            RealNumber eval = new RealNumber(convert(e,base,aimed));
             String res = eval.toString() + " "+aimed.getFullName();
             return res;
         }catch (ComputeError ce){

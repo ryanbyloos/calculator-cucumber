@@ -14,6 +14,10 @@ public class RealNumber extends MyNumber{
         value = new BigDecimal(s);
     }
 
+    public RealNumber(BigDecimal b){
+        value = b;
+    }
+
     public void accept(Visitor v) {
         v.visit(this);
     }
