@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Operation implements Expression {
-    public static int CONST_ROUNDED = 10;
     public List<Expression> args;
     protected String symbol;
     protected int neutral; // the neutral element of the operation (e.g. 1 for *, 0 for +)

@@ -53,7 +53,7 @@ public class TestConvert {
         try {
             RealNumber e = new RealNumber("10.0");
             BigDecimal eval = calc.evalReal(e).getValue();
-            Operation.CONST_ROUNDED = 15;
+            RealNumber.setPrecision(15);
             for (Unit unit : Unit.values())
             {
 

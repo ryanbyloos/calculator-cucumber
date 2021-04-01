@@ -23,6 +23,7 @@ public class TestRealNumber {
 
     @BeforeEach
     public void setUp() {
+        RealNumber.setPrecision(10);
         try {
             number = new RealNumber(Integer.toString(value));
         }catch (NotARealNumber e){
@@ -128,6 +129,7 @@ public class TestRealNumber {
     @Test
     public void testDisplayLargeRealNumber(){
         try {
+            RealNumber.setPrecision(10);
             MyNumber r = new RealNumber("12898948000000");
             assertEquals("1.2898948E13", r.toString());
         }catch (NotARealNumber e){
@@ -162,4 +164,49 @@ public class TestRealNumber {
             fail();
         }
     }
+
+    @Test
+    public void testPrecision1(){
+        try {
+            RealNumber.setPrecision(3);
+            MyNumber n1 = new RealNumber("6.122");
+            assertEquals("6.12",n1.toString());
+        }catch (IllegalConstruction e){
+            fail();
+        }
+    }
+
+    @Test
+    public void testPrecision2(){
+        try {
+            RealNumber.setPrecision(2);
+            MyNumber n1 = new RealNumber("36.122");
+            assertEquals("36",n1.toString());
+        }catch (IllegalConstruction e){
+            fail();
+        }
+    }
+
+    @Test
+    public void testPrecision3(){
+        try {
+            RealNumber.setPrecision(4);
+            MyNumber n1 = new RealNumber("36.122");
+            assertEquals("36.12",n1.toString());
+        }catch (IllegalConstruction e){
+            fail();
+        }
+    }
+
+    @Test
+    public void testPrecision4(){
+        try {
+            RealNumber.setPrecision(1);
+            MyNumber n1 = new RealNumber("600");
+            assertEquals("600",n1.toString());
+        }catch (IllegalConstruction e){
+            fail();
+        }
+    }
+
 }

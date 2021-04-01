@@ -3,28 +3,31 @@ package calculator;
 import calculator.exceptions.DivisionByZeroError;
 import calculator.exceptions.NotARealNumber;
 import calculator.exceptions.NotAnIntegerNumber;
-import calculator.operations.Operation;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 
 public class RealNumber extends MyNumber{
+    private static MathContext mc = new MathContext(10, RoundingMode.HALF_UP);
     private final BigDecimal value;
 
     public BigDecimal getValue() { return value; }
 
     public RealNumber(String s) throws NotARealNumber {
         try {
-            value = new BigDecimal(s);
+            value = new BigDecimal(s,mc);
         }catch (Exception e){
             throw new NotARealNumber(s);
         }
     }
 
-    public RealNumber(BigDecimal b){
-        value = b;
-    }
+    public RealNumber(BigDecimal b){ value = new BigDecimal(b.toString(),mc); }
+
+    public static void setPrecision(int a){ mc = new MathContext(a,RoundingMode.HALF_UP); }
+
+    public static MathContext getMc() { return mc; }
 
     public void accept(Visitor v) {
         v.visit(this);
@@ -32,21 +35,20 @@ public class RealNumber extends MyNumber{
 
     public RealNumber divide(RealNumber n2) throws DivisionByZeroError {
         try {
-            return new RealNumber(value.divide(n2.getValue(), Operation.CONST_ROUNDED, RoundingMode.HALF_UP));
+            return new RealNumber(value.divide(n2.getValue(), mc));
         }catch (ArithmeticException e){
             throw new DivisionByZeroError();
         }
     }
 
     public RealNumber plus(RealNumber n2){
-        return new RealNumber(value.add(n2.getValue()));
+        return new RealNumber(value.add(n2.getValue(),mc));
     }
-
     public RealNumber minus(RealNumber n2){
-        return new RealNumber(value.add(n2.getValue().negate()));
+        return new RealNumber(value.add(n2.getValue().negate(),mc));
     }
     public RealNumber times(RealNumber n2){
-        return new RealNumber(value.multiply(n2.getValue()));
+        return new RealNumber(value.multiply(n2.getValue(),mc));
     }
 
 

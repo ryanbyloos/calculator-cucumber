@@ -41,7 +41,7 @@ public class TestEvaluator {
     public void testEvaluatorDivides() {
         try { op = new Divides(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
             BigDecimal expected = new BigDecimal("1.33333");
-            Operation.CONST_ROUNDED = 5;
+            RealNumber.setPrecision(6);
             expected.divide(new BigDecimal(6), 2, RoundingMode.HALF_UP);
             assertEquals( expected.toString() ,
                         calc.eval(op) );

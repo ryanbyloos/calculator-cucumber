@@ -3,7 +3,6 @@ package calculator;
 import calculator.exceptions.BadAssignment;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConvertionArgument;
-import calculator.operations.Operation;
 import Converter.Temperature;
 import function.Function;
 import visitor.EvaluatorInteger;
@@ -11,13 +10,12 @@ import visitor.EvaluatorReal;
 import Converter.Unit;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.HashMap;
 
 public class Calculator {
     public enum Mode {INTEGER,REAL,CONVERSION}
 
-    private HashMap<String,Function> storedFun;
+    private final HashMap<String,Function> storedFun;
 
     private final Mode mode;
     /*
@@ -33,9 +31,9 @@ public class Calculator {
         mode = m;
         storedFun = new HashMap<>();
     }
-    public Calculator(Mode m,int round){
+    public Calculator(Mode m,int precision){
         this(m);
-        Operation.CONST_ROUNDED =round;
+        RealNumber.setPrecision(precision);
     }
 
 
@@ -129,7 +127,7 @@ public class Calculator {
         }
 
         BigDecimal eval = evalReal(e).getValue();
-        eval = eval.divide(base.getratio(), Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
+        eval = eval.divide(base.getratio(), RealNumber.getMc());
         eval = eval.multiply(aimed.getratio());
         return eval;
     }
@@ -151,7 +149,7 @@ public class Calculator {
     public BigDecimal convert(Expression e, Temperature base, Temperature aimed) throws  ComputeError {
         BigDecimal eval = evalReal(e).getValue();
         eval = eval.subtract(base.getConstant());
-        eval = eval.divide(base.getRatio(),Operation.CONST_ROUNDED, RoundingMode.HALF_UP);
+        eval = eval.divide(base.getRatio(),RealNumber.getMc());
         eval = eval.multiply(aimed.getRatio());
         eval = eval.add(aimed.getConstant());
 
