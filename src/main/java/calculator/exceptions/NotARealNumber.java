@@ -6,5 +6,5 @@ public class NotARealNumber extends ComputeError{
         error = err;
     }
     @Override
-    public String getMessage(){ return error+" is not an integer"; }
+    public String getMessage(){ return error+" is not an real"; }
 }

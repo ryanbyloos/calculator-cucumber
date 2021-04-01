@@ -8,7 +8,6 @@ import Converter.Temperature;
 import function.Function;
 import visitor.EvaluatorInteger;
 import visitor.EvaluatorReal;
-import visitor.FunctionValidator;
 import Converter.Unit;
 
 import java.math.BigDecimal;
@@ -61,59 +60,64 @@ public class Calculator {
         System.out.println();
     }
 
-    public String eval(Expression e){
-        try {
-            if (mode == Mode.INTEGER)
-                return evalInteger(e).toString();
-            else if (mode == Mode.REAL)
-                return evalReal(e).toString();
-        }catch(ComputeError ce){
-            return "Error"+ce.getMessage();
-        }
 
-        return null; // TODO handle ERROR CASE
-    }
-
+    /**
+     * Add a function to calculator memory
+     * @param key
+     * @param f
+     * @throws BadAssignment
+     */
     public void addFunction(String key,Function f) throws BadAssignment{
         storedFun.put(key,f);
     }
 
     /**
+     * Evaluates the expression or returns a description of its error
+     * @param e expression to evaluate
+     * @return a ready to print string for the user
+     */
+    public String eval(Expression e){
+        try {
+            switch (mode){
+                case INTEGER:
+                    return evalInteger(e).toString();
+                case REAL:
+                    return evalReal(e).toString();
+                default:
+                    return "Unsupported Mode";
+            }
+        }catch(ComputeError ce){
+            return "Error"+ce.getMessage();
+        }
+    }
+
+    /**
      * Return value of function or error message as string
      * @param value value of
-     * @param key
-     * @return
+     * @param funName name of the
+     * @return a ready to print string for the user
      * @throws BadAssignment
      */
-    public String eval(MyNumber value,String key) throws BadAssignment {
-        if(!storedFun.containsKey(key)) return "No Such Function";
-        Function f = storedFun.get(key);
+    public String eval(MyNumber value,String funName) throws BadAssignment {
+        if(!storedFun.containsKey(funName)) return "No Such Function";
+        Function f = storedFun.get(funName);
         String res;
         f.setValue(value);
 
-        FunctionValidator v =  new FunctionValidator();
-
-        if (!v.verify(f,mode)) throw new BadAssignment();
-
-        switch (mode){
-            case INTEGER:
-                try {
+        try {
+            switch (mode) {
+                case INTEGER:
                     res = evalInteger(f.getExpression()).toString();
-                }catch (ComputeError ce){
-                    return "ERROR : "+ce.getMessage();
-                }
-                break;
-            case REAL:
-                try {
+                    break;
+                case REAL:
                     res = evalReal(f.getExpression()).toString();
-                }catch (ComputeError ce){
-                    return "ERROR : "+ce.getMessage();
-                }
-                break;
-            default:
-                throw new BadAssignment(); // Should not be here
+                    break;
+                default:
+                    return "Unsupported Mode";
+            }
+        }catch (ComputeError ce) {
+            return ce.getMessage();
         }
-
         f.clearValue();
         return res;
     }
@@ -165,6 +169,12 @@ public class Calculator {
     }
 
 
+    /**
+     * Evaluate expression un a integer context
+     * @param e expression to evaluate
+     * @return IntegerNumber that results from the evaluation
+     * @throws ComputeError
+     */
     public IntegerNumber evalInteger(Expression e) throws ComputeError{
         // create a new visitor to evaluate expressions
         EvaluatorInteger v = new EvaluatorInteger();
@@ -175,6 +185,12 @@ public class Calculator {
         return new IntegerNumber(v.getResult().toString());
     }
 
+    /**
+     * Evaluate expression un a real context
+     * @param e expression to evaluate
+     * @return RealNumber that results from the evaluation
+     * @throws ComputeError
+     */
     public RealNumber evalReal(Expression e)  throws ComputeError {
         // create a new visitor to evaluate expressions
         EvaluatorReal v = new EvaluatorReal();

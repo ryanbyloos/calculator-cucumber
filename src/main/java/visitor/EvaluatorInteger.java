@@ -3,7 +3,7 @@ package visitor;
 import calculator.Expression;
 import calculator.IntegerNumber;
 import calculator.exceptions.ComputeError;
-import calculator.exceptions.ImpossibleConversionError;
+import calculator.exceptions.NotAnIntegerNumber;
 import calculator.operations.Operation;
 import calculator.RealNumber;
 import function.Variable;
@@ -22,7 +22,7 @@ public class EvaluatorInteger extends Evaluator {
         // try to convert else raise an exception
         try {
             setComputedValue(n.toIntegerNumber());
-        }catch (ImpossibleConversionError e){
+        }catch (NotAnIntegerNumber e){
             setException(e);
         }
     }

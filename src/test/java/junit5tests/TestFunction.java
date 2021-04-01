@@ -4,10 +4,7 @@ package junit5tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.*;
-import calculator.exceptions.BadAssignment;
-import calculator.exceptions.IllegalConstruction;
-import calculator.exceptions.ImpossibleConversionError;
-import calculator.exceptions.NotARealNumber;
+import calculator.exceptions.*;
 import calculator.operations.Divides;
 import calculator.operations.Plus;
 import calculator.operations.Times;
@@ -38,7 +35,7 @@ public class TestFunction {
             Collections.addAll(param, var1,  secondMember);
             Expression e = new Plus(param, Notation.INFIX);
 
-            Function f = new Function(var1,e);
+            Function f = new Function(e);
             // TEST variable as no value
             String infix = "( " + var1.varName + " + " + secondMember.toString() + " )";
 
@@ -60,21 +57,6 @@ public class TestFunction {
     }
 
     @Test
-    public void testFunctionVariableDifferent(){
-        Expression e;
-        try {
-            ArrayList<Expression> el = new ArrayList<>();
-            el.add(new IntegerNumber("2"));
-            el.add(var2);
-            e = new Times(el);
-        }catch (IllegalConstruction exception){
-            fail();
-            return;
-        }
-        assertThrows(IllegalConstruction.class,() -> new Function(var1,e));
-    }
-
-    @Test
     public void testUnassigned(){
         Function f;
         try {
@@ -84,7 +66,7 @@ public class TestFunction {
             Collections.addAll(param, var1, secondMember);
             Expression e = new Plus(param, Notation.INFIX);
 
-            f = new Function(var1, e);
+            f = new Function(e);
         }catch (IllegalConstruction exception){
             fail();
             return;
@@ -99,7 +81,7 @@ public class TestFunction {
             // test bad assignment to string
             EvaluatorInteger ev = new EvaluatorInteger();
             f.getExpression().accept(ev);
-            assertEquals(ImpossibleConversionError.class,ev.getException().getClass());
+            assertEquals(NotAnIntegerNumber.class,ev.getException().getClass());
 
         }catch (BadAssignment | NotARealNumber e){
             fail();
@@ -116,7 +98,7 @@ public class TestFunction {
             Collections.addAll(param, var1, secondMember);
             Expression e = new Plus(param, Notation.INFIX);
 
-            f = new Function(var1, e);
+            f = new Function(e);
         }catch (IllegalConstruction exception){
             fail();
             return;
@@ -131,7 +113,7 @@ public class TestFunction {
             // test bad assignment to string
             EvaluatorInteger ev = new EvaluatorInteger();
             f.getExpression().accept(ev);
-            assertEquals(ImpossibleConversionError.class,ev.getException().getClass());
+            assertEquals(NotAnIntegerNumber.class,ev.getException().getClass());
 
         }catch (BadAssignment | NotARealNumber e){
             fail();
@@ -147,7 +129,7 @@ public class TestFunction {
             Collections.addAll(param, var1, secondMember);
             Expression e = new Plus(param, Notation.INFIX);
 
-            Function f = new Function(var1, e);
+            Function f = new Function(e);
 
             // TEST variable as value
             MyNumber xValue = new IntegerNumber("12");
@@ -168,24 +150,6 @@ public class TestFunction {
     }
 
     @Test
-    public void testVarNotInParamFunction(){
-        Expression e;
-        ArrayList<Variable> varList;
-        try{
-
-            MyNumber secondMember = new IntegerNumber("2");
-
-            List<Expression> param = new ArrayList<>();
-            Collections.addAll(param, var2, secondMember);
-            e = new Plus(param, Notation.INFIX);
-        }catch(IllegalConstruction exception){
-            fail();
-            return;
-        }
-        assertThrows(IllegalConstruction.class, () -> new Function(var1, e));
-    }
-
-    @Test
     public void testFunctionCalculator(){
         try {
             Expression two = new IntegerNumber("2");
@@ -195,7 +159,7 @@ public class TestFunction {
 
             Expression e = new Times(el);
 
-            Function f = new Function(var1, e);
+            Function f = new Function(e);
 
             MyNumber seven = new IntegerNumber("7");
 
@@ -209,7 +173,7 @@ public class TestFunction {
     }
 
     @Test
-    public void testFunctionCalculatorBadAssignment(){
+    public void testFunctionCalculatorRealInsteadInteger(){
         try {
             Expression two = new IntegerNumber("2");
             ArrayList<Expression> el = new ArrayList<>();
@@ -218,12 +182,17 @@ public class TestFunction {
 
             Expression e = new Times(el);
 
-            Function f = new Function(var1, e);
+            Function f = new Function(e);
 
             Calculator c = new Calculator(Calculator.Mode.INTEGER);
             c.addFunction("fun",f);
 
-            assertThrows(BadAssignment.class,() -> c.eval(new RealNumber("23.5"),"fun"));
+            RealNumber x = new RealNumber("23.5");
+            f.setValue(x);
+            assertThrows(NotAnIntegerNumber.class,() -> c.evalInteger(f.getExpression()));
+            f.clearValue();
+
+            assertEquals("23.5 is not an integer", c.eval(x,"fun"));
 
         }catch (IllegalConstruction | BadAssignment exception){
             fail();
@@ -240,7 +209,7 @@ public class TestFunction {
 
             Expression e = new Divides(el);
 
-            Function f = new Function(var1, e);
+            Function f = new Function(e);
 
             Calculator c = new Calculator(Calculator.Mode.REAL);
             c.addFunction("fun",f);
@@ -262,15 +231,37 @@ public class TestFunction {
 
             Expression e = new Divides(el);
 
-            Function f = new Function(var1, e);
+            Function f = new Function(e);
 
             RealNumber zero = new RealNumber("0.0");
 
             Calculator c = new Calculator(Calculator.Mode.REAL);
             c.addFunction("fun",f);
 
-            assertEquals("ERROR : Division By Zero Error",c.eval(zero ,"fun"));
+            // test if eval throw exception
+            f.setValue(zero);
+            assertThrows(DivisionByZeroError.class, () -> c.evalReal(f.getExpression()));
+            f.clearValue();
+
+            // test if correctly return error message
+            assertEquals("Division By Zero Error",c.eval(zero ,"fun"));
         }catch (Exception e){
+            fail();
+        }
+    }
+
+    @Test
+    public void testValidatorTwoVariable(){
+        try {
+            ArrayList<Expression> el = new ArrayList<>();
+            el.add(var1);
+            el.add(var2);
+
+            Expression e = new Plus(el);
+
+            assertThrows(IllegalConstruction.class,() ->new Function(e));
+
+        }catch (IllegalConstruction exception){
             fail();
         }
     }

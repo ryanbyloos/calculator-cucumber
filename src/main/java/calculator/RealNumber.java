@@ -1,13 +1,12 @@
 package calculator;
 
 import calculator.exceptions.DivisionByZeroError;
-import calculator.exceptions.ImpossibleConversionError;
 import calculator.exceptions.NotARealNumber;
+import calculator.exceptions.NotAnIntegerNumber;
 import calculator.operations.Operation;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
 
 public class RealNumber extends MyNumber{
@@ -51,11 +50,11 @@ public class RealNumber extends MyNumber{
     }
 
 
-    public IntegerNumber toIntegerNumber() throws ImpossibleConversionError{
+    public IntegerNumber toIntegerNumber() throws NotAnIntegerNumber{
         try {
             return new IntegerNumber(value.toBigIntegerExact());
         }catch (Exception e){
-            throw new ImpossibleConversionError();
+            throw new NotAnIntegerNumber(value.toString());
         }
     }
 
