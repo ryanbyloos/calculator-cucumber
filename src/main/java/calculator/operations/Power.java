@@ -3,9 +3,11 @@ package calculator.operations;
 import calculator.Expression;
 import calculator.IllegalConstruction;
 import calculator.Notation;
+import ch.obermuhlner.math.big.BigDecimalMath;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 import java.util.List;
 
 public class Power extends Operation{
@@ -23,18 +25,13 @@ public class Power extends Operation{
 
     @Override
     public BigInteger op(BigInteger l, BigInteger r) {
-        BigInteger res = BigInteger.ONE;
-        while(r.signum() > 0){
-            if(r.testBit(0))
-                res = res.multiply(l);
-            l = l.multiply(l);
-            r = r.shiftRight(1);
-        }
-        return res;
+        BigDecimal a = new BigDecimal(l.toString());
+        BigDecimal b = new BigDecimal(r.toString());
+        return op(a,b).toBigInteger();
     }
 
     @Override
     public BigDecimal op(BigDecimal l, BigDecimal r) {
-        return null;
+        return BigDecimalMath.pow(l, r, MathContext.UNLIMITED);
     }
 }
