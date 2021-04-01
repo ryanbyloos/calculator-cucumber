@@ -28,5 +28,5 @@ final public class Minus extends Operation
 
 	public IntegerNumber op(IntegerNumber l, IntegerNumber r) { return l.minus(r); }
 	public RealNumber op(RealNumber l, RealNumber r) { return l.minus(r); }
-	public MyDate op (MyDate l, MyDate r){return null;}
+	public MyDate op (MyDate l, MyDate r){return l.minus(r);}
 }

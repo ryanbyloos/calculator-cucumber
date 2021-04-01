@@ -32,7 +32,7 @@ final public class Times extends Operation
 
 	@Override
 	public MyDate op(MyDate l, MyDate r) throws ComputeError {
-		return null;
+		throw new UselessComputation() ;
 	}
 
 }

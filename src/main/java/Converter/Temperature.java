@@ -16,7 +16,7 @@ public enum Temperature {
     private final BigDecimal ratio;
     private final BigDecimal constant;
 
-    private Temperature (String type, String name, BigDecimal ratio,BigDecimal constant) {
+     Temperature (String type, String name, BigDecimal ratio,BigDecimal constant) {
         this.type = type;
         this.name = name;
         this.ratio = ratio;
