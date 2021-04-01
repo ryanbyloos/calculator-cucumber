@@ -36,6 +36,10 @@ public class Printer extends Visitor{
 
     @Override
     public void visit(Variable v) { eval = v.toString(); }
+    @Override
+    public void visit(MyDate date){
+        eval = date.getlDate().toString();
+    }
 
     @Override
     public void visit(Operation o) {
@@ -65,11 +69,6 @@ public class Printer extends Visitor{
             case POSTFIX: tmp.append(") ").append(o.getSymbol()); break;
         }
         eval = tmp.toString();
-    }
-
-    @Override
-    public void visit(MyDate date) {
-
     }
 
 }

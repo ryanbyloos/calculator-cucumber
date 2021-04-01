@@ -4,6 +4,7 @@ import calculator.Calculator;
 import calculator.RealNumber;
 import calculator.exceptions.IllegalConstruction;
 import calculator.exceptions.NotARealNumber;
+import calculator.exceptions.TemporalException;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,7 +46,7 @@ public class TestMyDate {
     }
 
 @Test
-    public void test1() throws IllegalConstruction {
+    public void test1() throws TemporalException {
         l2 = LocalDate.of(1998,3,3);
         d2 = new MyDate(l2);
         d4 = new MyDate(0,0,1);
@@ -56,7 +57,7 @@ public class TestMyDate {
     }
 
     @Test
-    public void test2() throws IllegalConstruction {
+    public void test2() throws TemporalException {
         l2 = LocalDate.of(1998,3,3);
         d2 = new MyDate(l2);
         d5 = new MyDate(0,1,0);
@@ -67,7 +68,7 @@ public class TestMyDate {
     }
 
     @Test
-    public void test3() throws IllegalConstruction {
+    public void test3() throws TemporalException {
         l2 = LocalDate.of(1998,3,3);
         d2 = new MyDate(l2);
         d6 = new MyDate(1,0,0);
@@ -77,7 +78,7 @@ public class TestMyDate {
         assertEquals(0,tmp.compareTo(compared));
     }
     @Test
-    public void test4() throws IllegalConstruction {
+    public void test4() throws TemporalException {
         l2 = LocalDate.of(1998,3,3);
         d2 = new MyDate(l2);
         d7 = new MyDate(1,1,1);
@@ -88,7 +89,7 @@ public class TestMyDate {
     }
 
     @Test
-    public void test5() throws IllegalConstruction {
+    public void test5()  {
         l2 = LocalDate.of(1998,3,3);
         d2 = new MyDate(l2);
         d4 = new MyDate(0,0,1);
@@ -99,18 +100,18 @@ public class TestMyDate {
     }
 
     @Test
-    public void test6() throws IllegalConstruction {
+    public void test6()  {
         l2 = LocalDate.of(1998,3,3);
         d2 = new MyDate(l2);
         d5 = new MyDate(0,1,0);
-        d2 = d2.plus(d5);
+        d2 = d2.minus(d5);
         LocalDate tmp = d2.getlDate();
         LocalDate compared = LocalDate.of(1998,2,3);
         assertEquals(0,tmp.compareTo(compared));
     }
 
     @Test
-    public void test7() throws IllegalConstruction {
+    public void test7()  {
         l2 = LocalDate.of(1998,3,3);
         d2 = new MyDate(l2);
         d6 = new MyDate(1,0,0);
@@ -120,7 +121,7 @@ public class TestMyDate {
         assertEquals(0,tmp.compareTo(compared));
     }
     @Test
-    public void test8() throws IllegalConstruction {
+    public void test8()   {
         l2 = LocalDate.of(1998,3,3);
         d2 = new MyDate(l2);
         d7 = new MyDate(1,1,1);

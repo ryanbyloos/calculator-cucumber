@@ -2,7 +2,8 @@ package time;
 import calculator.MyNumber;
 import calculator.RealNumber;
 import calculator.exceptions.BadAssignment;
-import calculator.exceptions.IllegalConstruction;
+import calculator.exceptions.TemporalException;
+import calculator.exceptions.UselessComputation;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
@@ -36,11 +37,13 @@ public class MyDate extends MyNumber {
         this.months = m;
         this.days = d;
     }
+    public LocalDate getlDate()
+    {
+        return this.lDate;
+    }
 
-    public MyDate plus(MyDate n2) throws IllegalConstruction {
-        //LocalDate tmp = this.lDate.plusYears(n2.lDate.getYear());
-        //tmp = tmp.plusMonths(n2.lDate.getMonthValue());
-        //tmp = tmp.plusDays(n2.lDate.getDayOfMonth() );
+    public MyDate plus(MyDate n2) throws TemporalException {
+
         if (n2.lDate == null)
         {
             LocalDate tmp = this.lDate;
@@ -51,14 +54,10 @@ public class MyDate extends MyNumber {
         }
         else
         {
-            throw new IllegalConstruction();
+            throw new TemporalException();
         }
     }
 
-    public LocalDate getlDate()
-    {
-        return this.lDate;
-    }
     public MyDate minus(MyDate n2){
         if (n2.lDate == null)
         {
@@ -92,48 +91,6 @@ public class MyDate extends MyNumber {
     public MyDate divide(MyDate n2){
         return null;
     }
-public static void main (String [] args)
 
-{
-    ZoneId zoneId_Norway = ZoneId.of( "Europe/Paris" );
-    ZonedDateTime zdt_Norway = ZonedDateTime.of( 1985 , 1 , 1 , 3 , 2 , 1 , 0 , zoneId_Norway );
-    ZonedDateTime current = ZonedDateTime.now();
-
-    ZoneId zoneId_NewYork = ZoneId.of( "America/New_York" );
-    ZonedDateTime zdt_NewYork = zdt_Norway.withZoneSameInstant( zoneId_NewYork );
-    System.out.println(zdt_Norway);
-    ZonedDateTime zdt_Utc = zdt_Norway.withZoneSameInstant( ZoneOffset.UTC );  // Or, next line is similar.
-    Instant instant = zdt_Norway.toInstant();  // Instant is always in UTC.
-    LocalDate localDate_Norway = zdt_Norway.toLocalDate();
-    System.out.println(zdt_Norway.getHour());
-    System.out.println(zdt_Norway.compareTo(ZonedDateTime.now()));
-
-
-
-
-    LocalDate l1 = LocalDate.of(1999,12,6);
-    LocalDate l2 = LocalDate.of(1998,3,3);
-    LocalDate l4 = LocalDate.of(0,1,1);
-
-    MyDate test1 = new MyDate(0,0,1);
-    MyDate d1 = new MyDate(l1);
-    MyDate d2 = new MyDate(l2);
-    //MyDate d3 = new MyDate(l3);
-    MyDate d4 = new MyDate(l4);
-
-    MyDate testouille = new MyDate(0,0,1);
-    System.out.println(testouille.lDate);
-    MyDate aurelien = new MyDate(l1);
-    MyDate nicolo = new MyDate(l2);
-    MyDate testouille1 = new MyDate(2,9,3);
-    System.out.println(testouille.lDate);
-    try {
-        MyDate res = nicolo.plus(testouille1);
-        System.out.println(res.lDate);
-    } catch (IllegalConstruction illegalConstruction) {
-        illegalConstruction.printStackTrace();
-    }
-
-}
 
 }
