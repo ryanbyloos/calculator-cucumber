@@ -6,6 +6,7 @@ import calculator.exceptions.IllegalConvertionArgument;
 import calculator.operations.Operation;
 import Converter.Temperature;
 import function.Function;
+import time.MyDate;
 import visitor.EvaluatorInteger;
 import visitor.EvaluatorReal;
 import visitor.FunctionValidator;
@@ -19,7 +20,6 @@ public class Calculator {
     public enum Mode {INTEGER,REAL,CONVERSION}
 
     private HashMap<String,Function> storedFun;
-
     private final Mode mode;
     /*
      For the moment the calculator only contains a print method and an eval method
@@ -60,6 +60,8 @@ public class Calculator {
         System.out.println(" and " + e.countNbs() + " numbers.");
         System.out.println();
     }
+
+
 
     public String eval(Expression e){
         try {
