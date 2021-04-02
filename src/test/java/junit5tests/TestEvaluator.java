@@ -91,7 +91,7 @@ public class TestEvaluator {
     }
 
     @Test
-    public void testUnsuportedDateInteger(){
+    public void testUnsupportedDateInteger(){
         MyNumber d = new MyDate(LocalDate.of(0, 1, 1));
 
         Calculator c = new Calculator(Calculator.Mode.INTEGER);
@@ -101,7 +101,7 @@ public class TestEvaluator {
     }
 
     @Test
-    public void testUnsuportedDateReal(){
+    public void testUnsupportedDateReal(){
         MyNumber d = new MyDate(LocalDate.of(0, 1, 1));
 
         Calculator c = new Calculator(Calculator.Mode.REAL);
