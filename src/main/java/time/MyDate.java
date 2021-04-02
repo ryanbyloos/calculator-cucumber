@@ -1,4 +1,5 @@
 package time;
+import calculator.IntegerNumber;
 import calculator.MyNumber;
 import calculator.exceptions.TemporalException;
 import visitor.Visitor;
@@ -31,6 +32,15 @@ public class MyDate extends MyNumber {
         this.months = m;
         this.days = d;
     }
+    public MyDate(String string)
+    {
+        String [] tab = string.split("-");
+        this.lDate = null;
+        this.year   = 0;
+        this.months = 0;
+        this.days   = 0;
+    }
+
     public LocalDate getlDate()
     {
         return this.lDate;
@@ -79,12 +89,47 @@ public class MyDate extends MyNumber {
             return new MyDate(tmp);
         }
 }
-    public MyDate times(MyDate n2){
-        return null;
+    public String toString()
+    {
+        if(lDate != null)
+        {
+            int y = this.lDate.getYear();
+            int m = this.lDate.getMonthValue();
+            int d = this.lDate.getDayOfMonth();
+            return( ""+y+"-"+m+"-"+d);
+        }
+        long y = this.year;
+        long m = this.months;
+        long d = this.days;
+        return( ""+y+"-"+m+"-"+d);
     }
-    public MyDate divide(MyDate n2){
-        return null;
+    public MyDate times(MyDate n2) throws UselessComputation {
+        throw new UselessComputation();
+    }
+    public MyDate divide(MyDate n2) throws UselessComputation {
+        throw new UselessComputation();
     }
 
 
+
+    @Override
+    public boolean equals(Object o) {
+        // No object should be equal to null (not including this check can result in an exception if a MyNumber is tested against null)
+        if (o == null) return false;
+
+        // If the object is compared to itself then return true
+        if (o == this) {
+            return true;
+        }
+        // If the object is of another type then return false
+        if (o instanceof MyDate) {
+            if (this.lDate == null ||((MyDate)o).lDate== null )
+            {
+                return false;
+            }
+            return this.lDate.compareTo(((MyDate)o).lDate) == 0;
+            // .compareTo is needed for BigDecimal
+        }
+        return false;
+    }
 }

@@ -33,7 +33,6 @@ final public class Plus extends Operation
 		try {
 			return l.plus(r);
 		} catch (TemporalException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}

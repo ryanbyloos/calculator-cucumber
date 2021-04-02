@@ -1,6 +1,7 @@
 package junit5tests;
 import calculator.*;
 import Converter.*;
+import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConvertionArgument;
 import calculator.exceptions.NotARealNumber;
 import org.junit.jupiter.api.*;
@@ -47,10 +48,10 @@ public class TestConvert {
             assertThrows(IllegalConvertionArgument.class,() -> calc.convert(test1,unit1,unit2));
     }
     @Test
-    public void testEquals(){
-        try {
+    public void testEquals() throws ComputeError, IllegalConvertionArgument {
+
             RealNumber e = new RealNumber("10.0");
-            BigDecimal eval = calc.evalReal(e).getValue();
+            BigDecimal eval;
             RealNumber.setPrecision(15);
             for (Unit unit : Unit.values())
             {
@@ -61,12 +62,15 @@ public class TestConvert {
                     Boolean bool = Math.abs(tested )< 0.000001 ;
                     assertTrue(bool);
                 }
+    }
 
-            }
-        catch (Exception e)
-        {
-            fail();
-        }
+    @Test
+    public void test2() throws ComputeError, IllegalConvertionArgument {
+        RealNumber e = new RealNumber("10.0");
+        RealNumber.setPrecision(15);
+        String res = calc.convertToString(e, Unit.Kilogramme,Unit.Pound);
+        String compared = "22.0462 Pound";
+        assertEquals(res,compared);
     }
 
 
@@ -74,7 +78,7 @@ public class TestConvert {
     public void testTemperature1()
     {
         String res = calc.convertToString(test2,Temperature.Celsius,Temperature.Kelvin);
-        assertNotNull(res);
+        assertEquals("273.15 Degree Kelvin",res);
     }
 
 
