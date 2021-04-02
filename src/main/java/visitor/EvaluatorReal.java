@@ -3,6 +3,7 @@ package visitor;
 import calculator.Expression;
 import calculator.IntegerNumber;
 import calculator.exceptions.ComputeError;
+import calculator.exceptions.VariableUnassignedError;
 import calculator.operations.Operation;
 import calculator.RealNumber;
 import function.Variable;
@@ -22,8 +23,8 @@ public class EvaluatorReal extends Evaluator{
     public void visit(RealNumber n) { setComputedValue(n); }
     @Override
     public void visit(Variable v) {
-        if(v.asValue()) // TODO HANDLE VALUE NOT DEFINED
-            v.getValue().accept(this);
+        if(!v.asValue()) setException(new VariableUnassignedError());
+        else v.getValue().accept(this);
     }
     @Override
     public void visit(Operation o) {
@@ -35,8 +36,7 @@ public class EvaluatorReal extends Evaluator{
         }
         //second loop to accummulate all the evaluated subresults
         RealNumber temp = evaluatedArgs.get(0);
-        int max = evaluatedArgs.size();
-        for(int counter=1; counter<max; counter++) {
+        for(int counter=1; counter<evaluatedArgs.size(); counter++) {
             try{
                 temp = o.op(temp,evaluatedArgs.get(counter));
             }catch (ComputeError e){
@@ -49,7 +49,7 @@ public class EvaluatorReal extends Evaluator{
 
     @Override
     public void visit(MyDate date) {
-
+        setException(new ComputeError("Unsupported date in real mode"));
     }
 
 

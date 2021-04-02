@@ -7,9 +7,6 @@ import calculator.RealNumber;
 import calculator.exceptions.IllegalConstruction;
 import time.MyDate;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 final public class Minus extends Operation

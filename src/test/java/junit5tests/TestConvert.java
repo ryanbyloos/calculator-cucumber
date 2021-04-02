@@ -3,7 +3,6 @@ import calculator.*;
 import Converter.*;
 import calculator.exceptions.IllegalConvertionArgument;
 import calculator.exceptions.NotARealNumber;
-import calculator.operations.Operation;
 import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
@@ -45,8 +44,7 @@ public class TestConvert {
     {   Unit unit1 = Unit.Meter;
         Unit unit2 = Unit.Kilogramme;
 
-            assertThrows(IllegalConvertionArgument.class,() -> {calc.convert(test1,unit1,unit2);
-            });
+            assertThrows(IllegalConvertionArgument.class,() -> calc.convert(test1,unit1,unit2));
     }
     @Test
     public void testEquals(){

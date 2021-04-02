@@ -2,10 +2,7 @@ package junit5tests;
 
 import calculator.Calculator;
 import calculator.RealNumber;
-import calculator.exceptions.IllegalConstruction;
-import calculator.exceptions.NotARealNumber;
 import calculator.exceptions.TemporalException;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import time.MyDate;
@@ -13,7 +10,6 @@ import time.MyDate;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class TestMyDate {
     private Calculator calc;

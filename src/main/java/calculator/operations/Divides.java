@@ -11,9 +11,6 @@ import calculator.exceptions.UselessComputation;
 import time.MyDate;
 import visitor.EvaluatorReal;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 

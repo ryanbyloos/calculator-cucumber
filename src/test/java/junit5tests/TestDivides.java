@@ -56,9 +56,7 @@ public class TestDivides {
     public void testDivisionByZero1() {
         try {
             ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value3))));
-            assertThrows(DivisionByZeroError.class, () -> {
-                op = new Divides(p);
-            });
+            assertThrows(DivisionByZeroError.class, () -> op = new Divides(p));
         }catch (NotAnIntegerNumber e){
             fail();
         }
@@ -68,9 +66,7 @@ public class TestDivides {
     public void testDivisionByZero2() {
         try {
             ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2)), new IntegerNumber(Integer.toString(value3))));
-            assertThrows(DivisionByZeroError.class, () -> {
-                op = new Divides(p);
-            });
+            assertThrows(DivisionByZeroError.class, () -> op = new Divides(p));
         }catch (NotAnIntegerNumber e){
             fail();
         }
@@ -84,7 +80,7 @@ public class TestDivides {
                 op = new Divides(p);
             });
         }catch (NotAnIntegerNumber e){
-
+            fail();
         }
     }
 

@@ -3,7 +3,6 @@ package visitor;
 import calculator.Expression;
 import calculator.IntegerNumber;
 import calculator.exceptions.ComputeError;
-import calculator.exceptions.IllegalConstruction;
 import calculator.operations.Operation;
 import calculator.RealNumber;
 import function.Variable;

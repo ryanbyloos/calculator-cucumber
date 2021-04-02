@@ -13,7 +13,7 @@ public class Variable implements Expression {
 
     /**
      * Set the value
-     * @param num
+     * @param num value to assign
      */
     public void assignValue(MyNumber num){
         value = num;

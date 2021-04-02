@@ -1,7 +1,6 @@
 package Converter;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 public enum Unit {
 

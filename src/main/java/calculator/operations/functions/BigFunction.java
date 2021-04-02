@@ -2,7 +2,6 @@ package calculator.operations.functions;
 
 import calculator.Expression;
 import calculator.exceptions.IllegalConstruction;
-import calculator.Notation;
 import ch.obermuhlner.math.big.BigDecimalMath;
 import visitor.Visitor;
 

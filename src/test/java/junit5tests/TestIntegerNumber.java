@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.*;
 import calculator.exceptions.IllegalConstruction;
-import calculator.exceptions.NotARealNumber;
 import calculator.exceptions.NotAnIntegerNumber;
 import calculator.operations.Times;
 import org.junit.jupiter.api.*;

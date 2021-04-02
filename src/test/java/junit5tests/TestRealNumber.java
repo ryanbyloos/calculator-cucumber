@@ -15,7 +15,6 @@ import visitor.EvaluatorReal;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestRealNumber {
     private final int value =8;

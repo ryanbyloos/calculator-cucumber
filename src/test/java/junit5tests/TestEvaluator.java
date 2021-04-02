@@ -3,16 +3,19 @@ package junit5tests;
 //Import Junit5 libraries for unit testing:
 import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConstruction;
 import calculator.exceptions.NotAnIntegerNumber;
 import calculator.operations.*;
 import org.junit.jupiter.api.*;
 
 import calculator.*;
+import time.MyDate;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 public class TestEvaluator {
@@ -39,10 +42,10 @@ public class TestEvaluator {
 
     @Test
     public void testEvaluatorDivides() {
-        try { op = new Divides(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
+        try {
+            op = new Divides(Arrays.asList(new IntegerNumber(Integer.toString(value1)), new IntegerNumber(Integer.toString(value2))));
             BigDecimal expected = new BigDecimal("1.33333");
             RealNumber.setPrecision(6);
-            expected.divide(new BigDecimal(6), 2, RoundingMode.HALF_UP);
             assertEquals( expected.toString() ,
                         calc.eval(op) );
             }
@@ -85,6 +88,26 @@ public class TestEvaluator {
         catch(IllegalConstruction e) {
             fail();
         }
+    }
+
+    @Test
+    public void testUnsuportedDateInteger(){
+        MyNumber d = new MyDate(LocalDate.of(0, 1, 1));
+
+        Calculator c = new Calculator(Calculator.Mode.INTEGER);
+        assertThrows(ComputeError.class,() -> c.evalInteger(d));
+        assertEquals("Error : Unsupported date in integer mode",c.eval(d));
+
+    }
+
+    @Test
+    public void testUnsuportedDateReal(){
+        MyNumber d = new MyDate(LocalDate.of(0, 1, 1));
+
+        Calculator c = new Calculator(Calculator.Mode.REAL);
+        assertThrows(ComputeError.class,() -> c.evalInteger(d));
+        assertEquals("Error : Unsupported date in real mode",c.eval(d));
+
     }
 
 }

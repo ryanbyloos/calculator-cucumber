@@ -15,7 +15,7 @@ public class Function {
     /**
      * Verify if a function contain only one variable.
      */
-    private class FunctionValidator extends Visitor {
+    private static class FunctionValidator extends Visitor {
         private boolean valid = false;
         private Variable var;
 

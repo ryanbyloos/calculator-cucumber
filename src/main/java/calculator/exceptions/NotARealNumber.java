@@ -1,10 +1,7 @@
 package calculator.exceptions;
 
 public class NotARealNumber extends ComputeError{
-    String error;
-    public NotARealNumber(String err){
-        error = err;
-    }
+    public NotARealNumber(String err){ super(err); }
     @Override
-    public String getMessage(){ return error+" is not an real"; }
+    public String getMessage(){ return getError()+" is not an real"; }
 }

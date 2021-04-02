@@ -1,10 +1,9 @@
 package calculator.exceptions;
 
 public class NotAnIntegerNumber extends ComputeError{
-    String error;
-    public NotAnIntegerNumber(String err){
-        error = err;
-    }
+
+    public NotAnIntegerNumber(String err) { super(err); }
+
     @Override
-    public String getMessage(){ return error+ " is not an integer"; }
+    public String getMessage(){ return getError()+ " is not an integer"; }
 }
