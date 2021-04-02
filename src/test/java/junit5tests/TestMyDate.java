@@ -1,19 +1,29 @@
 package junit5tests;
 
 import calculator.Calculator;
+import calculator.Expression;
+import calculator.IntegerNumber;
 import calculator.RealNumber;
+import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConstruction;
 import calculator.exceptions.NotARealNumber;
 import calculator.exceptions.TemporalException;
+import calculator.operations.Divides;
+import calculator.operations.Minus;
+import calculator.operations.Plus;
+import calculator.operations.Times;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import time.MyDate;
+import visitor.EvaluatorDate;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestMyDate {
     private Calculator calc;
@@ -30,9 +40,12 @@ public class TestMyDate {
     private MyDate d5;
     private MyDate d6;
     private MyDate d7;
+    private Plus op;
+    private Minus op1;
 
     @BeforeEach
     public void setUp(){
+        calc = new Calculator(Calculator.Mode.REAL);
         LocalDate l1 = LocalDate.of(1999,12,6);
         LocalDate l2 = LocalDate.of(1998,3,3);
         LocalDate l3 = LocalDate.of(0,1,1);
@@ -131,4 +144,63 @@ public class TestMyDate {
         assertEquals(0,tmp.compareTo(compared));
     }
 
+    @Test
+    public void test9() throws IllegalConstruction {
+        List<Expression> params2 =
+                new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1998,3,3)), new MyDate(0,1,1)));
+        op = new Plus(params2);
+        assertEquals("( 1998-3-3 + 0-1-1 )",op.toString());
+    }
+    @Test
+    public void test9_1() throws IllegalConstruction {
+        List<Expression> params2 =
+                new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1998,3,3)), new MyDate(LocalDate.of(1998,3,3))));
+        op1 = new Minus(params2);
+        assertEquals("( 1998-3-3 - 1998-3-3 )",op1.toString());
+    }
+    @Test
+    public void test10()  {
+        l2 = LocalDate.of(1998,3,3);
+        l3 = LocalDate.of(1998,3,3);
+        MyDate m1 = new MyDate(l2);
+        MyDate m2 = new MyDate(l3);
+        assertEquals(m1,m2);
+    }
+
+    @Test
+    public void test11()  {
+        l2 = LocalDate.of(1998,3,3);
+        MyDate m1 = new MyDate(l2);
+        MyDate m2 = new MyDate(1,1,1);
+        assertNotEquals(m1,m2);
+        assertNotEquals(m2,m1);
+    }
+
+    @Test
+    public void test12()  {
+        try
+        {
+            List<Expression> params2 =
+                    new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1999,12,6)), new MyDate(1998,3,3)));
+            Expression exp = new Divides(params2);
+            assertThrows(ComputeError.class,() -> {calc.evalDate(exp);});
+        }
+        catch(IllegalConstruction e) {
+            fail();
+        }
+
+    }
+    @Test
+    public void test13()  {
+        try
+        {
+            List<Expression> params2 =
+                    new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1999,12,6)), new MyDate(1998,3,3)));
+            Expression exp = new Times(params2);
+            assertThrows(ComputeError.class,() -> {calc.evalDate(exp);});
+        }
+        catch(IllegalConstruction e) {
+            fail();
+        }
+    }
 }

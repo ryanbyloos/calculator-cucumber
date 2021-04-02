@@ -7,6 +7,7 @@ import calculator.operations.Operation;
 import Converter.Temperature;
 import function.Function;
 import time.MyDate;
+import visitor.EvaluatorDate;
 import visitor.EvaluatorInteger;
 import visitor.EvaluatorReal;
 import Converter.Unit;
@@ -200,7 +201,15 @@ public class Calculator {
         // and return the result of the evaluation at the end of the process
         return new RealNumber(v.getResult().toString());
     }
-
+    public MyDate evalDate(Expression e)  throws ComputeError {
+        // create a new visitor to evaluate expressions
+        EvaluatorDate v = new EvaluatorDate();
+        // and ask the expression to accept this visitor to start the evaluation process
+        e.accept(v);
+        if(v.getException() != null ) throw v.getException();
+        // and return the result of the evaluation at the end of the process
+        return new MyDate(v.getResult().toString());
+    }
     /*
      We could also have other methods, e.g. to verify whether an expression is syntactically correct
      public Boolean validate(Expression e)

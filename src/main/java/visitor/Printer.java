@@ -38,7 +38,11 @@ public class Printer extends Visitor{
     public void visit(Variable v) { eval = v.toString(); }
     @Override
     public void visit(MyDate date){
-        eval = date.getlDate().toString();
+        if (date.getlDate() == null)
+        {
+            eval = date.toString();
+        }
+        eval = date.toString();
     }
 
     @Override

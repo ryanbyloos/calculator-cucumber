@@ -3,17 +3,24 @@ package junit5tests;
 //Import Junit5 libraries for unit testing:
 import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConstruction;
+import calculator.exceptions.IllegalConvertionArgument;
 import calculator.exceptions.NotAnIntegerNumber;
 import calculator.operations.*;
 import org.junit.jupiter.api.*;
 
 import calculator.*;
+import time.MyDate;
+import visitor.EvaluatorDate;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class TestEvaluator {
     private Calculator calc;
@@ -81,6 +88,48 @@ public class TestEvaluator {
             BigInteger expected = new BigInteger("48");
             assertEquals( expected.toString(),
                     calc.eval(op) );
+        }
+        catch(IllegalConstruction e) {
+            fail();
+        }
+    }
+    @Test
+    public void testEvaluatorDate1() {
+        try {         List<Expression> params2 =
+                new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1998,3,3)), new MyDate(0,1,1)));
+            Expression exp = new Plus(params2);
+            EvaluatorDate evaluator = new EvaluatorDate();
+            exp.accept(evaluator);
+            assertNull(evaluator.getException());
+            assertEquals(new MyDate(LocalDate.of(1998,4,4)),evaluator.getResult());
+        }
+        catch(IllegalConstruction e) {
+            fail();
+        }
+    }
+    @Test
+    public void testEvaluatorDate2() {
+        try {         List<Expression> params2 =
+                new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1998,3,3)), new MyDate(0,1,1)));
+            Expression exp = new Minus(params2);
+            EvaluatorDate evaluator = new EvaluatorDate();
+            exp.accept(evaluator);
+            assertNull(evaluator.getException());
+            assertEquals(new MyDate(LocalDate.of(1998,2,2)),evaluator.getResult());
+        }
+        catch(IllegalConstruction e) {
+            fail();
+        }
+    }
+    @Test
+    public void testEvaluatorDate3() {
+        try {         List<Expression> params2 =
+                new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1999,12,6)), new MyDate(1998,3,3)));
+            Expression exp = new Minus(params2);
+            EvaluatorDate evaluator = new EvaluatorDate();
+            exp.accept(evaluator);
+            assertNull(evaluator.getException());
+            assertEquals(new MyDate(LocalDate.of(1,9,3)),evaluator.getResult());
         }
         catch(IllegalConstruction e) {
             fail();

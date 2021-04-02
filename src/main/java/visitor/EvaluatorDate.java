@@ -48,7 +48,7 @@ public class EvaluatorDate extends Evaluator{
 
     @Override
     public void visit(MyDate date) {
-
+    setComputedValue(date);
     }
 
 }
