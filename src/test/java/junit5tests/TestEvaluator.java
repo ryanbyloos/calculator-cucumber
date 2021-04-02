@@ -5,20 +5,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConstruction;
-import calculator.exceptions.IllegalConvertionArgument;
 import calculator.exceptions.NotAnIntegerNumber;
 import calculator.operations.*;
 import org.junit.jupiter.api.*;
 
 import calculator.*;
 import time.MyDate;
-import time.MyDate;
 import visitor.EvaluatorDate;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.RoundingMode;
-import java.time.LocalDate;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;

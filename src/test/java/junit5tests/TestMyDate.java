@@ -2,28 +2,23 @@ package junit5tests;
 
 import calculator.Calculator;
 import calculator.Expression;
-import calculator.IntegerNumber;
 import calculator.RealNumber;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConstruction;
-import calculator.exceptions.NotARealNumber;
 import calculator.exceptions.TemporalException;
 import calculator.operations.Divides;
 import calculator.operations.Minus;
 import calculator.operations.Plus;
 import calculator.operations.Times;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import time.MyDate;
-import visitor.EvaluatorDate;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestMyDate {

@@ -1,7 +1,7 @@
 package time;
-import calculator.IntegerNumber;
 import calculator.MyNumber;
 import calculator.exceptions.TemporalException;
+import calculator.exceptions.UselessComputation;
 import visitor.Visitor;
 
 import java.time.*;
@@ -109,8 +109,6 @@ public class MyDate extends MyNumber {
     public MyDate divide(MyDate n2) throws UselessComputation {
         throw new UselessComputation();
     }
-
-
 
     @Override
     public boolean equals(Object o) {
