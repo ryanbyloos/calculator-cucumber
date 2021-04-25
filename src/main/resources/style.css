@@ -1,0 +1,16 @@
+.button {
+    -fx-background-color: #404040;
+    -fx-text-fill: #f8f8f8;
+    -fx-pref-height: 35;
+    -fx-pref-width: 100;
+}
+.menu {
+    -fx-font-color: #ffffff;
+}
+#buttongrid {
+    -fx-background-color: #212121;
+}
+#calculatorScreen {
+    -fx-background-color: #404040;
+    -fx-text-fill: #f8f8f8;
+}
