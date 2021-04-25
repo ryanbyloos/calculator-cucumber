@@ -7,27 +7,21 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage){
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/darklayout.fxml")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void start(Stage primaryStage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/darklayout.fxml"));
+        Parent root = loader.load();
+        Controller controller = loader.getController();
+
         Scene mainScreen = new Scene(root, 640, 400);
         primaryStage.setScene(mainScreen);
         primaryStage.setTitle("Calculator");
         primaryStage.show();
     }
-    public void setup(Stage primaryStage) throws IOException {
 
-
-    }
     public static void main(String[] args) {
         launch(args);
     }

@@ -7,8 +7,12 @@
 .menu {
     -fx-font-color: #ffffff;
 }
-#buttongrid {
+#buttonGrid {
     -fx-background-color: #212121;
+}
+#answerScreen {
+    -fx-background-color: #404040;
+    -fx-text-fill: #f8f8f8;
 }
 #calculatorScreen {
     -fx-background-color: #404040;
