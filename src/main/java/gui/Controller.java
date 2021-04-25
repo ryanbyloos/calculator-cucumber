@@ -14,4 +14,10 @@ public class Controller {
         String buttonValue = ((Button) e.getSource()).getText();
         calculatorScreen.setText(calculatorScreen.getText()+buttonValue);
     }
+
+    @FXML
+    public void signButtonClicked(Event e){
+        String sign = ((Button) e.getSource()).getText();
+        // TODO deal with signs
+    }
 }

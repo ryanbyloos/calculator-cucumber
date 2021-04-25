@@ -12,15 +12,21 @@ import java.util.Objects;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        primaryStage.setTitle("Calculator!");
-        setup(primaryStage);
+    public void start(Stage primaryStage){
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/darklayout.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene mainScreen = new Scene(root, 640, 400);
+        primaryStage.setScene(mainScreen);
+        primaryStage.setTitle("Calculator");
         primaryStage.show();
     }
     public void setup(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/darklayout.fxml")));
-        Scene scene = new Scene(root, 640, 400);
-        primaryStage.setScene(scene);
+
+
     }
     public static void main(String[] args) {
         launch(args);
