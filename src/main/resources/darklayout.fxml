@@ -35,7 +35,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HelloWorld">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -76,7 +76,7 @@
         </Menu>
       </menus>
     </MenuBar>
-      <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="39.0" prefWidth="641.0" style="-fx-background-color: #404040;" text="CALCUL ICI :-)" textFill="#f8f8f8" />
+      <Label fx:id="calculatorScreen" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="39.0" prefWidth="641.0" style="-fx-background-color: #404040;" text="" textFill="#f8f8f8" />
       <GridPane alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #212121;" VBox.vgrow="ALWAYS">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -121,20 +121,20 @@
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="Button" textFill="#f8f8f8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="Button" textFill="#f8f8f8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="Button" textFill="#f8f8f8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <Button id="number1" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="1" textFill="#f8f8f8" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-            <Button id="number2" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="2" textFill="#f8f8f8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-            <Button id="number3" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="3" textFill="#f8f8f8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <Button onAction="#numberButtonClicked" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="1" textFill="#f8f8f8" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <Button onAction="#numberButtonClicked" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="2" textFill="#f8f8f8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <Button onAction="#numberButtonClicked" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="3" textFill="#f8f8f8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <Button id="times" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="*" textFill="#f8f8f8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="Button" textFill="#f8f8f8" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="Button" textFill="#f8f8f8" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-            <Button id="number4" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="4" textFill="#f8f8f8" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-            <Button id="number7" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="7" textFill="#f8f8f8" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-            <Button id="number0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="0" textFill="#f8f8f8" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-            <Button id="number5" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="5" textFill="#f8f8f8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-            <Button id="number8" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="8" textFill="#f8f8f8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+            <Button onAction="#numberButtonClicked" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="4" textFill="#f8f8f8" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <Button onAction="#numberButtonClicked" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="7" textFill="#f8f8f8" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+            <Button onAction="#numberButtonClicked" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="0" textFill="#f8f8f8" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+            <Button onAction="#numberButtonClicked" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="5" textFill="#f8f8f8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <Button onAction="#numberButtonClicked" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="8" textFill="#f8f8f8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="Button" textFill="#f8f8f8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-            <Button id="number6" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="6" textFill="#f8f8f8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-            <Button id="number9" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="9" textFill="#f8f8f8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+            <Button onAction="#numberButtonClicked" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="6" textFill="#f8f8f8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <Button onAction="#numberButtonClicked" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="9" textFill="#f8f8f8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="Button" textFill="#f8f8f8" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
             <Button id="minus" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="-" textFill="#f8f8f8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
             <Button id="plus" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #404040;" text="+" textFill="#f8f8f8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
