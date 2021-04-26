@@ -3,6 +3,7 @@ package calculator.operations.functions;
 import calculator.Expression;
 import calculator.exceptions.IllegalConstruction;
 import ch.obermuhlner.math.big.BigDecimalMath;
+import visitor.EvaluatorReal;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
@@ -14,13 +15,15 @@ public abstract class BigFunction implements Expression {
 
     public List<Expression> args;
 
-    public MathContext mc = MathContext.UNLIMITED;
+    public MathContext mc = MathContext.DECIMAL128;
     public final BigDecimal PI = BigDecimalMath.pi(mc);
     public final BigDecimal E = BigDecimalMath.e(mc);
 
     @Override
     public void accept(Visitor v) {
         //TODO
+
+        ((EvaluatorReal)v).visit(this);
     }
 
     @Override

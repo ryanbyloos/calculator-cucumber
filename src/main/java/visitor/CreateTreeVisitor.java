@@ -7,6 +7,7 @@ import calculator.operations.Divides;
 import calculator.operations.Minus;
 import calculator.operations.Plus;
 import calculator.operations.Times;
+import calculator.operations.functions.*;
 import function.Function;
 import org.antlr.v4.runtime.tree.*;
 import parser.ExpressionParser;
@@ -108,23 +109,55 @@ public class CreateTreeVisitor implements ExpressionVisitor {
         String funName = ctx.getChild(0).getText();
 
         MyNumber value = (MyNumber) this.visitNb((ExpressionParser.NbContext) ctx.getChild(2));
-
-        if(!calculator.getStoredFun().containsKey(funName)){
-            System.out.println("SHOULD NOT BE HERE 7");
-            System.exit(0);
-        }
-
         try{
-            // cree une copie de la fonction
-            Function f = new Function( calculator.getStoredFun().get(funName).getExpression() );
-            f.setValue(value);
-            return f;
+            switch (funName){
+                case "acos":
+                    return new Acos(List.of(value));
+                case "acosh":
+                    return new Acosh(List.of(value));
+                case "asin":
+                    return new Asin(List.of(value));
+                case "asinh":
+                    return new Asinh(List.of(value));
+                case "atan":
+                    return new Atan(List.of(value));
+                case "atanh":
+                    return new Atanh(List.of(value));
+                case "cos":
+                    return new Cos(List.of(value));
+                case "cosh":
+                    return new Cosh(List.of(value));
+                case "exp": // TODO
+                    return new Exp(List.of(value));
+                case "inverse": // TODO
+                    return new Inverse(List.of(value));
+                case "log":
+                    return new Log(List.of(value));
+                case "sin":
+                    return new Sin(List.of(value));
+                case "sinh":
+                    return new Sinh(List.of(value));
+                case "sqrt": //TODO
+                    return new SquareRoot(List.of(value));
+                case "tan":
+                    return new Tan(List.of(value));
+                case "tanh":
+                    return new Tanh(List.of(value));
+                default: // case where this is not a basic function
+                    if(!calculator.getStoredFun().containsKey(funName)){
+                        System.out.println("SHOULD NOT BE HERE 7");
+                        System.exit(0);
+                    }
+
+                    // cree une copie de la fonction
+                    Function f = new Function( calculator.getStoredFun().get(funName).getExpression() );
+                    f.setValue(value);
+                    return f;
+            }
         }catch (IllegalConstruction | BadAssignment e ){
-            System.out.println("SHOULD NOT BE HERE 8");
-            System.exit(0);
+                System.out.println("SHOULD NOT BE HERE 8");
+                System.exit(0);
         }
-
-
         return null;
     }
 

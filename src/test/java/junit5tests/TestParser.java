@@ -120,4 +120,25 @@ public class TestParser {
         c.print(e1);
         assertEquals("10",c.eval(e1));
     }
+
+    // TODO test function does not exists
+
+    @Test
+    public void testParserSqrt(){
+        Parser p = new Parser("sqrt(4)");
+
+        Calculator c = new Calculator(Calculator.Mode.REAL);
+        Expression e1 = p.getExpression(c);
+        c.print(e1);
+        assertEquals("2",c.eval(e1));
+    }
+    @Test
+    public void testParserCos(){
+        Parser p = new Parser("cos(0)");
+
+        Calculator c = new Calculator(Calculator.Mode.REAL);
+        Expression e1 = p.getExpression(c);
+        c.print(e1);
+        assertEquals("1",c.eval(e1));
+    }
 }

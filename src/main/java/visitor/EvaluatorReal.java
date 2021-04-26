@@ -2,13 +2,17 @@ package visitor;
 
 import calculator.Expression;
 import calculator.IntegerNumber;
+import calculator.MyNumber;
 import calculator.exceptions.ComputeError;
+import calculator.exceptions.NotARealNumber;
 import calculator.exceptions.VariableUnassignedError;
 import calculator.operations.Operation;
 import calculator.RealNumber;
+import calculator.operations.functions.BigFunction;
 import function.Variable;
 import time.MyDate;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class EvaluatorReal extends Evaluator{
@@ -52,5 +56,14 @@ public class EvaluatorReal extends Evaluator{
         setException(new ComputeError("Unsupported date in real mode"));
     }
 
+    public void visit(BigFunction bf){
+        bf.args.get(0).accept(this);
+        BigDecimal d = ((RealNumber)this.getComputedValue()).getValue();
 
+        try {
+            setComputedValue(new RealNumber(bf.op(d).toPlainString()));
+        }catch (NotARealNumber e){
+            setException(e);
+        }
+    }
 }
