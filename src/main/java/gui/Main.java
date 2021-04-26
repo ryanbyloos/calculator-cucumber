@@ -12,9 +12,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/darklayout.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout-main.fxml"));
         Parent root = loader.load();
-        Controller controller = loader.getController();
+        MainController mainController = loader.getController();
 
         Scene mainScreen = new Scene(root, 640, 400);
         primaryStage.setScene(mainScreen);
