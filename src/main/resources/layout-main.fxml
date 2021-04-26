@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="gui.MainController">
+    <MenuBar VBox.vgrow="NEVER">
+        <Menu text="File">
+            <MenuItem text="Clear" onAction="#clearScreen"/>
+            <MenuItem text="Quit"  onAction="#exitApplication"/>
+        </Menu>
+        <Menu text="Help">
+            <MenuItem text="About calculator"/>
+        </Menu>
+    </MenuBar>
+    <HBox prefHeight="40" prefWidth="640">
+        <TextField fx:id="calculatorScreen" id="calculatorScreen" prefHeight="40" prefWidth="320"/>
+        <Label fx:id="answerScreen" id="answerScreen" prefHeight="40" prefWidth="320" text="ANS"/>
+    </HBox>
+    <GridPane id="buttonGrid" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints minWidth="10.0" prefWidth="100.0" hgrow="SOMETIMES"/>
+            <ColumnConstraints minWidth="10.0" prefWidth="100.0" hgrow="SOMETIMES"/>
+            <ColumnConstraints minWidth="10.0" prefWidth="100.0" hgrow="SOMETIMES"/>
+            <ColumnConstraints minWidth="10.0" prefWidth="100.0" hgrow="SOMETIMES"/>
+            <ColumnConstraints minWidth="10.0" prefWidth="100.0" hgrow="SOMETIMES"/>
+            <ColumnConstraints minWidth="10.0" prefWidth="100.0" hgrow="SOMETIMES"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <Button text="sin"    GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="cos"    GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="tan"    GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="asin"   GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="acos"   GridPane.columnIndex="4" GridPane.rowIndex="0" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="atan"   GridPane.columnIndex="5" GridPane.rowIndex="0" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="sinh"   GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="cosh"   GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="tanh"   GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="asinh"  GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="acosh"  GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="atanh"  GridPane.columnIndex="5" GridPane.rowIndex="1" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="√"      GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="√n"     GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="exp"    GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="ln"     GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="1/x"    GridPane.columnIndex="4" GridPane.rowIndex="2" GridPane.halignment="CENTER" onAction="#functionButtonClicked"/>
+        <Button text="π"      GridPane.columnIndex="5" GridPane.rowIndex="2" GridPane.halignment="CENTER"/>
+        <Button text="CE"     GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"/>
+        <Button text="C"      GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.halignment="CENTER" onAction="#clearScreen"/>
+        <Button text="DEL"    GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.halignment="CENTER" onAction="#removeCharacter"/>
+        <Button text="/"      GridPane.columnIndex="3" GridPane.rowIndex="3" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="("      GridPane.columnIndex="4" GridPane.rowIndex="3" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text=")"      GridPane.columnIndex="5" GridPane.rowIndex="3" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="1"      GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="2"      GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="3"      GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="*"      GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="Button" GridPane.columnIndex="4" GridPane.rowIndex="4" GridPane.halignment="CENTER"/>
+        <Button text="Button" GridPane.columnIndex="5" GridPane.rowIndex="4" GridPane.halignment="CENTER"/>
+        <Button text="4"      GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="5"      GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="6"      GridPane.columnIndex="2" GridPane.rowIndex="5" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="-"      GridPane.columnIndex="3" GridPane.rowIndex="5" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="Button" GridPane.columnIndex="4" GridPane.rowIndex="5" GridPane.halignment="CENTER"/>
+        <Button text="Button" GridPane.columnIndex="5" GridPane.rowIndex="5" GridPane.halignment="CENTER"/>
+        <Button text="7"      GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="8"      GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="9"      GridPane.columnIndex="2" GridPane.rowIndex="6" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="+"      GridPane.columnIndex="3" GridPane.rowIndex="6" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="Button" GridPane.columnIndex="4" GridPane.rowIndex="6" GridPane.halignment="CENTER"/>
+        <Button text="Button" GridPane.columnIndex="5" GridPane.rowIndex="6" GridPane.halignment="CENTER"/>
+        <Button text="0"      GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.halignment="CENTER" onAction="#defaultButtonClicked"/>
+        <Button text="Button" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.halignment="CENTER"/>
+        <Button text="Button" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.halignment="CENTER"/>
+        <Button text="="      GridPane.columnIndex="3" GridPane.rowIndex="7" GridPane.halignment="CENTER" onAction="#getResult"/>
+        <Button text="Button" GridPane.columnIndex="4" GridPane.rowIndex="7" GridPane.halignment="CENTER"/>
+        <Button text="Button" GridPane.columnIndex="5" GridPane.rowIndex="7" GridPane.halignment="CENTER"/>
+    </GridPane>
+    <stylesheets>
+        <URL value="@style.css"/>
+    </stylesheets>
+</VBox>
