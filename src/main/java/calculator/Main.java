@@ -27,17 +27,10 @@ import visitor.CreateTreeVisitor;
 public class Main {
 
   public static void main(String[] args) {
-	CharStream in = new ANTLRInputStream("2+3*2+2.8");
-	ExpressionLexer lexer = new ExpressionLexer(in);
-	CommonTokenStream tokens = new CommonTokenStream(lexer);
-	ExpressionParser parser = new ExpressionParser(tokens);
-	parser.setBuildParseTree(true);
+  	Parser p = new Parser("2+3*2+2.8");
 
-	ParseTree tree = parser.exp();
-
-	CreateTreeVisitor visitor = new CreateTreeVisitor();
   	Calculator c1 = new Calculator(Calculator.Mode.REAL);
-	Expression e1 = (Expression) visitor.visitExp((ExpressionParser.ExpContext) tree);
+  	Expression e1 = p.getExpression();
 	c1.print(e1);
 	c1.eval(e1);
 
