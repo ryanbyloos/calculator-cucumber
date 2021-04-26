@@ -10,6 +10,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.TerminalNodeImpl;
+import parser.*;
+import visitor.CreateTreeVisitor;
+
 /***************************************
  * A very simple Calculator in Java    *
  * Tom Mens, February 2021             *
@@ -21,6 +27,19 @@ import java.util.List;
 public class Main {
 
   public static void main(String[] args) {
+	CharStream in = new ANTLRInputStream("2+3*2+2.8");
+	ExpressionLexer lexer = new ExpressionLexer(in);
+	CommonTokenStream tokens = new CommonTokenStream(lexer);
+	ExpressionParser parser = new ExpressionParser(tokens);
+	parser.setBuildParseTree(true);
+
+	ParseTree tree = parser.exp();
+
+	CreateTreeVisitor visitor = new CreateTreeVisitor();
+  	Calculator c1 = new Calculator(Calculator.Mode.REAL);
+	Expression e1 = (Expression) visitor.visitExp((ExpressionParser.ExpContext) tree);
+	c1.print(e1);
+	c1.eval(e1);
 
   	Expression e;
   	Calculator c = new Calculator(Calculator.Mode.INTEGER);
