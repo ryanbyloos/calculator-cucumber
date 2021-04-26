@@ -19,8 +19,8 @@ public class Parser {
         tree = parser.exp();
     }
 
-    public Expression getExpression(){
-        CreateTreeVisitor visitor = new CreateTreeVisitor();
+    public Expression getExpression(Calculator c){
+        CreateTreeVisitor visitor = new CreateTreeVisitor(c);
         return (Expression) visitor.visitExp(tree);
     }
 

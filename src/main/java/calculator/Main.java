@@ -30,7 +30,7 @@ public class Main {
   	Parser p = new Parser("2+3*2+2.8");
 
   	Calculator c1 = new Calculator(Calculator.Mode.REAL);
-  	Expression e1 = p.getExpression();
+  	Expression e1 = p.getExpression(c1);
 	c1.print(e1);
 	c1.eval(e1);
 

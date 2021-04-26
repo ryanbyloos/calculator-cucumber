@@ -1,14 +1,13 @@
 package visitor;
 
-import calculator.Expression;
-import calculator.IntegerNumber;
-import calculator.RealNumber;
+import calculator.*;
+import calculator.exceptions.BadAssignment;
 import calculator.exceptions.IllegalConstruction;
 import calculator.operations.Divides;
 import calculator.operations.Minus;
 import calculator.operations.Plus;
 import calculator.operations.Times;
-import org.antlr.v4.runtime.CommonToken;
+import function.Function;
 import org.antlr.v4.runtime.tree.*;
 import parser.ExpressionParser;
 import parser.ExpressionVisitor;
@@ -16,6 +15,10 @@ import parser.ExpressionVisitor;
 import java.util.List;
 
 public class CreateTreeVisitor implements ExpressionVisitor {
+    private Calculator calculator;
+    public CreateTreeVisitor(Calculator c){
+        calculator = c;
+    }
 
     @Override
     public Object visitExp(ExpressionParser.ExpContext ctx) {
@@ -87,6 +90,36 @@ public class CreateTreeVisitor implements ExpressionVisitor {
         }
         System.out.println("SHOULD NOT BE HERE 6");
         System.exit(0);
+        return null;
+    }
+
+    @Override
+    public Object visitValue(ExpressionParser.ValueContext ctx) {
+        return ctx.getChild(0).accept(this);
+    }
+
+    @Override
+    public Object visitFun(ExpressionParser.FunContext ctx){
+        String funName = ctx.getChild(0).getText();
+
+        MyNumber value = (MyNumber) this.visitNb((ExpressionParser.NbContext) ctx.getChild(2));
+
+        if(!calculator.getStoredFun().containsKey(funName)){
+            System.out.println("SHOULD NOT BE HERE 7");
+            System.exit(0);
+        }
+
+        try{
+            // cree une copie de la fonction
+            Function f = new Function( calculator.getStoredFun().get(funName).getExpression() );
+            f.setValue(value);
+            return f;
+        }catch (IllegalConstruction | BadAssignment e ){
+            System.out.println("SHOULD NOT BE HERE 8");
+            System.exit(0);
+        }
+
+
         return null;
     }
 

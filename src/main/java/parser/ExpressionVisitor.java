@@ -29,6 +29,18 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMultDiv(ExpressionParser.MultDivContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#value}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValue(ExpressionParser.ValueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#fun}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFun(ExpressionParser.FunContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#nb}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

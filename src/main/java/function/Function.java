@@ -10,7 +10,7 @@ import visitor.Visitor;
 /**
  * Class that represents a function with one variable x
  */
-public class Function {
+public class Function implements Expression{
 
     /**
      * Verify if a function contain only one variable.
@@ -97,4 +97,24 @@ public class Function {
     public Variable getVar() { return var; }
 
     public Expression getExpression() { return e; }
+
+    @Override
+    public void accept(Visitor v) {
+        e.accept(v);
+    }
+
+    @Override
+    public Integer countDepth() {
+        return e.countDepth();
+    }
+
+    @Override
+    public Integer countOps() {
+        return e.countOps();
+    }
+
+    @Override
+    public Integer countNbs() {
+        return e.countNbs();
+    }
 }

@@ -198,7 +198,7 @@ public class Calculator {
         }
     }
 
-
+    public HashMap<String, Function> getStoredFun() { return storedFun; }
 
     public MyDate evalDate(Expression e)  throws ComputeError {
         // create a new visitor to evaluate expressions
