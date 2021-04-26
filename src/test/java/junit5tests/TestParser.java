@@ -98,4 +98,26 @@ public class TestParser {
         c.print(e1);
         assertEquals("15",c.eval(e1));
     }
+
+    // TEST parenthesis
+
+    @Test
+    public void testParserWithoutParenthesis(){
+        Parser p = new Parser("2*2+3");
+
+        Calculator c = new Calculator(Calculator.Mode.REAL);
+        Expression e1 = p.getExpression(c);
+        c.print(e1);
+        assertEquals("7",c.eval(e1));
+    }
+
+    @Test
+    public void testParserWithParenthesis(){
+        Parser p = new Parser("2*(2+3)");
+
+        Calculator c = new Calculator(Calculator.Mode.REAL);
+        Expression e1 = p.getExpression(c);
+        c.print(e1);
+        assertEquals("10",c.eval(e1));
+    }
 }

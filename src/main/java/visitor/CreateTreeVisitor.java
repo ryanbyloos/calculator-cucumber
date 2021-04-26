@@ -94,6 +94,11 @@ public class CreateTreeVisitor implements ExpressionVisitor {
     }
 
     @Override
+    public Object visitParenth(ExpressionParser.ParenthContext ctx) {
+        return this.visitPlusMinus((ExpressionParser.PlusMinusContext) ctx.getChild(1));
+    }
+
+    @Override
     public Object visitValue(ExpressionParser.ValueContext ctx) {
         return ctx.getChild(0).accept(this);
     }

@@ -22,7 +22,10 @@ multDiv : multDiv MULT value
         | value;
 
 value : nb
-        | fun;
+        | fun
+        |parenth;
+
+parenth : '('plusMinus')';
 
 fun : NAME'('nb')';
 

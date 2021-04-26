@@ -48,6 +48,16 @@ public interface ExpressionListener extends ParseTreeListener {
 	 */
 	void exitValue(ExpressionParser.ValueContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ExpressionParser#parenth}.
+	 * @param ctx the parse tree
+	 */
+	void enterParenth(ExpressionParser.ParenthContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExpressionParser#parenth}.
+	 * @param ctx the parse tree
+	 */
+	void exitParenth(ExpressionParser.ParenthContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ExpressionParser#fun}.
 	 * @param ctx the parse tree
 	 */
