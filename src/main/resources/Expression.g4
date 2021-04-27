@@ -1,7 +1,7 @@
 grammar Expression;
 
-INT : [0-9]+;
-DECIMAL : [0-9]+'.'[0-9]+;
+INT : '-'?[0-9]+;
+DECIMAL : '-'?[0-9]+'.'[0-9]+;
 
 NAME : [a-z]+;
 

@@ -151,10 +151,10 @@ public class CreateTreeVisitor implements ExpressionVisitor{
                 case "cosh":
                     result = new Cosh(List.of(value));
                     return result;
-                case "exp": // TODO
+                case "exp":
                     result = new Exp(List.of(value));
                     return result;
-                case "inverse": // TODO
+                case "inverse":
                     result = new Inverse(List.of(value));
                     return result;
                 case "log":
@@ -166,7 +166,7 @@ public class CreateTreeVisitor implements ExpressionVisitor{
                 case "sinh":
                     result = new Sinh(List.of(value));
                     return result;
-                case "sqrt": //TODO
+                case "sqrt":
                     result = new SquareRoot(List.of(value));
                     return result;
                 case "tan":
