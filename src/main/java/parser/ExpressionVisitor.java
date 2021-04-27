@@ -29,6 +29,12 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMultDiv(ExpressionParser.MultDivContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#pow}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPow(ExpressionParser.PowContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#value}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -71,11 +77,23 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMultDivf(ExpressionParser.MultDivfContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#powf}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPowf(ExpressionParser.PowfContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#valuef}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitValuef(ExpressionParser.ValuefContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#funf}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunf(ExpressionParser.FunfContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#var}.
 	 * @param ctx the parse tree

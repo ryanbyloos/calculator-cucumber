@@ -5,10 +5,11 @@ DECIMAL : [0-9]+'.'[0-9]+;
 
 NAME : [a-z]+;
 
-PLUS : '+';
-MINUS : '-';
-MULT : '*';
-DIV  : '/';
+PLUS    : '+';
+MINUS   : '-';
+MULT    : '*';
+DIV     : '/';
+POW     : '^';
 
 exp : plusMinus | deffun;
 
@@ -16,9 +17,12 @@ plusMinus :  plusMinus PLUS multDiv
            | plusMinus MINUS multDiv
            | multDiv;
 
-multDiv : multDiv MULT value
-        | multDiv DIV value
-        | value;
+multDiv : multDiv MULT pow
+        | multDiv DIV pow
+        | pow;
+
+pow : pow POW value
+    | value;
 
 value : nb
         | fun
@@ -36,14 +40,19 @@ plusMinusf : plusMinusf PLUS multDivf
            | plusMinusf MINUS multDivf
            | multDivf;
 
-multDivf : multDivf MULT valuef
-        | multDivf DIV valuef
-        | valuef;
+multDivf : multDivf MULT powf
+        | multDivf DIV powf
+        | powf;
+
+powf : powf POW valuef
+     | valuef;
 
 valuef : nb
-        | fun
+        | funf
         | parenth
         | var;
+
+funf : NAME'('plusMinusf')';
 
 var : 'x';
 

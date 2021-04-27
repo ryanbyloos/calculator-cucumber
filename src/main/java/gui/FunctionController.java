@@ -1,6 +1,11 @@
 package gui;
 
 import calculator.Calculator;
+import calculator.RealNumber;
+import calculator.exceptions.BadAssignment;
+import calculator.exceptions.ComputeError;
+import calculator.exceptions.NotARealNumber;
+import function.Function;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -58,16 +63,43 @@ public class FunctionController implements Initializable {
 
         boolean first = true;
 
+        String funName = input.getText();
+
+        if (!calculator.getStoredFun().containsKey(funName)){
+            return;
+        }
+        Function f = calculator.getStoredFun().get(funName);
+
+        double py = 0;
         for(int x = 0 ; x < (int) (pane.getWidth()) ; x++){
             double x_value = pixToValueX(x) - (center_pix_x*size_pix);
-            double y_value = x_value*x_value;
-            int y = center_pix_y + valueToPixY(y_value+center_y);
+            try {
+                f.setValue(new RealNumber(Double.toString(x_value)));
 
-            if(first) {
-                path.getElements().add(new MoveTo(x, y));
-                first = false;
-            }else
-                path.getElements().add(new LineTo(x,y));
+                double y_value = Double.valueOf(calculator.evalReal(f).getValue().toPlainString());
+                f.clearValue();
+                int y = center_pix_y + valueToPixY(y_value + center_y);
+
+                if (first) {
+                    path.getElements().add(new MoveTo(x,y));
+                    first = false;
+                } else{
+
+                    if( (py > center_y+(size_pix*(double)center_pix_y)  &&  center_y-(size_pix*(double)center_pix_y) < y_value) ||
+                            (y_value > center_y+(size_pix*(double)center_pix_y)  && center_y-(size_pix*(double)center_pix_y) < py )){
+                        path.getElements().add(new MoveTo(x,y));
+                    }else{
+                        path.getElements().add(new LineTo(x,y));
+                    }
+
+                }
+                py = y_value;
+
+            }catch (NotARealNumber | BadAssignment e){
+
+            } catch (ComputeError computeError) {
+//                computeError.printStackTrace();
+            }
         }
 
         pane.getChildren().add(path);
@@ -75,34 +107,33 @@ public class FunctionController implements Initializable {
 
     @FXML
     private void moveLeft(ActionEvent event){
-        center_x+=2.0*size_pix;
+        center_x+=5.0*size_pix;
         drawCanvas();
     }
     @FXML
     private void moveRight(){
-        center_x-=2.0*size_pix;
+        center_x-=5.0*size_pix;
         drawCanvas();
     }
     @FXML
     private void moveUp(ActionEvent event){
-        center_y+=2.0*size_pix;
+        center_y+=5.0*size_pix;
         drawCanvas();
     }
     @FXML
     private void moveDown(){
-        System.out.println("MOOVEDOWN");
-        center_y-=2.0*size_pix;
+        center_y-=5.0*size_pix;
         drawCanvas();
     }
 
     @FXML
     private void zoomIn(){
-        size_pix += 0.01;
+        size_pix -= 0.01;
         drawCanvas();
     }
     @FXML
     private void zoomOut(){
-        size_pix -= 0.005;
+        size_pix += 0.005;
         if(size_pix <= 0.01) size_pix = 0.01;
         drawCanvas();
     }

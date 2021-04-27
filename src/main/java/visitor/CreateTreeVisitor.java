@@ -4,10 +4,7 @@ import calculator.*;
 import calculator.exceptions.BadAssignment;
 import calculator.exceptions.IllegalConstruction;
 import calculator.exceptions.InvalidSyntax;
-import calculator.operations.Divides;
-import calculator.operations.Minus;
-import calculator.operations.Plus;
-import calculator.operations.Times;
+import calculator.operations.*;
 import calculator.operations.functions.*;
 import function.Function;
 import function.Variable;
@@ -18,7 +15,7 @@ import parser.ExpressionVisitor;
 
 import java.util.List;
 
-public class CreateTreeVisitor implements ExpressionVisitor {
+public class CreateTreeVisitor implements ExpressionVisitor{
     private final Calculator calculator;
     private Expression result;
     private IllegalConstruction exception;
@@ -67,7 +64,7 @@ public class CreateTreeVisitor implements ExpressionVisitor {
         return null;
     }
 
-    public Object multDiv(ParserRuleContext ctx) {
+    public Expression multDiv(ParserRuleContext ctx) {
         if (ctx.getChildCount() == 1){ // if single element
             // return child result
             result = (Expression) ctx.getChild(0).accept(this);
@@ -100,36 +97,31 @@ public class CreateTreeVisitor implements ExpressionVisitor {
         return null;
     }
 
-    @Override
-    public Object visitExp(ExpressionParser.ExpContext ctx) {
-        result = (Expression) ctx.getChild(0).accept(this);
-        return result;
+    public  Expression pow(ParserRuleContext ctx){
+        if (ctx.getChildCount() == 1){ // if single element
+            // return child result
+            result = (Expression) ctx.getChild(0).accept(this);
+            return result;
+        }else if (ctx.getChildCount() == 3){
+            Expression e1 = (Expression) ctx.getChild(0).accept(this);
+            Expression e2 = (Expression) ctx.getChild(2).accept(this);
+            List<Expression> elist = List.of(e1,e2);
+            TerminalNodeImpl ct = (TerminalNodeImpl) ctx.getChild(1);
+
+            // if middle children is plus or minus
+            try{
+                result = new Pow(elist);
+                return result;
+            }catch (IllegalConstruction e){
+                exception = new InvalidSyntax("Parser accept an unsupported syntax");
+                return null;
+            }
+        }
+        exception = new InvalidSyntax("PlusMinus unsupported number of child : "+ctx.getChildCount());
+        return null;
     }
 
-    @Override
-    public Object visitPlusMinus(ExpressionParser.PlusMinusContext ctx) {
-        return plusMinus(ctx);
-    }
-
-    @Override
-    public Object visitMultDiv(ExpressionParser.MultDivContext ctx) {
-        return multDiv(ctx);
-    }
-
-    @Override
-    public Object visitParenth(ExpressionParser.ParenthContext ctx) {
-        result = (Expression) this.visitPlusMinus((ExpressionParser.PlusMinusContext) ctx.getChild(1));
-        return result;
-    }
-
-    @Override
-    public Object visitValue(ExpressionParser.ValueContext ctx) {
-        result = (Expression) ctx.getChild(0).accept(this);
-        return result;
-    }
-
-    @Override
-    public Object visitFun(ExpressionParser.FunContext ctx){
+    public Expression fun(ParserRuleContext ctx){
         String funName = ctx.getChild(0).getText();
 
         Expression value = (Expression) ctx.getChild(2).accept(this);
@@ -202,6 +194,44 @@ public class CreateTreeVisitor implements ExpressionVisitor {
     }
 
     @Override
+    public Object visitExp(ExpressionParser.ExpContext ctx) {
+        result = (Expression) ctx.getChild(0).accept(this);
+        return result;
+    }
+
+    @Override
+    public Object visitPlusMinus(ExpressionParser.PlusMinusContext ctx) {
+        return plusMinus(ctx);
+    }
+
+    @Override
+    public Object visitMultDiv(ExpressionParser.MultDivContext ctx) {
+        return multDiv(ctx);
+    }
+
+    @Override
+    public Object visitPow(ExpressionParser.PowContext ctx) {
+        return pow(ctx);
+    }
+
+    @Override
+    public Object visitParenth(ExpressionParser.ParenthContext ctx) {
+        result = (Expression) this.visitPlusMinus((ExpressionParser.PlusMinusContext) ctx.getChild(1));
+        return result;
+    }
+
+    @Override
+    public Object visitValue(ExpressionParser.ValueContext ctx) {
+        result = (Expression) ctx.getChild(0).accept(this);
+        return result;
+    }
+
+    @Override
+    public Object visitFun(ExpressionParser.FunContext ctx){
+       return fun(ctx);
+    }
+
+    @Override
     public Object visitNb(ExpressionParser.NbContext ctx) {
         TerminalNodeImpl value = (TerminalNodeImpl) ctx.getChild(0);
         String numStr = value.getText();
@@ -247,9 +277,19 @@ public class CreateTreeVisitor implements ExpressionVisitor {
     }
 
     @Override
+    public Object visitPowf(ExpressionParser.PowfContext ctx) {
+        return pow(ctx);
+    }
+
+    @Override
     public Object visitValuef(ExpressionParser.ValuefContext ctx) {
         result = (Expression) ctx.getChild(0).accept(this);
         return result;
+    }
+
+    @Override
+    public Object visitFunf(ExpressionParser.FunfContext ctx) {
+        return fun(ctx);
     }
 
     @Override

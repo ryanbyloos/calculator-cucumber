@@ -38,6 +38,16 @@ public interface ExpressionListener extends ParseTreeListener {
 	 */
 	void exitMultDiv(ExpressionParser.MultDivContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ExpressionParser#pow}.
+	 * @param ctx the parse tree
+	 */
+	void enterPow(ExpressionParser.PowContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExpressionParser#pow}.
+	 * @param ctx the parse tree
+	 */
+	void exitPow(ExpressionParser.PowContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ExpressionParser#value}.
 	 * @param ctx the parse tree
 	 */
@@ -108,6 +118,16 @@ public interface ExpressionListener extends ParseTreeListener {
 	 */
 	void exitMultDivf(ExpressionParser.MultDivfContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ExpressionParser#powf}.
+	 * @param ctx the parse tree
+	 */
+	void enterPowf(ExpressionParser.PowfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExpressionParser#powf}.
+	 * @param ctx the parse tree
+	 */
+	void exitPowf(ExpressionParser.PowfContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ExpressionParser#valuef}.
 	 * @param ctx the parse tree
 	 */
@@ -117,6 +137,16 @@ public interface ExpressionListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValuef(ExpressionParser.ValuefContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExpressionParser#funf}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunf(ExpressionParser.FunfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExpressionParser#funf}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunf(ExpressionParser.FunfContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ExpressionParser#var}.
 	 * @param ctx the parse tree

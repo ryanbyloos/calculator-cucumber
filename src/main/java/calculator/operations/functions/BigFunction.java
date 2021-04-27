@@ -3,6 +3,7 @@ package calculator.operations.functions;
 import calculator.Expression;
 import calculator.exceptions.IllegalConstruction;
 import ch.obermuhlner.math.big.BigDecimalMath;
+import function.Function;
 import visitor.EvaluatorReal;
 import visitor.Visitor;
 
@@ -21,7 +22,13 @@ public abstract class BigFunction implements Expression {
 
     @Override
     public void accept(Visitor v) {
-        ((EvaluatorReal)v).visit(this);
+        if (v instanceof EvaluatorReal) {
+            ((EvaluatorReal) v).visit(this);
+        }else {
+            for (Expression e : args) {
+                e.accept(v);
+            }
+        }
     }
 
     @Override

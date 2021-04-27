@@ -126,10 +126,8 @@ public class CalculatorController implements Initializable {
     public void showFunction(Event e){
         if (funStage != null) funStage.close();
 
-        Label secondLabel = new Label("I'm a Label on new Window");
 
         StackPane secondaryLayout = new StackPane();
-        secondaryLayout.getChildren().add(secondLabel);
 
         Scene secondScene = new Scene(secondaryLayout, 230, 100);
 
@@ -151,8 +149,6 @@ public class CalculatorController implements Initializable {
         }catch (IOException exception){
 
         }
-
-
     }
 
     public void setConverterScene(Scene scene){
