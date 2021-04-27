@@ -1,5 +1,9 @@
 package gui;
 
+import calculator.Calculator;
+import calculator.Expression;
+import calculator.Parser;
+import calculator.exceptions.IllegalConstruction;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -17,25 +21,25 @@ import java.util.ResourceBundle;
 
 public class CalculatorController implements Initializable {
 
-    public VBox calculatorVBox;
     private Scene converterScene;
 
+    public Calculator calculator;
+
     @FXML
+    public VBox calculatorVBox;
     public Label answerScreen;
     public CheckMenuItem calculatorMenuItem;
     public CheckMenuItem converterMenuItem;
+    public TextField calculatorScreen;
 
     @FXML
     public void exitApplication(Event e) {
         Platform.exit();
     }
 
-    @FXML
-    public TextField calculatorScreen;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        calculator = new Calculator(Calculator.Mode.REAL);
     }
 
     @FXML
@@ -58,14 +62,18 @@ public class CalculatorController implements Initializable {
     }
 
     @FXML
-    public void getResult(Event e){
-        //TODO Show the result on the answerScreen
+    public void getResult(Event e) throws IllegalConstruction {
         String screenValue = calculatorScreen.getText();
         StringBuilder parenthesisToAdd = new StringBuilder();
         int leftP = (int) screenValue.chars().filter(c -> c == '(').count();
         int rightP = (int) screenValue.chars().filter(c -> c == ')').count();
         parenthesisToAdd.append(")".repeat(Math.max(0, leftP - rightP)));
-        calculatorScreen.setText(screenValue+parenthesisToAdd);
+        String res = screenValue+parenthesisToAdd;
+        calculatorScreen.setText(res);
+
+        Parser parser = new Parser(res);
+        Expression expression = parser.getExpression(calculator);
+        answerScreen.setText(calculator.eval(expression));
     }
 
     @FXML
