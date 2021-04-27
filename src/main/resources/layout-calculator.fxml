@@ -76,6 +76,8 @@
         <Button onAction="#defaultButtonClicked" text="+" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
         <Button onAction="#defaultButtonClicked" text="0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
         <Button onAction="#defaultButtonClicked" text="." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+        <Button onAction="#showFunction" text="Function" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+        <Button onAction="#defFun" text="DefFun" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
         <Button onAction="#getResult" text="=" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
         <Button visible="false" fx:id="integerTrigger"/>
       <Label id="modeLabel"  text="Mode " GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />

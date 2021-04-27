@@ -53,9 +53,6 @@ public class FunctionController implements Initializable {
         // Clear pane
         pane.getChildren().clear();
 
-        System.out.println("WAW");
-        System.out.println("INPUT : "+input.getText());
-
         int center_pix_x = (int) (pane.getWidth()/2.0);
         int center_pix_y = (int) (pane.getHeight()/2.0);
 
