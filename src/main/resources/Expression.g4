@@ -27,7 +27,7 @@ value : nb
 
 parenth : '('plusMinus')';
 
-fun : NAME'('nb')';
+fun : NAME'('plusMinus')';
 
 nb : INT | DECIMAL;
 

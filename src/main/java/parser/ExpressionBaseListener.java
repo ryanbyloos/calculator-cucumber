@@ -1,4 +1,4 @@
-// Generated from /home/akira/IdeaProjects/NoteApp/calculator-cucumber/src/Expression.g4 by ANTLR 4.9.1
+// Generated from /home/akira/IdeaProjects/NoteApp/calculator-cucumber/src/main/resources/Expression.g4 by ANTLR 4.9.1
 package parser;
 
 import org.antlr.v4.runtime.ParserRuleContext;

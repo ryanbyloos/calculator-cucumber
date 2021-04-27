@@ -1,9 +1,13 @@
-// Generated from /home/akira/IdeaProjects/NoteApp/calculator-cucumber/src/Expression.g4 by ANTLR 4.9.1
+// Generated from /home/akira/IdeaProjects/NoteApp/calculator-cucumber/src/main/resources/Expression.g4 by ANTLR 4.9.1
 package parser;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
+import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class ExpressionParser extends Parser {
@@ -461,8 +465,8 @@ public class ExpressionParser extends Parser {
 
 	public static class FunContext extends ParserRuleContext {
 		public TerminalNode NAME() { return getToken(ExpressionParser.NAME, 0); }
-		public NbContext nb() {
-			return getRuleContext(NbContext.class,0);
+		public PlusMinusContext plusMinus() {
+			return getRuleContext(PlusMinusContext.class,0);
 		}
 		public FunContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -494,7 +498,7 @@ public class ExpressionParser extends Parser {
 			setState(54);
 			match(T__0);
 			setState(55);
-			nb();
+			plusMinus(0);
 			setState(56);
 			match(T__1);
 			}
@@ -605,8 +609,8 @@ public class ExpressionParser extends Parser {
 		"\'(\7\13\2\2(*\5\b\5\2)#\3\2\2\2)&\3\2\2\2*-\3\2\2\2+)\3\2\2\2+,\3\2\2"+
 		"\2,\7\3\2\2\2-+\3\2\2\2.\62\5\16\b\2/\62\5\f\7\2\60\62\5\n\6\2\61.\3\2"+
 		"\2\2\61/\3\2\2\2\61\60\3\2\2\2\62\t\3\2\2\2\63\64\7\3\2\2\64\65\5\4\3"+
-		"\2\65\66\7\4\2\2\66\13\3\2\2\2\678\7\7\2\289\7\3\2\29:\5\16\b\2:;\7\4"+
-		"\2\2;\r\3\2\2\2<=\t\2\2\2=\17\3\2\2\2\7\33\35)+\61";
+		"\2\65\66\7\4\2\2\66\13\3\2\2\2\678\7\7\2\289\7\3\2\29:\5\4\3\2:;\7\4\2"+
+		"\2;\r\3\2\2\2<=\t\2\2\2=\17\3\2\2\2\7\33\35)+\61";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

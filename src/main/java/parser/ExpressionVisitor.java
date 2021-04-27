@@ -1,4 +1,4 @@
-// Generated from /home/akira/IdeaProjects/NoteApp/calculator-cucumber/src/Expression.g4 by ANTLR 4.9.1
+// Generated from /home/akira/IdeaProjects/NoteApp/calculator-cucumber/src/main/resources/Expression.g4 by ANTLR 4.9.1
 package parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -17,13 +17,13 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExp(ExpressionParser.ExpContext ctx);
 	/**
-	 * Visit a parse tree produced by .
+	 * Visit a parse tree produced by {@link ExpressionParser#plusMinus}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitPlusMinus(ExpressionParser.PlusMinusContext ctx);
 	/**
-	 * Visit a parse tree produced by .
+	 * Visit a parse tree produced by {@link ExpressionParser#multDiv}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */

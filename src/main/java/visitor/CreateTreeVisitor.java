@@ -122,7 +122,7 @@ public class CreateTreeVisitor implements ExpressionVisitor {
     public Object visitFun(ExpressionParser.FunContext ctx){
         String funName = ctx.getChild(0).getText();
 
-        MyNumber value = (MyNumber) this.visitNb((ExpressionParser.NbContext) ctx.getChild(2));
+        Expression value = (Expression) ctx.getChild(2).accept(this);
         try{
             switch (funName){
                 case "acos":
@@ -181,7 +181,7 @@ public class CreateTreeVisitor implements ExpressionVisitor {
 
                     // cree une copie de la fonction
                     Function f = new Function( calculator.getStoredFun().get(funName).getExpression() );
-                    f.setValue(value);
+                    f.setValue((MyNumber) value);
                     result = f;
                     return f;
             }

@@ -1,4 +1,4 @@
-// Generated from /home/akira/IdeaProjects/NoteApp/calculator-cucumber/src/Expression.g4 by ANTLR 4.9.1
+// Generated from /home/akira/IdeaProjects/NoteApp/calculator-cucumber/src/main/resources/Expression.g4 by ANTLR 4.9.1
 package parser;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -18,22 +18,22 @@ public interface ExpressionListener extends ParseTreeListener {
 	 */
 	void exitExp(ExpressionParser.ExpContext ctx);
 	/**
-	 * Enter a parse tree produced by .
+	 * Enter a parse tree produced by {@link ExpressionParser#plusMinus}.
 	 * @param ctx the parse tree
 	 */
 	void enterPlusMinus(ExpressionParser.PlusMinusContext ctx);
 	/**
-	 * Exit a parse tree produced by .
+	 * Exit a parse tree produced by {@link ExpressionParser#plusMinus}.
 	 * @param ctx the parse tree
 	 */
 	void exitPlusMinus(ExpressionParser.PlusMinusContext ctx);
 	/**
-	 * Enter a parse tree produced by .
+	 * Enter a parse tree produced by {@link ExpressionParser#multDiv}.
 	 * @param ctx the parse tree
 	 */
 	void enterMultDiv(ExpressionParser.MultDivContext ctx);
 	/**
-	 * Exit a parse tree produced by .
+	 * Exit a parse tree produced by {@link ExpressionParser#multDiv}.
 	 * @param ctx the parse tree
 	 */
 	void exitMultDiv(ExpressionParser.MultDivContext ctx);
