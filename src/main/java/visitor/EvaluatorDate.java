@@ -3,6 +3,7 @@ package visitor;
 import calculator.Expression;
 import calculator.IntegerNumber;
 import calculator.exceptions.ComputeError;
+import calculator.operations.ComputeDate;
 import calculator.operations.Operation;
 import calculator.RealNumber;
 import function.Variable;
@@ -36,7 +37,11 @@ public class EvaluatorDate extends Evaluator{
             MyDate temp = evaluatedArgs.get(0);
             int max = evaluatedArgs.size();
             for(int counter=1; counter<max; counter++) {
-                temp = o.op(temp,evaluatedArgs.get(counter));
+                if (o instanceof ComputeDate)
+                    temp = ((ComputeDate)o).op(temp,evaluatedArgs.get(counter));
+                else {
+                    setException(new ComputeError("Unsupported Operator for date"));
+                }
             }
             // store the accumulated result
             setComputedValue(temp);

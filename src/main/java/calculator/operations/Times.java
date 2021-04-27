@@ -15,22 +15,21 @@ final public class Times extends Operation
 {
 	public /*constructor*/ Times(List<Expression> elist) throws IllegalConstruction {
 		super(elist);
-		symbol = "*";
-		neutral = 1;
+		setUp();
 	}
 
 	public Times(List<Expression> elist, Notation n) throws IllegalConstruction {
 		super(elist,n);
+		setUp();
+	}
+
+	private void setUp(){
 		symbol = "*";
 		neutral = 1;
 	}
 
-	public IntegerNumber op(IntegerNumber l, IntegerNumber r){ return l.times(r); }
-	public RealNumber op(RealNumber l, RealNumber r){ return l.times(r); }
-
 	@Override
-	public MyDate op(MyDate l, MyDate r) throws ComputeError {
-		throw new UselessComputation() ;
-	}
-
+	public IntegerNumber op(IntegerNumber l, IntegerNumber r){ return l.times(r); }
+	@Override
+	public RealNumber op(RealNumber l, RealNumber r){ return l.times(r); }
 }
