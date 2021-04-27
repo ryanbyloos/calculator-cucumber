@@ -1,26 +1,42 @@
 package gui;
 
-import Converter.Unit;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable {
+public class CalculatorController implements Initializable {
+
+    public VBox calculatorVBox;
+    private Scene converterScene;
+
+    @FXML
+    public Label answerScreen;
+    public CheckMenuItem calculatorMenuItem;
+    public CheckMenuItem converterMenuItem;
+
+    @FXML
+    public void exitApplication(Event e) {
+        Platform.exit();
+    }
+
     @FXML
     public TextField calculatorScreen;
-    public Label answerScreen;
-    public ComboBox<String> unitComboBox;
-    public ComboBox<String> fromComboBox;
-    public ComboBox<String> toComboBox;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 
     @FXML
     public void defaultButtonClicked(Event e){
@@ -34,11 +50,6 @@ public class MainController implements Initializable {
         String screenValue = calculatorScreen.getText();
         String res = (screenValue.equals("") || screenValue.endsWith("(")) ? screenValue+function : screenValue+"*"+function;
         calculatorScreen.setText(res);
-    }
-
-    @FXML
-    public void clearScreen(Event e){
-        calculatorScreen.setText("");
     }
 
     @FXML
@@ -58,29 +69,18 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void exitApplication(Event e) {
-        Platform.exit();
+    public void clearScreen(Event e){
+        calculatorScreen.setText("");
     }
 
     @FXML
-    public void unitChoice(Event e) {
-        ArrayList<String> unitList = new ArrayList<>();
-        String unit = ((ComboBox) e.getSource()).getValue().toString();
-        for (Unit u : Unit.values()){
-            if (u.getType().equals(unit)){
-                unitList.add(u.getFullName());
-            }
-        }
-        fromComboBox.getItems().clear();
-        toComboBox.getItems().clear();
-        fromComboBox.getItems().addAll(unitList);
-        toComboBox.getItems().addAll(unitList);
+    public void openConverterScene(Event e){
+        ((CheckMenuItem) e.getSource()).setSelected(false);
+        Stage stage = (Stage) calculatorVBox.getScene().getWindow();
+        stage.setScene(converterScene);
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        String[] typeOfUnit = {"Length", "Volume", "Mass", "Area", "Speed", "Energy", "Pressure", "Power", "Time", "Currency"};
-        if (unitComboBox!=null)
-            unitComboBox.getItems().addAll(typeOfUnit);
+    public void setConverterScene(Scene scene){
+        converterScene = scene;
     }
 }
