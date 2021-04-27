@@ -28,6 +28,7 @@ public class CalculatorApp extends Application {
 
         primaryStage.setScene(calculatorScene);
         primaryStage.setTitle("Calculator");
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
