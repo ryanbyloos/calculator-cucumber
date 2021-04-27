@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.exceptions.IllegalConstruction;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -19,9 +20,9 @@ public class Parser {
         tree = parser.exp();
     }
 
-    public Expression getExpression(Calculator c){
+    public Expression getExpression(Calculator c) throws IllegalConstruction {
         CreateTreeVisitor visitor = new CreateTreeVisitor(c);
-        return (Expression) visitor.visitExp(tree);
+        visitor.visitExp(tree);
+        return visitor.getResult();
     }
-
 }

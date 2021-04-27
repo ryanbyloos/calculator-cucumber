@@ -157,7 +157,6 @@ public class TestRealNumber {
             Times t = new Times(el);
             Evaluator v = new EvaluatorReal();
             t.accept(v);
-            assertNull(v.getException());
             assertEquals("6.022E23", v.getResult().toString());
         }catch (IllegalConstruction e){
             fail();

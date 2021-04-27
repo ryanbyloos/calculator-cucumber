@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.*;
 import calculator.exceptions.IllegalConstruction;
+import calculator.exceptions.InvalidSyntax;
 import calculator.operations.Times;
 import function.Function;
 import function.Variable;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class TestParser {
 
     @Test
-    public void testParser(){
+    public void testParser() throws IllegalConstruction {
         Parser p = new Parser("2");
 
         Calculator c = new Calculator(Calculator.Mode.REAL);
@@ -24,7 +25,7 @@ public class TestParser {
     }
 
     @Test
-    public void testParserRealCannotBeConvert(){
+    public void testParserRealCannotBeConvert() throws IllegalConstruction {
         Parser p = new Parser("2.8");
 
         Calculator c = new Calculator(Calculator.Mode.INTEGER);
@@ -34,7 +35,7 @@ public class TestParser {
     }
 
     @Test
-    public void testParserAddReal(){
+    public void testParserAddReal() throws IllegalConstruction {
         Parser p = new Parser("2.3+2.7");
 
         Calculator c = new Calculator(Calculator.Mode.REAL);
@@ -44,7 +45,7 @@ public class TestParser {
     }
 
     @Test
-    public void testParserOpPriority(){
+    public void testParserOpPriority() throws IllegalConstruction {
         Parser p = new Parser("2+3*2+2.8");
 
         Calculator c = new Calculator(Calculator.Mode.REAL);
@@ -102,7 +103,7 @@ public class TestParser {
     // TEST parenthesis
 
     @Test
-    public void testParserWithoutParenthesis(){
+    public void testParserWithoutParenthesis() throws IllegalConstruction {
         Parser p = new Parser("2*2+3");
 
         Calculator c = new Calculator(Calculator.Mode.REAL);
@@ -112,7 +113,7 @@ public class TestParser {
     }
 
     @Test
-    public void testParserWithParenthesis(){
+    public void testParserWithParenthesis() throws IllegalConstruction {
         Parser p = new Parser("2*(2+3)");
 
         Calculator c = new Calculator(Calculator.Mode.REAL);
@@ -124,7 +125,7 @@ public class TestParser {
     // TODO test function does not exists
 
     @Test
-    public void testParserSqrt(){
+    public void testParserSqrt() throws IllegalConstruction {
         Parser p = new Parser("sqrt(4)");
 
         Calculator c = new Calculator(Calculator.Mode.REAL);
@@ -133,12 +134,23 @@ public class TestParser {
         assertEquals("2",c.eval(e1));
     }
     @Test
-    public void testParserCos(){
+    public void testParserCos() throws IllegalConstruction {
         Parser p = new Parser("cos(0)");
 
         Calculator c = new Calculator(Calculator.Mode.REAL);
         Expression e1 = p.getExpression(c);
         c.print(e1);
         assertEquals("1",c.eval(e1));
+    }
+
+    @Test
+    public void testParserFunDoesNotExist() throws IllegalConstruction {
+        Parser p = new Parser("funqwe(0)");
+
+        Calculator c = new Calculator(Calculator.Mode.REAL);
+        assertThrows(InvalidSyntax.class, () -> p.getExpression(c));
+//        Expression e1 = p.getExpression(c);
+//        c.print(e1);
+//        assertEquals("1",c.eval(e1));
     }
 }

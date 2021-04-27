@@ -102,7 +102,6 @@ public class RealNumber extends MyNumber{
         return exp;
     }
 
-
     //Two MyNumber expressions are equal if the values they contain are equal
     @Override
     public boolean equals(Object o) {

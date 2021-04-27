@@ -10,12 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.TerminalNodeImpl;
-import parser.*;
-import visitor.CreateTreeVisitor;
-
 /***************************************
  * A very simple Calculator in Java    *
  * Tom Mens, February 2021             *
@@ -27,13 +21,6 @@ import visitor.CreateTreeVisitor;
 public class Main {
 
   public static void main(String[] args) {
-  	Parser p = new Parser("2+3*2+2.8");
-
-  	Calculator c1 = new Calculator(Calculator.Mode.REAL);
-  	Expression e1 = p.getExpression(c1);
-	c1.print(e1);
-	c1.eval(e1);
-
   	Expression e;
   	Calculator c = new Calculator(Calculator.Mode.INTEGER);
 

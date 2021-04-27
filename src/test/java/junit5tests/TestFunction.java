@@ -81,8 +81,7 @@ public class TestFunction {
             // test bad assignment to string
             EvaluatorInteger ev = new EvaluatorInteger();
             f.getExpression().accept(ev);
-            assertEquals(NotAnIntegerNumber.class,ev.getException().getClass());
-
+            assertThrows(NotAnIntegerNumber.class,() -> ev.getResult());
         }catch (BadAssignment | NotARealNumber e){
             fail();
         }
@@ -113,8 +112,7 @@ public class TestFunction {
             // test bad assignment to string
             EvaluatorInteger ev = new EvaluatorInteger();
             f.getExpression().accept(ev);
-            assertEquals(NotAnIntegerNumber.class,ev.getException().getClass());
-
+            assertThrows(NotAnIntegerNumber.class,() -> ev.getResult());
         }catch (BadAssignment | NotARealNumber e){
             fail();
         }

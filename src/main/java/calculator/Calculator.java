@@ -60,12 +60,8 @@ public class Calculator {
         System.out.println();
     }
 
-
     /**
      * Add a function to calculator memory
-     * @param key
-     * @param f
-     * @throws BadAssignment
      */
     public void addFunction(String key,Function f){
         storedFun.put(key,f);
@@ -96,7 +92,6 @@ public class Calculator {
      * @param value value of
      * @param funName name of the
      * @return a ready to print string for the user
-     * @throws BadAssignment
      */
     public String eval(MyNumber value,String funName) throws BadAssignment {
         if(!storedFun.containsKey(funName)) return "No Such Function";
@@ -133,7 +128,6 @@ public class Calculator {
         EvaluatorInteger v = new EvaluatorInteger();
         // and ask the expression to accept this visitor to start the evaluation process
         e.accept(v);
-        if(v.getException() != null ) throw v.getException();
         // and return the result of the evaluation at the end of the process
         return new IntegerNumber(v.getResult().toString());
     }
@@ -149,7 +143,6 @@ public class Calculator {
         EvaluatorReal v = new EvaluatorReal();
         // and ask the expression to accept this visitor to start the evaluation process
         e.accept(v);
-        if(v.getException() != null ) throw v.getException();
         // and return the result of the evaluation at the end of the process
         return new RealNumber(v.getResult().toString());
     }
@@ -205,7 +198,6 @@ public class Calculator {
         EvaluatorDate v = new EvaluatorDate();
         // and ask the expression to accept this visitor to start the evaluation process
         e.accept(v);
-        if(v.getException() != null ) throw v.getException();
         // and return the result of the evaluation at the end of the process
         return new MyDate(v.getResult().toString());
     }

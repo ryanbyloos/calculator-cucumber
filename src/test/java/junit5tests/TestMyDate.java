@@ -174,17 +174,9 @@ public class TestMyDate {
 
     @Test
     public void test12()  {
-        try
-        {
-            List<Expression> params2 =
-                    new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1999,12,6)), new MyDate(1998,3,3)));
-            Expression exp = new Divides(params2);
-            assertThrows(ComputeError.class,() -> {calc.evalDate(exp);});
-        }
-        catch(IllegalConstruction e) {
-            fail();
-        }
-
+        List<Expression> params2 =
+                new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1999,12,6)), new MyDate(1998,3,3)));
+        assertThrows(IllegalConstruction.class,() -> new Divides(params2));
     }
     @Test
     public void test13()  {
@@ -193,7 +185,7 @@ public class TestMyDate {
             List<Expression> params2 =
                     new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1999,12,6)), new MyDate(1998,3,3)));
             Expression exp = new Times(params2);
-            assertThrows(ComputeError.class,() -> {calc.evalDate(exp);});
+            assertThrows(ComputeError.class,() -> calc.evalDate(exp) );
         }
         catch(IllegalConstruction e) {
             fail();

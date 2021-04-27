@@ -36,23 +36,23 @@ public class EvaluatorInteger extends Evaluator {
     @Override
     public void visit(Operation o) {
         ArrayList<IntegerNumber> evaluatedArgs = new ArrayList<>();
-        //first loop to recursively evaluate each subexpression
-        for(Expression a:o.args) {
-            a.accept(this);
-            evaluatedArgs.add((IntegerNumber) getComputedValue());
-        }
-        //second loop to accummulate all the evaluated subresults
-        IntegerNumber temp = evaluatedArgs.get(0);
-
-        for(int counter=1; counter<evaluatedArgs.size(); counter++) {
-            try {
-                temp = o.op(temp, evaluatedArgs.get(counter));
-            }catch (ComputeError e){
-                setException(e);
+        try {
+            //first loop to recursively evaluate each subexpression
+            for(Expression a:o.args) {
+                a.accept(this);
+                evaluatedArgs.add((IntegerNumber) getResult());
             }
+            //second loop to accummulate all the evaluated subresults
+            IntegerNumber temp = evaluatedArgs.get(0);
+
+            for(int counter=1; counter<evaluatedArgs.size(); counter++) {
+                temp = o.op(temp, evaluatedArgs.get(counter));
+            }
+            // store the accumulated result
+            setComputedValue(temp);
+        }catch (ComputeError e){
+            setException(e);
         }
-        // store the accumulated result
-        setComputedValue(temp);
     }
 
     @Override

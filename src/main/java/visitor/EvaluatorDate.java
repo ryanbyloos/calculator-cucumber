@@ -26,28 +26,28 @@ public class EvaluatorDate extends Evaluator{
     @Override
     public void visit(Operation o)  {
         ArrayList<MyDate> evaluatedArgs = new ArrayList<>();
-        //first loop to recursively evaluate each subexpression
-        for(Expression a:o.args) {
-            a.accept(this);
-            evaluatedArgs.add((MyDate) getComputedValue());
-        }
-        //second loop to accummulate all the evaluated subresults
-        MyDate temp = evaluatedArgs.get(0);
-        int max = evaluatedArgs.size();
-        for(int counter=1; counter<max; counter++) {
-            try{
-                temp = o.op(temp,evaluatedArgs.get(counter));
-            }catch (ComputeError e){
-                setException(e);
+        try {
+            //first loop to recursively evaluate each subexpression
+            for(Expression a:o.args) {
+                a.accept(this);
+                evaluatedArgs.add((MyDate) getResult());
             }
+            //second loop to accummulate all the evaluated subresults
+            MyDate temp = evaluatedArgs.get(0);
+            int max = evaluatedArgs.size();
+            for(int counter=1; counter<max; counter++) {
+                temp = o.op(temp,evaluatedArgs.get(counter));
+            }
+            // store the accumulated result
+            setComputedValue(temp);
+        }catch (ComputeError e){
+            setException(e);
         }
-        // store the accumulated result
-        setComputedValue(temp);
     }
 
     @Override
     public void visit(MyDate date) {
-    setComputedValue(date);
+        setComputedValue(date);
     }
 
 }

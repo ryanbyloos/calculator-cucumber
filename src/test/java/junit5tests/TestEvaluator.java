@@ -98,7 +98,6 @@ public class TestEvaluator {
             Expression exp = new Plus(params2);
             EvaluatorDate evaluator = new EvaluatorDate();
             exp.accept(evaluator);
-            assertNull(evaluator.getException());
             assertEquals(new MyDate(LocalDate.of(1998,4,4)),evaluator.getResult());
         }
         catch(IllegalConstruction e) {
@@ -112,7 +111,6 @@ public class TestEvaluator {
             Expression exp = new Minus(params2);
             EvaluatorDate evaluator = new EvaluatorDate();
             exp.accept(evaluator);
-            assertNull(evaluator.getException());
             assertEquals(new MyDate(LocalDate.of(1998,2,2)),evaluator.getResult());
         }
         catch(IllegalConstruction e) {
@@ -126,7 +124,6 @@ public class TestEvaluator {
             Expression exp = new Minus(params2);
             EvaluatorDate evaluator = new EvaluatorDate();
             exp.accept(evaluator);
-            assertNull(evaluator.getException());
             assertEquals(new MyDate(LocalDate.of(1,9,3)),evaluator.getResult());
         }
         catch(IllegalConstruction e) {

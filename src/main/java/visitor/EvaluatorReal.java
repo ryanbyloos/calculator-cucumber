@@ -2,7 +2,6 @@ package visitor;
 
 import calculator.Expression;
 import calculator.IntegerNumber;
-import calculator.MyNumber;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.NotARealNumber;
 import calculator.exceptions.VariableUnassignedError;
@@ -33,22 +32,23 @@ public class EvaluatorReal extends Evaluator{
     @Override
     public void visit(Operation o) {
         ArrayList<RealNumber> evaluatedArgs = new ArrayList<>();
-        //first loop to recursively evaluate each subexpression
-        for(Expression a:o.args) {
-            a.accept(this);
-            evaluatedArgs.add((RealNumber) getComputedValue());
-        }
-        //second loop to accummulate all the evaluated subresults
-        RealNumber temp = evaluatedArgs.get(0);
-        for(int counter=1; counter<evaluatedArgs.size(); counter++) {
-            try{
-                temp = o.op(temp,evaluatedArgs.get(counter));
-            }catch (ComputeError e){
-                setException(e);
+        try {
+            //first loop to recursively evaluate each subexpression
+            for (Expression a : o.args) {
+                a.accept(this);
+                evaluatedArgs.add((RealNumber) getResult());
             }
+            //second loop to accummulate all the evaluated subresults
+            RealNumber temp = evaluatedArgs.get(0);
+            for (int counter = 1; counter < evaluatedArgs.size(); counter++) {
+                temp = o.op(temp, evaluatedArgs.get(counter));
+
+            }
+            // store the accumulated result
+            setComputedValue(temp);
+        }catch (ComputeError e){
+            setException(e);
         }
-        // store the accumulated result
-        setComputedValue(temp);
     }
 
     @Override
@@ -58,11 +58,11 @@ public class EvaluatorReal extends Evaluator{
 
     public void visit(BigFunction bf){
         bf.args.get(0).accept(this);
-        BigDecimal d = ((RealNumber)this.getComputedValue()).getValue();
-
-        try {
+        BigDecimal d;
+        try{
+            d = ((RealNumber)this.getResult()).getValue();
             setComputedValue(new RealNumber(bf.op(d).toPlainString()));
-        }catch (NotARealNumber e){
+        }catch (ComputeError e){
             setException(e);
         }
     }

@@ -3,6 +3,7 @@ package visitor;
 import calculator.*;
 import calculator.exceptions.BadAssignment;
 import calculator.exceptions.IllegalConstruction;
+import calculator.exceptions.InvalidSyntax;
 import calculator.operations.Divides;
 import calculator.operations.Minus;
 import calculator.operations.Plus;
@@ -16,21 +17,31 @@ import parser.ExpressionVisitor;
 import java.util.List;
 
 public class CreateTreeVisitor implements ExpressionVisitor {
-    private Calculator calculator;
+    private final Calculator calculator;
+    private Expression result;
+    private IllegalConstruction exception;
+
     public CreateTreeVisitor(Calculator c){
         calculator = c;
     }
 
+    public Expression getResult() throws IllegalConstruction{
+        if(exception != null) throw exception;
+        return result;
+    }
+
     @Override
     public Object visitExp(ExpressionParser.ExpContext ctx) {
-        return ctx.getChild(0).accept(this);
+        result = (Expression) ctx.getChild(0).accept(this);
+        return result;
     }
 
     @Override
     public Object visitPlusMinus(ExpressionParser.PlusMinusContext ctx) {
         if (ctx.getChildCount() == 1){ // if single element
             // return child result
-            return ctx.getChild(0).accept(this);
+            result = (Expression) ctx.getChild(0).accept(this);
+            return result;
         }else if (ctx.getChildCount() == 3){
             // get element of expression
             Expression e1 = (Expression) ctx.getChild(0).accept(this);
@@ -43,21 +54,21 @@ public class CreateTreeVisitor implements ExpressionVisitor {
             try{
                 switch (ct.getSymbol().getType()){
                     case ExpressionParser.PLUS:
-                        return new Plus(elist);
+                        result = new Plus(elist);
+                        return result;
                     case ExpressionParser.MINUS:
-                        return new Minus(elist);
+                        result = new Minus(elist);
+                        return result;
                     default:
-                        System.out.println("SHOULD NOT BE HERE 1");
-                        System.exit(0);
+                        exception = new InvalidSyntax("Unsupported case");
                         return null;
                 }
             }catch (IllegalConstruction e){
-                System.out.println("SHOULD NOT BE HERE 2");
-                System.exit(0);
+                exception = new InvalidSyntax("Parser accept an unsupported syntax");
+                return null;
             }
         }
-        System.out.println("SHOULD NOT BE HERE 3");
-        System.exit(0);
+        exception = new InvalidSyntax("PlusMinus unsupported number of child : "+ctx.getChildCount());
         return null;
     }
 
@@ -65,7 +76,8 @@ public class CreateTreeVisitor implements ExpressionVisitor {
     public Object visitMultDiv(ExpressionParser.MultDivContext ctx) {
         if (ctx.getChildCount() == 1){ // if single element
             // return child result
-            return ctx.getChild(0).accept(this);
+            result = (Expression) ctx.getChild(0).accept(this);
+            return result;
         }else if (ctx.getChildCount() == 3){
             Expression e1 = (Expression) ctx.getChild(0).accept(this);
             Expression e2 = (Expression) ctx.getChild(2).accept(this);
@@ -76,32 +88,34 @@ public class CreateTreeVisitor implements ExpressionVisitor {
             try{
                 switch (ct.getSymbol().getType()){
                     case ExpressionParser.MULT:
-                        return new Times(elist);
+                        result = new Times(elist);
+                        return result;
                     case ExpressionParser.DIV:
-                        return new Divides(elist);
+                        result = new Divides(elist);
+                        return result;
                     default:
-                        System.out.println("SHOULD NOT BE HERE 4");
-                        System.exit(0);
+                        exception = new InvalidSyntax("Unsupported case");
                         return null;
                 }
             }catch (IllegalConstruction e){
-                System.out.println("SHOULD NOT BE HERE 5");
-                System.exit(0);
+                exception = new InvalidSyntax("Parser accept an unsupported syntax");
+                return null;
             }
         }
-        System.out.println("SHOULD NOT BE HERE 6");
-        System.exit(0);
+        exception = new InvalidSyntax("PlusMinus unsupported number of child : "+ctx.getChildCount());
         return null;
     }
 
     @Override
     public Object visitParenth(ExpressionParser.ParenthContext ctx) {
-        return this.visitPlusMinus((ExpressionParser.PlusMinusContext) ctx.getChild(1));
+        result = (Expression) this.visitPlusMinus((ExpressionParser.PlusMinusContext) ctx.getChild(1));
+        return result;
     }
 
     @Override
     public Object visitValue(ExpressionParser.ValueContext ctx) {
-        return ctx.getChild(0).accept(this);
+        result = (Expression) ctx.getChild(0).accept(this);
+        return result;
     }
 
     @Override
@@ -112,53 +126,69 @@ public class CreateTreeVisitor implements ExpressionVisitor {
         try{
             switch (funName){
                 case "acos":
-                    return new Acos(List.of(value));
+                    result = new Acos(List.of(value));
+                    return result;
                 case "acosh":
-                    return new Acosh(List.of(value));
+                    result = new Acosh(List.of(value));
+                    return result;
                 case "asin":
-                    return new Asin(List.of(value));
+                    result = new Asin(List.of(value));
+                    return result;
                 case "asinh":
-                    return new Asinh(List.of(value));
+                    result = new Asinh(List.of(value));
+                    return result;
                 case "atan":
-                    return new Atan(List.of(value));
+                    result = new Atan(List.of(value));
+                    return result;
                 case "atanh":
-                    return new Atanh(List.of(value));
+                    result = new Atanh(List.of(value));
+                    return result;
                 case "cos":
-                    return new Cos(List.of(value));
+                    result = new Cos(List.of(value));
+                    return result;
                 case "cosh":
-                    return new Cosh(List.of(value));
+                    result = new Cosh(List.of(value));
+                    return result;
                 case "exp": // TODO
-                    return new Exp(List.of(value));
+                    result = new Exp(List.of(value));
+                    return result;
                 case "inverse": // TODO
-                    return new Inverse(List.of(value));
+                    result = new Inverse(List.of(value));
+                    return result;
                 case "log":
-                    return new Log(List.of(value));
+                    result = new Log(List.of(value));
+                    return result;
                 case "sin":
-                    return new Sin(List.of(value));
+                    result = new Sin(List.of(value));
+                    return result;
                 case "sinh":
-                    return new Sinh(List.of(value));
+                    result = new Sinh(List.of(value));
+                    return result;
                 case "sqrt": //TODO
-                    return new SquareRoot(List.of(value));
+                    result = new SquareRoot(List.of(value));
+                    return result;
                 case "tan":
-                    return new Tan(List.of(value));
+                    result = new Tan(List.of(value));
+                    return result;
                 case "tanh":
-                    return new Tanh(List.of(value));
+                    result = new Tanh(List.of(value));
+                    return result;
                 default: // case where this is not a basic function
                     if(!calculator.getStoredFun().containsKey(funName)){
-                        System.out.println("SHOULD NOT BE HERE 7");
-                        System.exit(0);
+                        exception = new InvalidSyntax("Function "+funName+" does not exist");
+                        return null;
                     }
 
                     // cree une copie de la fonction
                     Function f = new Function( calculator.getStoredFun().get(funName).getExpression() );
                     f.setValue(value);
+                    result = f;
                     return f;
             }
         }catch (IllegalConstruction | BadAssignment e ){
-                System.out.println("SHOULD NOT BE HERE 8");
-                System.exit(0);
+            exception = new InvalidSyntax("Parser accept an unsupported syntax");
+            return null;
         }
-        return null;
     }
 
     @Override
@@ -169,20 +199,19 @@ public class CreateTreeVisitor implements ExpressionVisitor {
         try {
             switch (value.getSymbol().getType()) {
                 case ExpressionParser.INT:
-                    return new IntegerNumber(numStr);
+                    result = new IntegerNumber(numStr);
+                    return result;
                 case ExpressionParser.DECIMAL:
-                    return new RealNumber(numStr);
+                    result = new RealNumber(numStr);
+                    return result;
                 default:
-                    System.out.println("SHOULD NOT BE HERE 7");
-                    System.exit(0);
+                    exception = new InvalidSyntax("Unsupported case");
+                    return null;
             }
         }catch (Exception e){
-            System.out.println("SHOULD NOT BE HERE 8");
-            System.exit(0);
+            exception = new InvalidSyntax("Parser accept an unsupported syntax");
+            return null;
         }
-        System.out.println("SHOULD NOT BE HERE 9");
-        System.exit(0);
-        return null;
     }
 
     @Override
