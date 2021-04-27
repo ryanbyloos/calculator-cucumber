@@ -1,7 +1,6 @@
 package function;
 
 import calculator.Expression;
-import calculator.MyNumber;
 import visitor.Visitor;
 
 /**
@@ -39,7 +38,7 @@ public class Variable implements Expression {
 
     public String completeString(){
         if (value == null) return varName;
-        return varName+":"+value.toString();
+        return varName+":"+ value;
     }
 
     @Override

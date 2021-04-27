@@ -9,7 +9,7 @@ import parser.ExpressionParser;
 import visitor.CreateTreeVisitor;
 
 public class Parser {
-    ExpressionParser.ExpContext tree;
+    final ExpressionParser.ExpContext tree;
     public Parser(String s){
         CharStream in = new ANTLRInputStream(s);
         ExpressionLexer lexer = new ExpressionLexer(in);

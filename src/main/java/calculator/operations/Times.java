@@ -4,10 +4,7 @@ import calculator.Expression;
 import calculator.IntegerNumber;
 import calculator.Notation;
 import calculator.RealNumber;
-import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConstruction;
-import calculator.exceptions.UselessComputation;
-import time.MyDate;
 
 import java.util.List;
 

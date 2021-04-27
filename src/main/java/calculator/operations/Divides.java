@@ -5,7 +5,6 @@ import calculator.IntegerNumber;
 import calculator.Notation;
 import calculator.RealNumber;
 import calculator.exceptions.*;
-import time.MyDate;
 import visitor.EvaluatorReal;
 
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ final public class Divides extends Operation {
                 if (evaluator.getResult() != null && evaluator.getResult().equals(new RealNumber("0"))) {  // If equals to 0
                     throw new DivisionByZeroError();
                 }
-            }catch (VariableUnassignedError e) { }
+            }catch (VariableUnassignedError ignored) { } //because variable can be initialise later
             args = new ArrayList<>(elist);
         }
         symbol = "/";

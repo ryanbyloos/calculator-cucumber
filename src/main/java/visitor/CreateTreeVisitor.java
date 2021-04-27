@@ -106,7 +106,6 @@ public class CreateTreeVisitor implements ExpressionVisitor{
             Expression e1 = (Expression) ctx.getChild(0).accept(this);
             Expression e2 = (Expression) ctx.getChild(2).accept(this);
             List<Expression> elist = List.of(e1,e2);
-            TerminalNodeImpl ct = (TerminalNodeImpl) ctx.getChild(1);
 
             // if middle children is plus or minus
             try{
@@ -258,11 +257,7 @@ public class CreateTreeVisitor implements ExpressionVisitor{
     public Object visitDeffun(ExpressionParser.DeffunContext ctx) {
         String funName = ctx.getChild(0).getText();
         result = (Expression) ctx.getChild(3).accept(this);
-        try {
-            calculator.addFunction(funName,new Function(result));
-        }catch (IllegalConstruction e){
-            exception = e;
-        }
+        calculator.addFunction(funName,new Function(result));
         return null;
     }
 

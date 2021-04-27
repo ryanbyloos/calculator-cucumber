@@ -1,16 +1,13 @@
 package visitor;
 
 import calculator.Expression;
-import calculator.IntegerNumber;
 import calculator.MyNumber;
 import calculator.exceptions.ComputeError;
-import calculator.exceptions.NotARealNumber;
 import calculator.exceptions.VariableUnassignedError;
 import calculator.operations.Operation;
 import calculator.RealNumber;
 import calculator.operations.functions.BigFunction;
 import function.Variable;
-import time.MyDate;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -18,11 +15,6 @@ import java.util.ArrayList;
 public class EvaluatorReal extends Evaluator{
     @Override
     public void visit(MyNumber n){
-//        if ( n instanceof IntegerNumber){
-//            setComputedValue(((IntegerNumber)n).toRealNumber());
-//        }else {
-//            setComputedValue(n);
-//        }
         try {
             setComputedValue(n.convertTo(MyNumber.Type.REAL));
         }catch (ComputeError e){

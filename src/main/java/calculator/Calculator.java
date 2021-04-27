@@ -1,6 +1,5 @@
 package calculator;
 
-import calculator.exceptions.BadAssignment;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConvertionArgument;
 import Converter.Temperature;
@@ -136,7 +135,7 @@ public class Calculator {
         try {
             RealNumber eval = new RealNumber(convert(e, base, aimed));
 
-            return eval.toString() +  " " +aimed.getFullName();
+            return eval +  " " +aimed.getFullName();
         }catch(ComputeError ce){
             return "ERROR : "+ce.getMessage();
         }
@@ -155,7 +154,7 @@ public class Calculator {
     public String convertToString(Expression e, Temperature base, Temperature aimed) {
         try {
             RealNumber eval = new RealNumber(convert(e,base,aimed));
-            return eval.toString() + " "+aimed.getFullName();
+            return eval + " "+aimed.getFullName();
         }catch (ComputeError ce){
             return "ERROR : "+ce.getMessage();
         }

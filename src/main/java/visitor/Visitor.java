@@ -1,11 +1,8 @@
 package visitor;
 
-import calculator.IntegerNumber;
 import calculator.MyNumber;
 import calculator.operations.Operation;
-import calculator.RealNumber;
 import function.Variable;
-import time.MyDate;
 
 /* Visitor design pattern
  */

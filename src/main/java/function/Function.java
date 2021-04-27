@@ -2,9 +2,7 @@ package function;
 
 import calculator.*;
 import calculator.exceptions.BadAssignment;
-import calculator.exceptions.IllegalConstruction;
 import calculator.operations.Operation;
-import time.MyDate;
 import visitor.Visitor;
 
 /**
@@ -16,21 +14,16 @@ public class Function implements Expression{
      * Verify if a function contain only one variable.
      */
     private static class FunctionValidator extends Visitor {
-        private boolean valid = false;
         private Variable var;
 
         /**
          * Verify if a function is correct
          * @param f function to verify
-         * @return true if the variables are correctly assigned
          */
-        public boolean verify(Function f){
-            valid = true;
+        public void verify(Function f){
             var = f.getVar();
             f.getExpression().accept(this);
-            return valid;
         }
-
 
         @Override
         public void visit(Variable v) {
@@ -52,9 +45,7 @@ public class Function implements Expression{
         }
 
         @Override
-        public void visit(MyNumber n) {
-
-        }
+        public void visit(MyNumber n) { }
 
         public Variable getVar() { return var; }
     }
@@ -64,13 +55,11 @@ public class Function implements Expression{
     private final Variable var;
     private final Expression e;
 
-    public Function(Expression e) throws IllegalConstruction {
+    public Function(Expression e){
         this.e = e;
-
         // check if there are only the same var in e
         FunctionValidator v = new FunctionValidator();
-
-        if(!v.verify(this)) throw  new IllegalConstruction();
+        v.verify(this);
         this.var = v.getVar();
     }
 

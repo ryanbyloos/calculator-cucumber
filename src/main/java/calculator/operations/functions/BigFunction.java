@@ -3,7 +3,6 @@ package calculator.operations.functions;
 import calculator.Expression;
 import calculator.exceptions.IllegalConstruction;
 import ch.obermuhlner.math.big.BigDecimalMath;
-import function.Function;
 import visitor.EvaluatorReal;
 import visitor.Visitor;
 

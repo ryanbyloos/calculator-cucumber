@@ -92,7 +92,7 @@ public class IntegerNumber extends MyNumber{
     }
 
     @Override
-    public MyNumber convertTo(Type t) throws ComputeError {
+    public MyNumber convertTo(Type t) {
         switch (t){
             case REAL:
                 return toRealNumber();

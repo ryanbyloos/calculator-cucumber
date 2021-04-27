@@ -3,7 +3,6 @@ package visitor;
 import calculator.*;
 import calculator.operations.Operation;
 import function.Variable;
-import time.MyDate;
 
 public class Printer extends Visitor{
     private final Notation notation;

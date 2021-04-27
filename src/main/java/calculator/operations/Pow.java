@@ -6,7 +6,6 @@ import calculator.Notation;
 import calculator.RealNumber;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConstruction;
-import time.MyDate;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class Pow extends Operation{
     }
 
     @Override
-    public IntegerNumber op(IntegerNumber l, IntegerNumber r) throws ComputeError {
+    public IntegerNumber op(IntegerNumber l, IntegerNumber r) {
         return  new IntegerNumber(l.getValue().pow(r.getValue().intValue()));
     }
 

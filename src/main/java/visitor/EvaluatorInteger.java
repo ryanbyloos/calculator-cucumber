@@ -4,28 +4,15 @@ import calculator.Expression;
 import calculator.IntegerNumber;
 import calculator.MyNumber;
 import calculator.exceptions.ComputeError;
-import calculator.exceptions.NotAnIntegerNumber;
 import calculator.exceptions.VariableUnassignedError;
 import calculator.operations.Operation;
-import calculator.RealNumber;
 import function.Variable;
-import time.MyDate;
 
 import java.util.ArrayList;
 
 public class EvaluatorInteger extends Evaluator {
     @Override
     public void visit(MyNumber n){
-//        if ( n instanceof RealNumber){
-//            // try to convert else raise an exception
-//            try {
-//                setComputedValue(((RealNumber)n).toIntegerNumber());
-//            }catch (NotAnIntegerNumber e){
-//                setException(e);
-//            }
-//        }else {
-//            setComputedValue(n);
-//        }
         try {
             setComputedValue(n.convertTo(MyNumber.Type.INTEGER));
         }catch (ComputeError e){

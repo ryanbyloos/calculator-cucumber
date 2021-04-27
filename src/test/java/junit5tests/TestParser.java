@@ -144,13 +144,10 @@ public class TestParser {
     }
 
     @Test
-    public void testParserFunDoesNotExist() throws IllegalConstruction {
+    public void testParserFunDoesNotExist() {
         Parser p = new Parser("funqwe(0)");
 
         Calculator c = new Calculator(Calculator.Mode.REAL);
         assertThrows(InvalidSyntax.class, () -> p.getExpression(c));
-//        Expression e1 = p.getExpression(c);
-//        c.print(e1);
-//        assertEquals("1",c.eval(e1));
     }
 }

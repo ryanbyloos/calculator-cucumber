@@ -2,7 +2,6 @@ package junit5tests;
 
 import calculator.*;
 import calculator.exceptions.IllegalConstruction;
-import calculator.exceptions.NotAnIntegerNumber;
 import calculator.operations.Pow;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -22,10 +22,10 @@ import java.util.ResourceBundle;
 
 public class FunctionController implements Initializable {
 
-    private int canvas_size_x = 300;
-    private int canvas_size_y = 300;
+    private final int canvas_size_x = 300;
+    private final int canvas_size_y = 300;
 
-    @FXML public Pane pane = new Pane();
+    @FXML public final Pane pane = new Pane();
     public TextField input;
     private Calculator calculator;
 

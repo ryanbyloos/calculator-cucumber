@@ -6,7 +6,6 @@ import calculator.RealNumber;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.IllegalConstruction;
 import calculator.exceptions.TemporalException;
-import calculator.operations.Divides;
 import calculator.operations.Minus;
 import calculator.operations.Plus;
 import calculator.operations.Times;
@@ -28,7 +27,6 @@ public class TestMyDate {
     private RealNumber test2;
     private LocalDate l1;
     private LocalDate l2;
-    private LocalDate l3;
     private MyDate d1;
     private MyDate d2;
     private MyDate d3;
@@ -36,8 +34,6 @@ public class TestMyDate {
     private MyDate d5;
     private MyDate d6;
     private MyDate d7;
-    private Plus op;
-    private Minus op1;
 
     @BeforeEach
     public void setUp(){
@@ -144,20 +140,20 @@ public class TestMyDate {
     public void test9() throws IllegalConstruction {
         List<Expression> params2 =
                 new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1998,3,3)), new MyDate(0,1,1)));
-        op = new Plus(params2);
-        assertEquals("( 1998-3-3 + 0-1-1 )",op.toString());
+        Plus op = new Plus(params2);
+        assertEquals("( 1998-3-3 + 0-1-1 )", op.toString());
     }
     @Test
     public void test9_1() throws IllegalConstruction {
         List<Expression> params2 =
                 new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1998,3,3)), new MyDate(LocalDate.of(1998,3,3))));
-        op1 = new Minus(params2);
-        assertEquals("( 1998-3-3 - 1998-3-3 )",op1.toString());
+        Minus op1 = new Minus(params2);
+        assertEquals("( 1998-3-3 - 1998-3-3 )", op1.toString());
     }
     @Test
     public void test10()  {
         l2 = LocalDate.of(1998,3,3);
-        l3 = LocalDate.of(1998,3,3);
+        LocalDate l3 = LocalDate.of(1998, 3, 3);
         MyDate m1 = new MyDate(l2);
         MyDate m2 = new MyDate(l3);
         assertEquals(m1,m2);

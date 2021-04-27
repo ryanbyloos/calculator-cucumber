@@ -37,7 +37,7 @@ public class TestFunction {
 
             Function f = new Function(e);
             // TEST variable as no value
-            String infix = "( " + var1.varName + " + " + secondMember.toString() + " )";
+            String infix = "( " + var1.varName + " + " + secondMember + " )";
 
             assertEquals(infix,f.toString());
 

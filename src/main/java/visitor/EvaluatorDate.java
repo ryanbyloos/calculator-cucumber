@@ -1,12 +1,10 @@
 package visitor;
 
 import calculator.Expression;
-import calculator.IntegerNumber;
 import calculator.MyNumber;
 import calculator.exceptions.ComputeError;
 import calculator.operations.ComputeDate;
 import calculator.operations.Operation;
-import calculator.RealNumber;
 import function.Variable;
 import time.MyDate;
 
