@@ -14,11 +14,11 @@ public class CalculatorApp extends Application {
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader calculatorLoader = new FXMLLoader(getClass().getResource("/layout-calculator.fxml"));
         Parent calculatorParent = calculatorLoader.load();
-        Scene calculatorScene = new Scene(calculatorParent, 640, 400);
+        Scene calculatorScene = new Scene(calculatorParent, 640, 380);
 
         FXMLLoader converterLoader = new FXMLLoader(getClass().getResource("/layout-converter.fxml"));
         Parent converterParent = converterLoader.load();
-        Scene converterScene = new Scene(converterParent, 400, 400);
+        Scene converterScene = new Scene(converterParent, 330, 360);
 
         CalculatorController calculatorController = calculatorLoader.getController();
         calculatorController.setConverterScene(converterScene);
