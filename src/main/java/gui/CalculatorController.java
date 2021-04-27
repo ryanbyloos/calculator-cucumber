@@ -17,6 +17,7 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -38,6 +39,8 @@ public class CalculatorController implements Initializable {
     public CheckMenuItem calculatorMenuItem;
     public CheckMenuItem converterMenuItem;
     public TextField calculatorScreen;
+    public ComboBox<Calculator.Mode> modeComboBox;
+    public Button integerTrigger;
 
     @FXML
     public void exitApplication(Event e) {
@@ -47,6 +50,13 @@ public class CalculatorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         calculator = new Calculator(Calculator.Mode.REAL);
+        modeComboBox.getItems().addAll(Calculator.Mode.values());
+    }
+
+    @FXML
+    public void changeMode(Event e){
+        calculator = new Calculator((Calculator.Mode) ((ComboBox) e.getSource()).getValue());
+        integerTrigger.setDisable(!integerTrigger.isDisable());
     }
 
     @FXML
@@ -59,7 +69,17 @@ public class CalculatorController implements Initializable {
     public void functionButtonClicked(Event e){
         String function = ((Button) e.getSource()).getText()+"(";
         String screenValue = calculatorScreen.getText();
+        if(function.equals("√(")){
+            function = "sqrt(";
+        }
         String res = (screenValue.equals("") || screenValue.endsWith("(")) ? screenValue+function : screenValue+"*"+function;
+        calculatorScreen.setText(res);
+    }
+
+    @FXML
+    public void inverseFunctionButtonClicked(Event e){
+        String screenValue = calculatorScreen.getText();
+        String res = "1/("+screenValue;
         calculatorScreen.setText(res);
     }
 
@@ -85,8 +105,14 @@ public class CalculatorController implements Initializable {
     }
 
     @FXML
+    public void getAnswerValue(){
+        calculatorScreen.setText(answerScreen.getText());
+    }
+
+    @FXML
     public void clearScreen(Event e){
         calculatorScreen.setText("");
+        answerScreen.setText("");
     }
 
     @FXML

@@ -21,8 +21,6 @@ public abstract class BigFunction implements Expression {
 
     @Override
     public void accept(Visitor v) {
-        //TODO
-
         ((EvaluatorReal)v).visit(this);
     }
 

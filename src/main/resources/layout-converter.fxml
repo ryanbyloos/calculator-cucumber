@@ -1,51 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.net.URL?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="gui.ConverterController" fx:id="controllerVBox">
-    <MenuBar prefWidth="640">
+<VBox fx:id="controllerVBox" prefHeight="360.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ConverterController">
+    <MenuBar prefHeight="25.0" prefWidth="627.0">
         <Menu text="File">
-            <MenuItem text="Exit" onAction="#exitApplication"/>
+            <MenuItem onAction="#exitApplication" text="Exit" />
         </Menu>
         <Menu text="Mode">
-            <CheckMenuItem text="Calculator" fx:id="calculatorMenuItem"
-                           onAction="#openCalculatorScene"/>
-            <CheckMenuItem text="Converter" fx:id="converterMenuItem" selected="true"/>
+            <CheckMenuItem fx:id="calculatorMenuItem" onAction="#openCalculatorScene" text="Calculator" />
+            <CheckMenuItem fx:id="converterMenuItem" selected="true" text="Converter" />
         </Menu>
         <Menu text="Help">
-            <MenuItem text="About calculator"/>
+            <MenuItem text="About calculator" />
         </Menu>
     </MenuBar>
-    <HBox prefHeight="40" prefWidth="640">
-        <TextField fx:id="calculatorScreen" id="calculatorScreen" prefHeight="40" prefWidth="320"/>
-        <Label fx:id="answerScreen" id="answerScreen" prefHeight="40" prefWidth="320" text="ANS"/>
-    </HBox>
+    <TextField id="calculatorScreen" fx:id="calculatorScreen" prefHeight="40" prefWidth="420.0" />
+    <Label id="answerScreen" fx:id="answerScreen" prefHeight="40" prefWidth="420.0" />
     <GridPane id="buttonGrid" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="ALWAYS">
         <columnConstraints>
-            <ColumnConstraints minWidth="10.0" prefWidth="100.0" hgrow="SOMETIMES"/>
-            <ColumnConstraints minWidth="10.0" prefWidth="100.0" hgrow="SOMETIMES"/>
-            <ColumnConstraints minWidth="10.0" prefWidth="100.0" hgrow="SOMETIMES"/>
-            <ColumnConstraints minWidth="10.0" prefWidth="100.0" hgrow="SOMETIMES"/>
-            <ColumnConstraints minWidth="10.0" prefWidth="100.0" hgrow="SOMETIMES"/>
-            <ColumnConstraints minWidth="10.0" prefWidth="100.0" hgrow="SOMETIMES"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints />
         </rowConstraints>
-        <ComboBox fx:id="unitComboBox" GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="unit type"
-                  onAction="#unitChoice"/>
-        <ComboBox fx:id="fromComboBox" GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="from unit"/>
-        <ComboBox fx:id="toComboBox" GridPane.columnIndex="5" GridPane.rowIndex="0" promptText="to unit"/>
-        <Button text="=" GridPane.columnIndex="3" GridPane.rowIndex="5" GridPane.halignment="CENTER"/>
+        <ComboBox fx:id="unitComboBox" onAction="#unitChoice" promptText="unit type" GridPane.halignment="CENTER" />
+        <ComboBox fx:id="fromComboBox" promptText="from unit" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+        <ComboBox fx:id="toComboBox" promptText="to unit" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+        <Button onAction="#defaultButtonClicked" text="C" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <Button onAction="#defaultButtonClicked" text="6" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+        <Button onAction="#defaultButtonClicked" text="DEL" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <Button onAction="#getResult" text="=" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+        <Button onAction="#defaultButtonClicked" text="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Button onAction="#defaultButtonClicked" text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Button onAction="#defaultButtonClicked" text="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+        <Button onAction="#defaultButtonClicked" text="5" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+        <Button onAction="#defaultButtonClicked" text="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Button onAction="#defaultButtonClicked" text="7" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+        <Button onAction="#defaultButtonClicked" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+        <Button onAction="#defaultButtonClicked" text="9" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+        <Button onAction="#defaultButtonClicked" text="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+        <Button onAction="#defaultButtonClicked" text="." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
     </GridPane>
     <stylesheets>
-        <URL value="@style.css"/>
+        <URL value="@style.css" />
     </stylesheets>
 </VBox>
