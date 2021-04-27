@@ -21,28 +21,9 @@ public class Printer extends Visitor{
         return eval;
     }
 
-    @Override
-    public void visit(IntegerNumber n) {
-        eval = n.toString();
-    }
-
-    @Override
-    public void visit(RealNumber n) {
-        eval = n.toString();
-    }
-
     public void visit(MyNumber n) {  eval = n.toString();}
-
     @Override
     public void visit(Variable v) { eval = v.toString(); }
-    @Override
-    public void visit(MyDate date){
-        if (date.getlDate() == null)
-        {
-            eval = date.toString();
-        }
-        eval = date.toString();
-    }
 
     @Override
     public void visit(Operation o) {

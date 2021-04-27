@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.exceptions.ComputeError;
 import calculator.exceptions.DivisionByZeroError;
 import calculator.exceptions.NotARealNumber;
 import calculator.exceptions.NotAnIntegerNumber;
@@ -122,5 +123,16 @@ public class RealNumber extends MyNumber{
             return this.value.compareTo(n.value) == 0;
         }
         return false;
+    }
+
+    @Override
+    public MyNumber convertTo(Type t) throws ComputeError {
+        switch (t){
+            case REAL:
+                return this;
+            case INTEGER:
+                return toIntegerNumber();
+        }
+        return null;
     }
 }

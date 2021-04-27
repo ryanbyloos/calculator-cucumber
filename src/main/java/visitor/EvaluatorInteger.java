@@ -2,6 +2,7 @@ package visitor;
 
 import calculator.Expression;
 import calculator.IntegerNumber;
+import calculator.MyNumber;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.NotAnIntegerNumber;
 import calculator.exceptions.VariableUnassignedError;
@@ -13,17 +14,21 @@ import time.MyDate;
 import java.util.ArrayList;
 
 public class EvaluatorInteger extends Evaluator {
-
-
     @Override
-    public void visit(IntegerNumber n) { setComputedValue(n); }
-
-    @Override
-    public void visit(RealNumber n) {
-        // try to convert else raise an exception
+    public void visit(MyNumber n){
+//        if ( n instanceof RealNumber){
+//            // try to convert else raise an exception
+//            try {
+//                setComputedValue(((RealNumber)n).toIntegerNumber());
+//            }catch (NotAnIntegerNumber e){
+//                setException(e);
+//            }
+//        }else {
+//            setComputedValue(n);
+//        }
         try {
-            setComputedValue(n.toIntegerNumber());
-        }catch (NotAnIntegerNumber e){
+            setComputedValue(n.convertTo(MyNumber.Type.INTEGER));
+        }catch (ComputeError e){
             setException(e);
         }
     }
@@ -54,11 +59,4 @@ public class EvaluatorInteger extends Evaluator {
             setException(e);
         }
     }
-
-    @Override
-    public void visit(MyDate date) {
-        setException(new ComputeError("Unsupported date in integer mode"));
-    }
-
-
 }

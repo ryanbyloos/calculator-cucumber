@@ -17,19 +17,19 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExp(ExpressionParser.ExpContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#plusMinus}.
+	 * Visit a parse tree produced by .
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitPlusMinus(ExpressionParser.PlusMinusContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#multDiv}.
+	 * Visit a parse tree produced by .
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitMultDiv(ExpressionParser.MultDivContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#pow}.
+	 * Visit a parse tree produced by .
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -65,19 +65,19 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDeffun(ExpressionParser.DeffunContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#plusMinusf}.
+	 * Visit a parse tree produced by .
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitPlusMinusf(ExpressionParser.PlusMinusfContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#multDivf}.
+	 * Visit a parse tree produced by .
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitMultDivf(ExpressionParser.MultDivfContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#powf}.
+	 * Visit a parse tree produced by .
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */

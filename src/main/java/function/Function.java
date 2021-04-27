@@ -31,11 +31,6 @@ public class Function implements Expression{
             return valid;
         }
 
-        @Override
-        // Can't fail because an integer can also be considered as a real
-        public void visit(IntegerNumber n) { }
-        @Override
-        public void visit(RealNumber n) { }
 
         @Override
         public void visit(Variable v) {
@@ -57,7 +52,9 @@ public class Function implements Expression{
         }
 
         @Override
-        public void visit(MyDate date) { }
+        public void visit(MyNumber n) {
+
+        }
 
         public Variable getVar() { return var; }
     }

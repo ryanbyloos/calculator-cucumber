@@ -137,7 +137,7 @@ public class TestEvaluator {
 
         Calculator c = new Calculator(Calculator.Mode.INTEGER);
         assertThrows(ComputeError.class,() -> c.evalInteger(d));
-        assertEquals("Unsupported date in integer mode",c.eval(d));
+        assertEquals("Cannot convert Date",c.eval(d));
 
     }
 
@@ -147,7 +147,7 @@ public class TestEvaluator {
 
         Calculator c = new Calculator(Calculator.Mode.REAL);
         assertThrows(ComputeError.class,() -> c.evalInteger(d));
-        assertEquals("Unsupported date in real mode",c.eval(d));
+        assertEquals("Cannot convert Date",c.eval(d));
 
     }
 

@@ -2,6 +2,7 @@ package visitor;
 
 import calculator.Expression;
 import calculator.IntegerNumber;
+import calculator.MyNumber;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.NotARealNumber;
 import calculator.exceptions.VariableUnassignedError;
@@ -15,15 +16,20 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class EvaluatorReal extends Evaluator{
-
     @Override
-    public void visit(IntegerNumber n) {
-        // convert Integer to decimal number
-        setComputedValue(n.toRealNumber());
+    public void visit(MyNumber n){
+//        if ( n instanceof IntegerNumber){
+//            setComputedValue(((IntegerNumber)n).toRealNumber());
+//        }else {
+//            setComputedValue(n);
+//        }
+        try {
+            setComputedValue(n.convertTo(MyNumber.Type.REAL));
+        }catch (ComputeError e){
+            setException(e);
+        }
     }
 
-    @Override
-    public void visit(RealNumber n) { setComputedValue(n); }
     @Override
     public void visit(Variable v) {
         if(!v.asValue()) setException(new VariableUnassignedError());
@@ -51,11 +57,6 @@ public class EvaluatorReal extends Evaluator{
         }catch (ComputeError e){
             setException(e);
         }
-    }
-
-    @Override
-    public void visit(MyDate date) {
-        setException(new ComputeError("Unsupported date in real mode"));
     }
 
     public void visit(BigFunction bf){

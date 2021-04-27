@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.exceptions.ComputeError;
 import calculator.exceptions.DivisionByZeroError;
 import calculator.exceptions.NotAnIntegerNumber;
 import visitor.Visitor;
@@ -88,5 +89,16 @@ public class IntegerNumber extends MyNumber{
             }
         }
         return false;
+    }
+
+    @Override
+    public MyNumber convertTo(Type t) throws ComputeError {
+        switch (t){
+            case REAL:
+                return toRealNumber();
+            case INTEGER:
+                return this;
+        }
+        return null;
     }
 }

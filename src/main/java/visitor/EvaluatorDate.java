@@ -2,6 +2,7 @@ package visitor;
 
 import calculator.Expression;
 import calculator.IntegerNumber;
+import calculator.MyNumber;
 import calculator.exceptions.ComputeError;
 import calculator.operations.ComputeDate;
 import calculator.operations.Operation;
@@ -13,15 +14,6 @@ import java.util.ArrayList;
 
 public class EvaluatorDate extends Evaluator{
 
-
-    @Override
-    public void visit(IntegerNumber n) {
-        // convert Integer to decimal number
-        //setComputedValue(n.toRealNumber());
-    }
-
-    @Override
-    public void visit(RealNumber n) {}
     @Override
     public void visit(Variable v) {}
     @Override
@@ -51,8 +43,7 @@ public class EvaluatorDate extends Evaluator{
     }
 
     @Override
-    public void visit(MyDate date) {
-        setComputedValue(date);
+    public void visit(MyNumber n){
+        setComputedValue(n);
     }
-
 }

@@ -1,5 +1,6 @@
 package time;
 import calculator.MyNumber;
+import calculator.exceptions.ComputeError;
 import calculator.exceptions.TemporalException;
 import calculator.exceptions.UselessComputation;
 import visitor.Visitor;
@@ -129,5 +130,10 @@ public class MyDate extends MyNumber {
             // .compareTo is needed for BigDecimal
         }
         return false;
+    }
+
+    @Override
+    public MyNumber convertTo(Type t) throws ComputeError {
+        throw new ComputeError("Cannot convert Date");
     }
 }

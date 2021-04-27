@@ -171,15 +171,8 @@ public class TestMyDate {
         assertNotEquals(m1,m2);
         assertNotEquals(m2,m1);
     }
-
     @Test
     public void test12()  {
-        List<Expression> params2 =
-                new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1999,12,6)), new MyDate(1998,3,3)));
-        assertThrows(IllegalConstruction.class,() -> new Divides(params2));
-    }
-    @Test
-    public void test13()  {
         try
         {
             List<Expression> params2 =
