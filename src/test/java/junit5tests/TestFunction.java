@@ -163,8 +163,8 @@ public class TestFunction {
 
             Calculator c = new Calculator(Calculator.Mode.INTEGER);
 
-            c.addFunction("fun",f);
-            assertEquals("14",c.eval(seven, "fun"));
+            f.setValue(seven);
+            assertEquals("14",c.eval(f));
         }catch (IllegalConstruction | BadAssignment exception){
             fail();
         }
@@ -190,7 +190,9 @@ public class TestFunction {
             assertThrows(NotAnIntegerNumber.class,() -> c.evalInteger(f.getExpression()));
             f.clearValue();
 
-            assertEquals("23.5 is not an integer", c.eval(x,"fun"));
+            f.setValue(x);
+            assertEquals("23.5 is not an integer", c.eval(f));
+            f.clearValue();
 
         }catch (IllegalConstruction | BadAssignment exception){
             fail();
@@ -210,11 +212,10 @@ public class TestFunction {
             Function f = new Function(e);
 
             Calculator c = new Calculator(Calculator.Mode.REAL);
-            c.addFunction("fun",f);
 
-            assertEquals("1",c.eval(new IntegerNumber("2") ,"fun"));
-
-        }catch (Exception e){
+            f.setValue(new IntegerNumber("2"));
+            assertEquals("1",c.eval(f));
+        }catch (IllegalConstruction | BadAssignment e){
             fail();
         }
     }
@@ -234,7 +235,6 @@ public class TestFunction {
             RealNumber zero = new RealNumber("0.0");
 
             Calculator c = new Calculator(Calculator.Mode.REAL);
-            c.addFunction("fun",f);
 
             // test if eval throw exception
             f.setValue(zero);
@@ -242,13 +242,15 @@ public class TestFunction {
             f.clearValue();
 
             // test if correctly return error message
-            assertEquals("Division By Zero Error",c.eval(zero ,"fun"));
+            f.setValue(zero);
+            assertEquals("Division By Zero Error",c.eval(f));
         }catch (Exception e){
             fail();
         }
     }
 
     @Test
+    // test if function constructor replace variable
     public void testValidatorTwoVariable(){
         try {
             ArrayList<Expression> el = new ArrayList<>();
@@ -257,9 +259,14 @@ public class TestFunction {
 
             Expression e = new Plus(el);
 
-            assertThrows(IllegalConstruction.class,() ->new Function(e));
+            Function f = new Function(e);
 
-        }catch (IllegalConstruction exception){
+            Calculator c = new Calculator(Calculator.Mode.REAL);
+
+            f.setValue(new RealNumber("2.6"));
+            assertEquals("5.2",c.eval(f));
+
+        }catch (IllegalConstruction | BadAssignment exception){
             fail();
         }
     }

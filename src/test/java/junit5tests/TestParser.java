@@ -31,7 +31,7 @@ public class TestParser {
         Calculator c = new Calculator(Calculator.Mode.INTEGER);
         Expression e1 = p.getExpression(c);
         c.print(e1);
-        assertEquals("Error : 2.8 is not an integer",c.eval(e1));
+        assertEquals("2.8 is not an integer",c.eval(e1));
     }
 
     @Test

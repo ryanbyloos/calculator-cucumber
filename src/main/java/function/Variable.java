@@ -9,15 +9,13 @@ import visitor.Visitor;
  */
 public class Variable implements Expression {
     public final String varName = "X";
-    private MyNumber value;
+    private Expression value;
 
     /**
      * Set the value
-     * @param num value to assign
+     * @param v value to assign
      */
-    public void assignValue(MyNumber num){
-        value = num;
-    }
+    public void assignValue(Expression v){ value = v; }
 
     /**
      * Set value to null
@@ -59,7 +57,5 @@ public class Variable implements Expression {
     @Override
     public Integer countNbs() { return 1; }
 
-    public MyNumber getValue(){
-        return value;
-    }
+    public Expression getValue() { return value; }
 }

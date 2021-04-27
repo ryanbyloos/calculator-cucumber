@@ -10,8 +10,7 @@ MINUS : '-';
 MULT : '*';
 DIV  : '/';
 
-exp : plusMinus;
-
+exp : plusMinus | deffun;
 
 plusMinus :  plusMinus PLUS multDiv
            | plusMinus MINUS multDiv
@@ -23,12 +22,29 @@ multDiv : multDiv MULT value
 
 value : nb
         | fun
-        |parenth;
+        | parenth;
 
 parenth : '('plusMinus')';
 
 fun : NAME'('plusMinus')';
 
 nb : INT | DECIMAL;
+
+deffun : NAME '->' '('plusMinusf')';
+
+plusMinusf : plusMinusf PLUS multDivf
+           | plusMinusf MINUS multDivf
+           | multDivf;
+
+multDivf : multDivf MULT valuef
+        | multDivf DIV valuef
+        | valuef;
+
+valuef : nb
+        | fun
+        | parenth
+        | var;
+
+var : 'x';
 
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines

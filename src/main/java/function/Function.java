@@ -42,15 +42,17 @@ public class Function implements Expression{
             // If first variable encountered
             if (var == null)
                 var = v;
-                // If variable is already set they must be equals
-            else if(var != v)
-                valid = false;
         }
 
         @Override
         public void visit(Operation o) {
             for(int i = 1 ; i < o.getArgs().size() ; i++) {
-                o.getArgs().get(i).accept(this);
+                Expression e = o.getArgs().get(i);
+                // replace erroneous variable
+                if ( var!=null && e instanceof Variable ){
+                    o.getArgs().set(i,var);
+                }
+                e.accept(this);
             }
         }
 
@@ -75,7 +77,7 @@ public class Function implements Expression{
         this.var = v.getVar();
     }
 
-    public void setValue(MyNumber n) throws BadAssignment{
+    public void setValue(Expression n) throws BadAssignment{
         if (n == null) throw new BadAssignment();
         var.assignValue(n);
     }

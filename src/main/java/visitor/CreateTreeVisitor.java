@@ -10,6 +10,8 @@ import calculator.operations.Plus;
 import calculator.operations.Times;
 import calculator.operations.functions.*;
 import function.Function;
+import function.Variable;
+import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.*;
 import parser.ExpressionParser;
 import parser.ExpressionVisitor;
@@ -30,14 +32,7 @@ public class CreateTreeVisitor implements ExpressionVisitor {
         return result;
     }
 
-    @Override
-    public Object visitExp(ExpressionParser.ExpContext ctx) {
-        result = (Expression) ctx.getChild(0).accept(this);
-        return result;
-    }
-
-    @Override
-    public Object visitPlusMinus(ExpressionParser.PlusMinusContext ctx) {
+    public Expression plusMinus(ParserRuleContext ctx){
         if (ctx.getChildCount() == 1){ // if single element
             // return child result
             result = (Expression) ctx.getChild(0).accept(this);
@@ -72,8 +67,7 @@ public class CreateTreeVisitor implements ExpressionVisitor {
         return null;
     }
 
-    @Override
-    public Object visitMultDiv(ExpressionParser.MultDivContext ctx) {
+    public Object multDiv(ParserRuleContext ctx) {
         if (ctx.getChildCount() == 1){ // if single element
             // return child result
             result = (Expression) ctx.getChild(0).accept(this);
@@ -104,6 +98,22 @@ public class CreateTreeVisitor implements ExpressionVisitor {
         }
         exception = new InvalidSyntax("PlusMinus unsupported number of child : "+ctx.getChildCount());
         return null;
+    }
+
+    @Override
+    public Object visitExp(ExpressionParser.ExpContext ctx) {
+        result = (Expression) ctx.getChild(0).accept(this);
+        return result;
+    }
+
+    @Override
+    public Object visitPlusMinus(ExpressionParser.PlusMinusContext ctx) {
+        return plusMinus(ctx);
+    }
+
+    @Override
+    public Object visitMultDiv(ExpressionParser.MultDivContext ctx) {
+        return multDiv(ctx);
     }
 
     @Override
@@ -181,7 +191,7 @@ public class CreateTreeVisitor implements ExpressionVisitor {
 
                     // cree une copie de la fonction
                     Function f = new Function( calculator.getStoredFun().get(funName).getExpression() );
-                    f.setValue((MyNumber) value);
+                    f.setValue(value);
                     result = f;
                     return f;
             }
@@ -212,6 +222,40 @@ public class CreateTreeVisitor implements ExpressionVisitor {
             exception = new InvalidSyntax("Parser accept an unsupported syntax");
             return null;
         }
+    }
+
+    @Override
+    public Object visitDeffun(ExpressionParser.DeffunContext ctx) {
+        String funName = ctx.getChild(0).getText();
+        result = (Expression) ctx.getChild(3).accept(this);
+        try {
+            calculator.addFunction(funName,new Function(result));
+        }catch (IllegalConstruction e){
+            exception = e;
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitPlusMinusf(ExpressionParser.PlusMinusfContext ctx) {
+        return plusMinus(ctx);
+    }
+
+    @Override
+    public Object visitMultDivf(ExpressionParser.MultDivfContext ctx) {
+        return multDiv(ctx);
+    }
+
+    @Override
+    public Object visitValuef(ExpressionParser.ValuefContext ctx) {
+        result = (Expression) ctx.getChild(0).accept(this);
+        return result;
+    }
+
+    @Override
+    public Object visitVar(ExpressionParser.VarContext ctx) {
+        result = new Variable();
+        return result;
     }
 
     @Override

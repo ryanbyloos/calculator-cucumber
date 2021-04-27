@@ -5,17 +5,22 @@ import calculator.Expression;
 import calculator.Parser;
 import calculator.exceptions.IllegalConstruction;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,6 +29,8 @@ public class CalculatorController implements Initializable {
     private Scene converterScene;
 
     public Calculator calculator;
+
+    private Stage funStage;
 
     @FXML
     public VBox calculatorVBox;
@@ -73,7 +80,8 @@ public class CalculatorController implements Initializable {
 
         Parser parser = new Parser(res);
         Expression expression = parser.getExpression(calculator);
-        answerScreen.setText(calculator.eval(expression));
+        if (expression != null)
+            answerScreen.setText(calculator.eval(expression));
     }
 
     @FXML
@@ -88,7 +96,44 @@ public class CalculatorController implements Initializable {
         stage.setScene(converterScene);
     }
 
+    @FXML
+    public void showFunction(Event e){
+        if (funStage != null) funStage.close();
+
+        Label secondLabel = new Label("I'm a Label on new Window");
+
+        StackPane secondaryLayout = new StackPane();
+        secondaryLayout.getChildren().add(secondLabel);
+
+        Scene secondScene = new Scene(secondaryLayout, 230, 100);
+
+        // New window (Stage)
+        funStage = new Stage();
+        funStage.setTitle("Function");
+        funStage.setScene(secondScene);
+
+        funStage.show();
+
+        try{
+            FXMLLoader functionShow = new FXMLLoader(getClass().getResource("/layout-functionShow.fxml"));
+            Parent calculatorParent = functionShow.load();
+            Scene calculatorScene = new Scene(calculatorParent, 640, 400);
+            funStage.setScene(calculatorScene);
+
+            FunctionController functionController = functionShow.getController();
+            functionController.setCalculator(calculator);
+        }catch (IOException exception){
+
+        }
+
+
+    }
+
     public void setConverterScene(Scene scene){
         converterScene = scene;
+    }
+
+    public void defFun(ActionEvent actionEvent) {
+        calculatorScreen.setText("name -> (x+2)");
     }
 }

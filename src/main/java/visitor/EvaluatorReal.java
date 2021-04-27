@@ -27,7 +27,9 @@ public class EvaluatorReal extends Evaluator{
     @Override
     public void visit(Variable v) {
         if(!v.asValue()) setException(new VariableUnassignedError());
-        else v.getValue().accept(this);
+        else{
+            v.getValue().accept(this);
+        }
     }
     @Override
     public void visit(Operation o) {

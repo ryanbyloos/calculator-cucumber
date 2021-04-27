@@ -77,4 +77,54 @@ public interface ExpressionListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNb(ExpressionParser.NbContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExpressionParser#deffun}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeffun(ExpressionParser.DeffunContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExpressionParser#deffun}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeffun(ExpressionParser.DeffunContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExpressionParser#plusMinusf}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlusMinusf(ExpressionParser.PlusMinusfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExpressionParser#plusMinusf}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlusMinusf(ExpressionParser.PlusMinusfContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExpressionParser#multDivf}.
+	 * @param ctx the parse tree
+	 */
+	void enterMultDivf(ExpressionParser.MultDivfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExpressionParser#multDivf}.
+	 * @param ctx the parse tree
+	 */
+	void exitMultDivf(ExpressionParser.MultDivfContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExpressionParser#valuef}.
+	 * @param ctx the parse tree
+	 */
+	void enterValuef(ExpressionParser.ValuefContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExpressionParser#valuef}.
+	 * @param ctx the parse tree
+	 */
+	void exitValuef(ExpressionParser.ValuefContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExpressionParser#var}.
+	 * @param ctx the parse tree
+	 */
+	void enterVar(ExpressionParser.VarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExpressionParser#var}.
+	 * @param ctx the parse tree
+	 */
+	void exitVar(ExpressionParser.VarContext ctx);
 }

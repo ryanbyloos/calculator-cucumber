@@ -83,38 +83,8 @@ public class Calculator {
                     return "Unsupported Mode";
             }
         }catch(ComputeError ce){
-            return "Error : "+ce.getMessage();
-        }
-    }
-
-    /**
-     * Return value of function or error message as string
-     * @param value value of
-     * @param funName name of the
-     * @return a ready to print string for the user
-     */
-    public String eval(MyNumber value,String funName) throws BadAssignment {
-        if(!storedFun.containsKey(funName)) return "No Such Function";
-        Function f = storedFun.get(funName);
-        String res;
-        f.setValue(value);
-
-        try {
-            switch (mode) {
-                case INTEGER:
-                    res = evalInteger(f.getExpression()).toString();
-                    break;
-                case REAL:
-                    res = evalReal(f.getExpression()).toString();
-                    break;
-                default:
-                    return "Unsupported Mode";
-            }
-        }catch (ComputeError ce) {
             return ce.getMessage();
         }
-        f.clearValue();
-        return res;
     }
 
     /**

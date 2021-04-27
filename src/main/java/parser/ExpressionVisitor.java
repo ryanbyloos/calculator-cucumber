@@ -52,4 +52,34 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNb(ExpressionParser.NbContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#deffun}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeffun(ExpressionParser.DeffunContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#plusMinusf}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPlusMinusf(ExpressionParser.PlusMinusfContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#multDivf}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMultDivf(ExpressionParser.MultDivfContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#valuef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValuef(ExpressionParser.ValuefContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#var}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVar(ExpressionParser.VarContext ctx);
 }

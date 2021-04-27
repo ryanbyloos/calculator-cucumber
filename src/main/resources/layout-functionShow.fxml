@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="calculatorVBox" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FunctionController">
+   <Pane fx:id="pane" prefHeight="452.0" prefWidth="640.0" />
+   <HBox prefHeight="100.0" prefWidth="200.0">
+      <children>
+         <TextField fx:id="input" prefHeight="30.0" prefWidth="327.0" />
+         <Button mnemonicParsing="false" onAction="#moveLeft" prefHeight="65.0" prefWidth="64.0" text="&lt;" />
+         <Button mnemonicParsing="false" onAction="#moveUp" prefHeight="41.0" prefWidth="85.0" text="/\" />
+         <Button mnemonicParsing="false" onAction="#moveDown" text="\\/" />
+         <Button mnemonicParsing="false" onAction="#moveRight" text="&gt;" />
+         <Button mnemonicParsing="false" onAction="#zoomIn" text="+" />
+         <Button mnemonicParsing="false" onAction="#zoomOut" text="-" />
+      </children>
+   </HBox>
+
+   <stylesheets>
+      <URL value="@style.css" />
+   </stylesheets>
+</VBox>

@@ -94,8 +94,10 @@
                 onAction="#defaultButtonClicked"/>
         <Button text="*" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.halignment="CENTER"
                 onAction="#defaultButtonClicked"/>
-        <Button text="Button" GridPane.columnIndex="4" GridPane.rowIndex="4" GridPane.halignment="CENTER"/>
-        <Button text="Button" GridPane.columnIndex="5" GridPane.rowIndex="4" GridPane.halignment="CENTER"/>
+        <Button text="Function" GridPane.columnIndex="4" GridPane.rowIndex="4" GridPane.halignment="CENTER"
+                onAction="#showFunction"/>
+        <Button text="DefFun" GridPane.columnIndex="5" GridPane.rowIndex="4" GridPane.halignment="CENTER"
+                onAction="#defFun"/>
         <Button text="4" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.halignment="CENTER"
                 onAction="#defaultButtonClicked"/>
         <Button text="5" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.halignment="CENTER"
