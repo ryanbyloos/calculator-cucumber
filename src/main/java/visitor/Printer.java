@@ -2,6 +2,7 @@ package visitor;
 
 import calculator.*;
 import calculator.operations.Operation;
+import calculator.operations.functions.BigFunction;
 import function.Variable;
 
 public class Printer extends Visitor{
@@ -33,7 +34,7 @@ public class Printer extends Visitor{
             case POSTFIX: tmp.append("("); break;
         }
 
-        for(Expression a:o.args.subList(0,o.args.size()-1)) {
+        for(Expression a:o.getArgs().subList(0,o.getArgs().size()-1)) {
             a.accept(this);
             if(notation == Notation.INFIX)
             {
@@ -43,7 +44,7 @@ public class Printer extends Visitor{
             }
         }
 
-        o.args.get(o.args.size()-1).accept(this);
+        o.getArgs().get(o.getArgs().size()-1).accept(this);
         tmp.append(eval);
 
         switch (notation) {
@@ -52,6 +53,11 @@ public class Printer extends Visitor{
             case POSTFIX: tmp.append(") ").append(o.getSymbol()); break;
         }
         eval = tmp.toString();
+    }
+
+    @Override
+    public void visit(BigFunction f) {
+        // TODO
     }
 
 }

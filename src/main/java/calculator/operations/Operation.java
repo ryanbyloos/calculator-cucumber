@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Operation implements Expression {
-    public List<Expression> args;
+    private List<Expression> args;
     protected String symbol;
     protected int neutral; // the neutral element of the operation (e.g. 1 for *, 0 for +)
     public Notation notation = Notation.INFIX; //by default, expressions are rendered as strings using infix notation
 
     // It is not allowed to create operation that have a null list of arguments.
-    // Note that it is allowed to have an EMPTY list of arguments. // TODO
+    // Note that it is allowed to have an EMPTY list of arguments.
     public /*constructor*/ Operation(List<Expression> elist)
             throws IllegalConstruction {
         if (elist == null) {
@@ -31,6 +31,9 @@ public abstract class Operation implements Expression {
 
     public List<Expression> getArgs() {
         return args;
+    }
+    public void setArgs(int i,Expression e){
+        args.set(i,e);
     }
 
     public /*constructor*/ Operation(List<Expression> elist, Notation n)

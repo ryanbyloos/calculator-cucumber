@@ -5,6 +5,7 @@ import calculator.MyNumber;
 import calculator.exceptions.ComputeError;
 import calculator.operations.ComputeDate;
 import calculator.operations.Operation;
+import calculator.operations.functions.BigFunction;
 import function.Variable;
 import time.MyDate;
 
@@ -19,7 +20,7 @@ public class EvaluatorDate extends Evaluator{
         ArrayList<MyDate> evaluatedArgs = new ArrayList<>();
         try {
             //first loop to recursively evaluate each subexpression
-            for(Expression a:o.args) {
+            for(Expression a:o.getArgs()) {
                 a.accept(this);
                 evaluatedArgs.add((MyDate) getResult());
             }
@@ -39,6 +40,9 @@ public class EvaluatorDate extends Evaluator{
             setException(e);
         }
     }
+
+    @Override
+    public void visit(BigFunction f) { }
 
     @Override
     public void visit(MyNumber n){

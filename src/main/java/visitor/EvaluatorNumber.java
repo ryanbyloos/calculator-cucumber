@@ -35,7 +35,7 @@ public class EvaluatorNumber extends Evaluator{
         ArrayList<MyNumber> evaluatedArgs = new ArrayList<>();
         try {
             //first loop to recursively evaluate each subexpression
-            for (Expression a : o.args) {
+            for (Expression a : o.getArgs()) {
                 a.accept(this);
                 evaluatedArgs.add(getResult());
             }
@@ -58,8 +58,9 @@ public class EvaluatorNumber extends Evaluator{
         }
     }
 
+    @Override
     public void visit(BigFunction bf){
-        bf.args.get(0).accept(this);
+        bf.getArgs().get(0).accept(this);
         BigDecimal d;
         try{
             d = ((RealNumber)this.getResult()).getValue();

@@ -152,6 +152,6 @@ public class CalculatorController implements Initializable {
     }
 
     public void defFun(ActionEvent actionEvent) {
-        calculatorScreen.setText("name -> (x+2)");
+        calculatorScreen.setText("name -> x+2");
     }
 }

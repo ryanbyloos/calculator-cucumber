@@ -28,7 +28,7 @@ final public class Divides extends Operation {
                     throw new DivisionByZeroError();
                 }
             }catch (VariableUnassignedError ignored) { } //because variable can be initialise later
-            args = new ArrayList<>(elist);
+//            args = new ArrayList<>(elist);
         }
         symbol = "/";
         neutral = 1;

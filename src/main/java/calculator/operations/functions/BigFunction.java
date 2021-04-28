@@ -13,7 +13,7 @@ import java.util.List;
 
 public abstract class BigFunction implements Expression {
 
-    public List<Expression> args;
+    private List<Expression> args;
 
     public MathContext mc = MathContext.DECIMAL128;
     public final BigDecimal PI = BigDecimalMath.pi(mc);
@@ -21,28 +21,36 @@ public abstract class BigFunction implements Expression {
 
     @Override
     public void accept(Visitor v) {
-        if (v instanceof EvaluatorNumber) {
-            ((EvaluatorNumber) v).visit(this);
-        }else {
-            for (Expression e : args) {
-                e.accept(v);
-            }
+        // ask each of the argument expressions of the current operation to accept the visitor
+        for (Expression a : args) {
+            a.accept(v);
         }
+        // and then visit the current operation itself
+        v.visit(this);
     }
 
-    @Override
-    public Integer countDepth() {
-        return null;
+    final public Integer countDepth() {
+        // use of Java 8 functional programming capabilities
+        return 1 + args.stream()
+                .mapToInt(Expression::countDepth)
+                .max()
+                .getAsInt();
     }
 
-    @Override
-    public Integer countOps() {
-        return null;
+    final public Integer countOps() {
+        // use of Java 8 functional programming capabilities
+        return 1 + args.stream()
+                .mapToInt(Expression::countOps)
+                .reduce(Integer::sum)
+                .getAsInt();
     }
 
-    @Override
-    public Integer countNbs() {
-        return null;
+    final public Integer countNbs() {
+        // use of Java 8 functional programming capabilities
+        return args.stream()
+                .mapToInt(Expression::countNbs)
+                .reduce(Integer::sum)
+                .getAsInt();
     }
 
     public /*constructor*/ BigFunction(List<Expression> elist)
@@ -55,4 +63,11 @@ public abstract class BigFunction implements Expression {
     }
 
     abstract public BigDecimal op(BigDecimal x);
+
+    public List<Expression> getArgs() {
+        return args;
+    }
+    public void setArgs(int i,Expression e){
+        args.set(i,e);
+    }
 }

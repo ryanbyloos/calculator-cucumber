@@ -148,6 +148,16 @@ public interface ExpressionListener extends ParseTreeListener {
 	 */
 	void exitFunf(ExpressionParser.FunfContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ExpressionParser#parenthf}.
+	 * @param ctx the parse tree
+	 */
+	void enterParenthf(ExpressionParser.ParenthfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExpressionParser#parenthf}.
+	 * @param ctx the parse tree
+	 */
+	void exitParenthf(ExpressionParser.ParenthfContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ExpressionParser#var}.
 	 * @param ctx the parse tree
 	 */

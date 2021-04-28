@@ -256,7 +256,7 @@ public class CreateTreeVisitor implements ExpressionVisitor{
     @Override
     public Object visitDeffun(ExpressionParser.DeffunContext ctx) {
         String funName = ctx.getChild(0).getText();
-        result = (Expression) ctx.getChild(3).accept(this);
+        result = (Expression) ctx.getChild(2).accept(this);
         calculator.addFunction(funName,new Function(result));
         return null;
     }
@@ -285,6 +285,12 @@ public class CreateTreeVisitor implements ExpressionVisitor{
     @Override
     public Object visitFunf(ExpressionParser.FunfContext ctx) {
         return fun(ctx);
+    }
+
+    @Override
+    public Object visitParenthf(ExpressionParser.ParenthfContext ctx) {
+        result = (Expression) this.visitPlusMinusf((ExpressionParser.PlusMinusfContext) ctx.getChild(1));
+        return result;
     }
 
     @Override

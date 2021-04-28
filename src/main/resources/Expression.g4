@@ -34,7 +34,7 @@ fun : NAME'('plusMinus')';
 
 nb : INT | DECIMAL;
 
-deffun : NAME '->' '('plusMinusf')';
+deffun : NAME '->' plusMinusf;
 
 plusMinusf : plusMinusf PLUS multDivf
            | plusMinusf MINUS multDivf
@@ -49,10 +49,12 @@ powf : powf POW valuef
 
 valuef : nb
         | funf
-        | parenth
+        | parenthf
         | var;
 
 funf : NAME'('plusMinusf')';
+
+parenthf : '('plusMinusf')';
 
 var : 'x';
 

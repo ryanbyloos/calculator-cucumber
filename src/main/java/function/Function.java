@@ -3,6 +3,7 @@ package function;
 import calculator.*;
 import calculator.exceptions.BadAssignment;
 import calculator.operations.Operation;
+import calculator.operations.functions.BigFunction;
 import visitor.Visitor;
 
 /**
@@ -27,6 +28,7 @@ public class Function implements Expression{
 
         @Override
         public void visit(Variable v) {
+            System.out.println("VAR");
             // If first variable encountered
             if (var == null)
                 var = v;
@@ -34,13 +36,39 @@ public class Function implements Expression{
 
         @Override
         public void visit(Operation o) {
-            for(int i = 1 ; i < o.getArgs().size() ; i++) {
+            for(int i = 0 ; i < o.getArgs().size() ; i++) {
                 Expression e = o.getArgs().get(i);
+
+                System.out.println("CLASS OF CHILD "+e.getClass());
+                e.accept(this);
+
+                System.out.println("Var   : "+System.identityHashCode(var));
+                System.out.println("Start : "+System.identityHashCode(o.getArgs().get(i)));
                 // replace erroneous variable
                 if ( var!=null && e instanceof Variable ){
+//                    o.setArgs(i,var);
                     o.getArgs().set(i,var);
                 }
+                System.out.println("End : "+System.identityHashCode(o.getArgs().get(i)));
+            }
+        }
+
+        @Override
+        public void visit(BigFunction bf) {
+            for(int i = 0 ; i < bf.getArgs().size() ; i++) {
+                Expression e = bf.getArgs().get(i);
+
+                System.out.println("CLASS OF CHILD "+e.getClass());
                 e.accept(this);
+
+                System.out.println("Var   : "+System.identityHashCode(var));
+                System.out.println("Start : "+System.identityHashCode(bf.getArgs().get(i)));
+                // replace erroneous variable
+                if ( var!=null && e instanceof Variable ){
+//                    o.setArgs(i,var);
+                    bf.getArgs().set(i,var);
+                }
+                System.out.println("End : "+System.identityHashCode(bf.getArgs().get(i)));
             }
         }
 
@@ -59,7 +87,9 @@ public class Function implements Expression{
         this.e = e;
         // check if there are only the same var in e
         FunctionValidator v = new FunctionValidator();
+        System.out.println("Start VERIFY");
         v.verify(this);
+        System.out.println("END VERIFY");
         this.var = v.getVar();
     }
 
