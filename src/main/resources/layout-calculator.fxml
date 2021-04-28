@@ -10,8 +10,9 @@
             <MenuItem onAction="#exitApplication" text="Exit" />
         </Menu>
         <Menu text="Mode">
-            <CheckMenuItem fx:id="calculatorMenuItem" selected="true" text="Calculator" />
-            <CheckMenuItem fx:id="converterMenuItem" onAction="#openConverterScene" text="Converter" />
+            <CheckMenuItem selected="true" text="Calculator" />
+            <CheckMenuItem onAction="#openConverterScene" text="Converter" />
+            <CheckMenuItem onAction="#openDateScene" text="Date" />
         </Menu>
         <Menu text="Help">
             <MenuItem text="About calculator" />

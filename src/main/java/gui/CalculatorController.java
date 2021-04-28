@@ -21,67 +21,48 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CalculatorController implements Initializable {
+public class CalculatorController extends MainController implements Initializable {
 
-    private Scene converterScene;
 
     public Calculator calculator;
-
     private Stage funStage;
 
     @FXML
     public VBox calculatorVBox;
-    public Label answerScreen;
-    public CheckMenuItem calculatorMenuItem;
-    public CheckMenuItem converterMenuItem;
-    public TextField calculatorScreen;
     public ComboBox<Calculator.Mode> modeComboBox;
     public Button integerTrigger;
 
-    @FXML
-    public void exitApplication(Event e) {
-        Platform.exit();
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.mainVBox = calculatorVBox;
         calculator = new Calculator(Calculator.Mode.REAL);
         modeComboBox.getItems().addAll(Calculator.Mode.values());
     }
 
     @FXML
-    public void changeMode(Event e){
+    public void changeMode(Event e) {
         calculator = new Calculator((Calculator.Mode) ((ComboBox) e.getSource()).getValue());
         integerTrigger.setDisable(!integerTrigger.isDisable());
     }
 
-    @FXML
-    public void defaultButtonClicked(Event e){
-        String buttonValue = ((Button) e.getSource()).getText();
-        calculatorScreen.setText(calculatorScreen.getText()+buttonValue);
-    }
 
     @FXML
-    public void functionButtonClicked(Event e){
-        String function = ((Button) e.getSource()).getText()+"(";
+    public void functionButtonClicked(Event e) {
+        String function = ((Button) e.getSource()).getText() + "(";
         String screenValue = calculatorScreen.getText();
-        if(function.equals("√(")){
+        if (function.equals("√(")) {
             function = "sqrt(";
         }
-        String res = (screenValue.equals("") || screenValue.endsWith("(")) ? screenValue+function : screenValue+"*"+function;
+        String res = (screenValue.equals("") || screenValue.endsWith("(")) ? screenValue + function : screenValue + "*" + function;
         calculatorScreen.setText(res);
     }
 
     @FXML
-    public void inverseFunctionButtonClicked(Event e){
+    public void inverseFunctionButtonClicked(Event e) {
         String screenValue = calculatorScreen.getText();
-        String res = "1/("+screenValue;
+        String res = "1/(" + screenValue;
         calculatorScreen.setText(res);
-    }
-
-    @FXML
-    public void removeCharacter(Event e){
-        //TODO Remove a character or a function when pressing delete
     }
 
     @FXML
@@ -91,7 +72,7 @@ public class CalculatorController implements Initializable {
         int leftP = (int) screenValue.chars().filter(c -> c == '(').count();
         int rightP = (int) screenValue.chars().filter(c -> c == ')').count();
         parenthesisToAdd.append(")".repeat(Math.max(0, leftP - rightP)));
-        String res = screenValue+parenthesisToAdd;
+        String res = screenValue + parenthesisToAdd;
         calculatorScreen.setText(res);
 
         Parser parser = new Parser(res);
@@ -100,26 +81,9 @@ public class CalculatorController implements Initializable {
             answerScreen.setText(calculator.eval(expression));
     }
 
-    @FXML
-    public void getAnswerValue(){
-        calculatorScreen.setText(answerScreen.getText());
-    }
 
     @FXML
-    public void clearScreen(Event e){
-        calculatorScreen.setText("");
-        answerScreen.setText("");
-    }
-
-    @FXML
-    public void openConverterScene(Event e){
-        ((CheckMenuItem) e.getSource()).setSelected(false);
-        Stage stage = (Stage) calculatorVBox.getScene().getWindow();
-        stage.setScene(converterScene);
-    }
-
-    @FXML
-    public void showFunction(Event e){
+    public void showFunction(Event e) {
         if (funStage != null) funStage.close();
 
 
@@ -134,7 +98,7 @@ public class CalculatorController implements Initializable {
 
         funStage.show();
 
-        try{
+        try {
             FXMLLoader functionShow = new FXMLLoader(getClass().getResource("/layout-functionShow.fxml"));
             Parent calculatorParent = functionShow.load();
             Scene calculatorScene = new Scene(calculatorParent, 640, 400);
@@ -142,13 +106,9 @@ public class CalculatorController implements Initializable {
 
             FunctionController functionController = functionShow.getController();
             functionController.setCalculator(calculator);
-        }catch (IOException ignored){
+        } catch (IOException ignored) {
 
         }
-    }
-
-    public void setConverterScene(Scene scene){
-        converterScene = scene;
     }
 
     public void defFun(ActionEvent actionEvent) {
