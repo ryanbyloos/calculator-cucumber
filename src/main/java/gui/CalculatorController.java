@@ -46,7 +46,6 @@ public class CalculatorController extends MainController implements Initializabl
         integerTrigger.setDisable(!integerTrigger.isDisable());
     }
 
-
     @FXML
     public void functionButtonClicked(Event e) {
         String function = ((Button) e.getSource()).getText() + "(";

@@ -4,8 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="dateVBox" prefHeight="360.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DateController">
-    <MenuBar id="menuScreen" prefHeight="25.0" prefWidth="627.0">
+<VBox fx:id="dateVBox" prefHeight="200.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DateController">
+    <MenuBar prefHeight="25.0" prefWidth="627.0">
         <Menu text="File">
             <MenuItem onAction="#exitApplication" text="Exit" />
         </Menu>
@@ -18,8 +18,8 @@
             <MenuItem text="About calculator" />
         </Menu>
     </MenuBar>
-   <TextField id="calculatorScreen" layoutX="10.0" layoutY="35.0" prefHeight="40" prefWidth="420.0" />
-    <TextField id="calculatorScreen" fx:id="calculatorScreen" prefHeight="40" prefWidth="420.0" />
+    <TextField id="calculatorScreen" fx:id="firstScreen" prefHeight="40" prefWidth="420.0" />
+    <TextField id="calculatorScreen" fx:id="secondScreen" prefHeight="40" prefWidth="420.0" />
     <Label id="answerScreen" fx:id="answerScreen" prefHeight="40" prefWidth="420.0" />
     <GridPane id="buttonGrid" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="ALWAYS">
         <columnConstraints>
@@ -29,27 +29,11 @@
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints />
         </rowConstraints>
-        <Button onAction="#clearScreen" text="C" GridPane.halignment="CENTER" />
-        <Button onAction="#defaultButtonClicked" text="6" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-        <Button onAction="#removeCharacter" text="DEL" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-        <Button onAction="#getResult" text="=" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-        <Button onAction="#defaultButtonClicked" text="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-        <Button onAction="#defaultButtonClicked" text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-        <Button onAction="#defaultButtonClicked" text="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-        <Button onAction="#defaultButtonClicked" text="5" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-        <Button onAction="#defaultButtonClicked" text="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-        <Button onAction="#defaultButtonClicked" text="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-        <Button onAction="#defaultButtonClicked" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-        <Button onAction="#defaultButtonClicked" text="9" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-        <Button onAction="#defaultButtonClicked" text="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-        <Button onAction="#defaultButtonClicked" text="." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-      <ComboBox prefWidth="150.0" GridPane.columnIndex="2" />
+        <Button onAction="#clearScreen" text="C" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+        <Button onAction="#getResult" text="=" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+      <ComboBox fx:id="dateComboBox" prefWidth="150.0" promptText="ADDITION" />
     </GridPane>
     <stylesheets>
         <URL value="@style.css" />

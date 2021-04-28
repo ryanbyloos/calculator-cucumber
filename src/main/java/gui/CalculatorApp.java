@@ -22,7 +22,7 @@ public class CalculatorApp extends Application {
 
         FXMLLoader dateLoader = new FXMLLoader(getClass().getResource("/layout-date.fxml"));
         Parent dateParent = dateLoader.load();
-        Scene dateScene = new Scene(dateParent, 330, 360);
+        Scene dateScene = new Scene(dateParent, 340, 200);
 
         CalculatorController calculatorController = calculatorLoader.getController();
         calculatorController.setConverterScene(converterScene);

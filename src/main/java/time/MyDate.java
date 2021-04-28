@@ -36,8 +36,12 @@ public class MyDate extends MyNumber {
     }
     public MyDate(String string)
     {
+        //day-month-year
         String [] tab = string.split("-");
-        this.lDate = null;
+        int day = Integer.parseInt(tab[0]);
+        int month = Integer.parseInt(tab[1]);
+        int years = Integer.parseInt(tab[2]);
+        this.lDate = LocalDate.of(day,month,years);
         this.year   = 0;
         this.months = 0;
         this.days   = 0;
@@ -62,6 +66,18 @@ public class MyDate extends MyNumber {
         {
             throw new TemporalException();
         }
+    }
+    public MyDate plus(String s) throws TemporalException {
+        String [] tab = s.split("-");
+        long years = Long.parseLong(tab[0]);
+        long month = Long.parseLong(tab[1]);
+        long day = Long.parseLong(tab[2]);
+        MyDate n2 = new MyDate(years,month,day);
+        LocalDate tmp = this.lDate;
+        tmp = tmp.plusYears(n2.year);
+        tmp = tmp.plusMonths(n2.months);
+        tmp = tmp.plusDays(n2.days);
+        return new MyDate( tmp);
     }
 
     public MyDate minus(MyDate n2){
