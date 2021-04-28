@@ -10,8 +10,9 @@
             <MenuItem onAction="#exitApplication" text="Exit" />
         </Menu>
         <Menu text="Mode">
-            <CheckMenuItem fx:id="calculatorMenuItem" selected="true" text="Calculator" />
-            <CheckMenuItem fx:id="converterMenuItem" onAction="#openConverterScene" text="Converter" />
+            <CheckMenuItem selected="true" text="Calculator" />
+            <CheckMenuItem onAction="#openConverterScene" text="Converter" />
+            <CheckMenuItem onAction="#openDateScene" text="Date" />
         </Menu>
         <Menu text="Help">
             <MenuItem text="About calculator" />
@@ -39,26 +40,25 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
-        <Button onAction="#functionButtonClicked" text="sin" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" disable="${integerTrigger.disable}"/>
-        <Button onAction="#functionButtonClicked" text="cos" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" disable="${integerTrigger.disable}"/>
-        <Button onAction="#functionButtonClicked" text="tan" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" disable="${integerTrigger.disable}"/>
-        <Button onAction="#functionButtonClicked" text="asin" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" disable="${integerTrigger.disable}"/>
-        <Button onAction="#functionButtonClicked" text="acos" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" disable="${integerTrigger.disable}"/>
-        <Button onAction="#functionButtonClicked" text="atan" GridPane.columnIndex="5" GridPane.halignment="CENTER" disable="${integerTrigger.disable}"/>
-        <Button onAction="#functionButtonClicked" text="sinh" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" disable="${integerTrigger.disable}"/>
-        <Button onAction="#functionButtonClicked" text="cosh" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" disable="${integerTrigger.disable}"/>
-        <Button onAction="#functionButtonClicked" text="tanh" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" disable="${integerTrigger.disable}"/>
-        <Button onAction="#functionButtonClicked" text="asinh" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" disable="${integerTrigger.disable}"/>
-        <Button onAction="#functionButtonClicked" text="acosh" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" disable="${integerTrigger.disable}"/>
-        <Button onAction="#functionButtonClicked" text="atanh" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" disable="${integerTrigger.disable}"/>
-        <Button onAction="#functionButtonClicked" text="√" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" disable="${integerTrigger.disable}"/>
-        <Button onAction="#functionButtonClicked" text="exp" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" disable="${integerTrigger.disable}"/>
-        <Button onAction="#functionButtonClicked" text="log" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" disable="${integerTrigger.disable}"/>
-        <Button onAction="#inverseFunctionButtonClicked" text="1/x" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" disable="${integerTrigger.disable}"/>
-        <Button text="PI" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" disable="${integerTrigger.disable}"/>
-        <Button onAction="#getAnswerValue" text="ANS" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-        <Button onAction="#clearScreen" text="C" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-        <Button onAction="#removeCharacter" text="DEL" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="sin" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="cos" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="tan" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="asin" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="acos" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="atan" GridPane.columnIndex="5" GridPane.halignment="CENTER" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="sinh" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="cosh" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="tanh" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="asinh" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="acosh" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="atanh" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="√" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="exp" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+        <Button disable="${integerTrigger.disable}" onAction="#functionButtonClicked" text="log" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+        <Button disable="${integerTrigger.disable}" onAction="#inverseFunctionButtonClicked" text="1/x" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+        <Button disable="${integerTrigger.disable}" text="PI" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Button onAction="#clearScreen" text="C" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Button onAction="#removeCharacter" text="DEL" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
         <Button onAction="#defaultButtonClicked" text="/" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
         <Button onAction="#defaultButtonClicked" text="(" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
         <Button onAction="#defaultButtonClicked" text=")" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
@@ -73,15 +73,16 @@
         <Button onAction="#defaultButtonClicked" text="7" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
         <Button onAction="#defaultButtonClicked" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
         <Button onAction="#defaultButtonClicked" text="9" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-        <Button onAction="#defaultButtonClicked" text="^" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+        <Button onAction="#defaultButtonClicked" text="^" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
         <Button onAction="#defaultButtonClicked" text="+" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
         <Button onAction="#defaultButtonClicked" text="0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
         <Button onAction="#defaultButtonClicked" text="." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-        <Button onAction="#showFunction" text="Function" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-        <Button onAction="#defFun" text="DefFun" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+        <Button disable="${integerTrigger.disable}" onAction="#showFunction" text="Function" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+        <Button disable="${integerTrigger.disable}" onAction="#defFun" text="DefFun" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
         <Button onAction="#getResult" text="=" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-        <Button visible="false" fx:id="integerTrigger"/>
-      <ComboBox fx:id="modeComboBox" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="5" promptText="REAL" onAction="#changeMode" />
+        <Button fx:id="integerTrigger" visible="false" />
+      <ComboBox fx:id="modeComboBox" onAction="#changeMode" prefWidth="150.0" promptText="REAL" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+      <Label id="modeLabel" text="Mode : " GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
     </GridPane>
     <stylesheets>
         <URL value="@style.css" />

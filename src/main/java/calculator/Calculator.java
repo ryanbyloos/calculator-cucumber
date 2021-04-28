@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 
 public class Calculator {
-    public enum Mode {INTEGER,REAL,CONVERSION}
+    public enum Mode {INTEGER,REAL}
 
     private final HashMap<String,Function> storedFun;
 
