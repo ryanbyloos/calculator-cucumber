@@ -5,10 +5,10 @@
 <?import javafx.scene.layout.*?>
 
 <VBox fx:id="calculatorVBox" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FunctionController">
-   <Pane fx:id="pane" prefHeight="452.0" prefWidth="640.0" />
-   <HBox prefHeight="100.0" prefWidth="200.0">
+   <Pane id="paneScreen" fx:id="pane" prefHeight="452.0" prefWidth="640.0" />
+   <HBox id="boxScreen" prefHeight="100.0" prefWidth="200.0">
       <children>
-         <TextField fx:id="input" prefHeight="30.0" prefWidth="327.0" />
+         <TextField id="calculatorScreen" fx:id="input" prefHeight="30.0" prefWidth="327.0" />
          <Button mnemonicParsing="false" onAction="#ok" text="ok" />
          <Button mnemonicParsing="false" onAction="#moveLeft" text="&lt;" />
          <Button mnemonicParsing="false" onAction="#moveUp" text="/\" />

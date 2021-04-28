@@ -4,8 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="calculatorVBox" prefHeight="380.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CalculatorController">
-    <MenuBar prefWidth="640">
+<VBox id="boxScreen" fx:id="calculatorVBox" prefHeight="380.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CalculatorController">
+    <MenuBar id="menuScreen" prefWidth="640">
         <Menu text="File">
             <MenuItem onAction="#exitApplication" text="Exit" />
         </Menu>

@@ -39,7 +39,7 @@ public class FunctionController implements Initializable {
 
     private void drawCanvas() {
         Path path = new Path();
-        path.setStroke(Color.DARKBLUE);
+        path.setStroke(Color.LIGHTGREEN);
         path.setStrokeWidth(2);
 
         path.setClip(

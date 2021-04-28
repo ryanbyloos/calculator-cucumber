@@ -4,8 +4,11 @@
     -fx-pref-height: 35;
     -fx-pref-width: 100;
 }
-.menu {
-    -fx-font-color: #ffffff;
+.menu,.label, .menu-item, .context-menu {
+    -fx-text-fill: grey;
+    -fx-dark-text-color: grey;
+    -fx-focus-color: grey;
+    -fx-background-color: #212121;
 }
 
 #modeLabel {
@@ -22,4 +25,16 @@
 #calculatorScreen {
     -fx-background-color: #404040;
     -fx-text-fill: #f8f8f8;
+}
+
+#paneScreen{
+    -fx-background-color: #404040;
+}
+
+#boxScreen{
+    -fx-background-color: #212121;
+}
+
+#menuScreen{
+    -fx-background-color: #212121;
 }
