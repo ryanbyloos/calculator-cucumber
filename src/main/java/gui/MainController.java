@@ -19,9 +19,6 @@ public abstract class MainController {
     private Scene dateScene;
 
     @FXML
-
-
-
     public VBox mainVBox;
     public TextField calculatorScreen;
     public Label answerScreen;
@@ -56,6 +53,7 @@ public abstract class MainController {
         ((CheckMenuItem) e.getSource()).setSelected(false);
         Stage stage = (Stage) mainVBox.getScene().getWindow();
         stage.setScene(converterScene);
+        stage.setTitle("Converter");
     }
 
     public void setConverterScene(Scene scene) {
@@ -67,6 +65,7 @@ public abstract class MainController {
         ((CheckMenuItem) e.getSource()).setSelected(false);
         Stage stage = (Stage) mainVBox.getScene().getWindow();
         stage.setScene(calculatorScene);
+        stage.setTitle("Calculator");
     }
 
     public void setCalculatorScene(Scene scene) {
@@ -78,6 +77,7 @@ public abstract class MainController {
         ((CheckMenuItem) e.getSource()).setSelected(false);
         Stage stage = (Stage) mainVBox.getScene().getWindow();
         stage.setScene(dateScene);
+        stage.setTitle("Date calculator");
     }
 
     public void setDateScene(Scene scene) {

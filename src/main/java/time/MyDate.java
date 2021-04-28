@@ -36,8 +36,12 @@ public class MyDate extends MyNumber {
     }
     public MyDate(String string)
     {
+        //day-month-year
         String [] tab = string.split("-");
-        this.lDate = null;
+        int day = Integer.parseInt(tab[0]);
+        int month = Integer.parseInt(tab[1]);
+        int years = Integer.parseInt(tab[2]);
+        this.lDate = LocalDate.of(day,month,years);
         this.year   = 0;
         this.months = 0;
         this.days   = 0;
