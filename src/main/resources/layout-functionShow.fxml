@@ -9,8 +9,9 @@
    <HBox prefHeight="100.0" prefWidth="200.0">
       <children>
          <TextField fx:id="input" prefHeight="30.0" prefWidth="327.0" />
-         <Button mnemonicParsing="false" onAction="#moveLeft" prefHeight="65.0" prefWidth="64.0" text="&lt;" />
-         <Button mnemonicParsing="false" onAction="#moveUp" prefHeight="41.0" prefWidth="85.0" text="/\" />
+         <Button mnemonicParsing="false" onAction="#ok" text="ok" />
+         <Button mnemonicParsing="false" onAction="#moveLeft" text="&lt;" />
+         <Button mnemonicParsing="false" onAction="#moveUp" text="/\" />
          <Button mnemonicParsing="false" onAction="#moveDown" text="\\/" />
          <Button mnemonicParsing="false" onAction="#moveRight" text="&gt;" />
          <Button mnemonicParsing="false" onAction="#zoomIn" text="+" />

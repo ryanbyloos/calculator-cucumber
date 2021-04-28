@@ -1,16 +1,13 @@
 package junit5tests;
 
-import calculator.Expression;
-import calculator.IntegerNumber;
-import calculator.MyNumber;
-import calculator.RealNumber;
+import calculator.*;
 import calculator.exceptions.IllegalConstruction;
 import calculator.exceptions.NotARealNumber;
 import calculator.operations.Times;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import visitor.Evaluator;
-import visitor.EvaluatorReal;
+import visitor.EvaluatorNumber;
 
 import java.util.ArrayList;
 
@@ -155,7 +152,7 @@ public class TestRealNumber {
             el.add(n1);
             el.add(n2);
             Times t = new Times(el);
-            Evaluator v = new EvaluatorReal();
+            Evaluator v = new EvaluatorNumber(Calculator.Mode.REAL);
             t.accept(v);
             assertEquals("6.022E23", v.getResult().toString());
         }catch (IllegalConstruction e){

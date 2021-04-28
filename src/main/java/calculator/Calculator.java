@@ -6,8 +6,7 @@ import Converter.Temperature;
 import function.Function;
 import time.MyDate;
 import visitor.EvaluatorDate;
-import visitor.EvaluatorInteger;
-import visitor.EvaluatorReal;
+import visitor.EvaluatorNumber;
 import Converter.Unit;
 
 import java.math.BigDecimal;
@@ -94,7 +93,7 @@ public class Calculator {
      */
     public IntegerNumber evalInteger(Expression e) throws ComputeError{
         // create a new visitor to evaluate expressions
-        EvaluatorInteger v = new EvaluatorInteger();
+        EvaluatorNumber v = new EvaluatorNumber(Mode.INTEGER);
         // and ask the expression to accept this visitor to start the evaluation process
         e.accept(v);
         // and return the result of the evaluation at the end of the process
@@ -109,7 +108,7 @@ public class Calculator {
      */
     public RealNumber evalReal(Expression e)  throws ComputeError {
         // create a new visitor to evaluate expressions
-        EvaluatorReal v = new EvaluatorReal();
+        EvaluatorNumber v = new EvaluatorNumber(Mode.REAL);
         // and ask the expression to accept this visitor to start the evaluation process
         e.accept(v);
         // and return the result of the evaluation at the end of the process

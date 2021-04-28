@@ -3,7 +3,7 @@ package calculator.operations.functions;
 import calculator.Expression;
 import calculator.exceptions.IllegalConstruction;
 import ch.obermuhlner.math.big.BigDecimalMath;
-import visitor.EvaluatorReal;
+import visitor.EvaluatorNumber;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
@@ -21,8 +21,8 @@ public abstract class BigFunction implements Expression {
 
     @Override
     public void accept(Visitor v) {
-        if (v instanceof EvaluatorReal) {
-            ((EvaluatorReal) v).visit(this);
+        if (v instanceof EvaluatorNumber) {
+            ((EvaluatorNumber) v).visit(this);
         }else {
             for (Expression e : args) {
                 e.accept(v);

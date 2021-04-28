@@ -126,8 +126,8 @@ public class RealNumber extends MyNumber{
     }
 
     @Override
-    public MyNumber convertTo(Type t) throws ComputeError {
-        switch (t){
+    public MyNumber convertTo(Calculator.Mode m) throws ComputeError {
+        switch (m){
             case REAL:
                 return this;
             case INTEGER:

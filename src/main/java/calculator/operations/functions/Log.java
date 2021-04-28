@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class Log extends BigFunction{
-
     public Log(List<Expression> elist) throws IllegalConstruction {
         super(elist);
     }

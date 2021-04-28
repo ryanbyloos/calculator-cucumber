@@ -92,8 +92,8 @@ public class IntegerNumber extends MyNumber{
     }
 
     @Override
-    public MyNumber convertTo(Type t) {
-        switch (t){
+    public MyNumber convertTo(Calculator.Mode m) {
+        switch (m){
             case REAL:
                 return toRealNumber();
             case INTEGER:

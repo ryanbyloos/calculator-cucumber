@@ -1,11 +1,8 @@
 package calculator.operations;
 
-import calculator.Expression;
-import calculator.IntegerNumber;
-import calculator.Notation;
-import calculator.RealNumber;
+import calculator.*;
 import calculator.exceptions.*;
-import visitor.EvaluatorReal;
+import visitor.EvaluatorNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +20,7 @@ final public class Divides extends Operation {
     }
 
     public void setUp(List<Expression> elist) throws  IllegalConstruction{
-        EvaluatorReal evaluator = new EvaluatorReal();
+        EvaluatorNumber evaluator = new EvaluatorNumber(Calculator.Mode.REAL);
         for (int i = 1; i < elist.size(); i++) {
             elist.get(i).accept(evaluator);
             try{

@@ -1,4 +1,5 @@
 package time;
+import calculator.Calculator;
 import calculator.MyNumber;
 import calculator.exceptions.ComputeError;
 import calculator.exceptions.TemporalException;
@@ -133,7 +134,7 @@ public class MyDate extends MyNumber {
     }
 
     @Override
-    public MyNumber convertTo(Type t) throws ComputeError {
+    public MyNumber convertTo(Calculator.Mode m) throws ComputeError {
         throw new ComputeError("Cannot convert Date");
     }
 }

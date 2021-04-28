@@ -11,7 +11,7 @@ import calculator.operations.Times;
 import function.Function;
 import function.Variable;
 import org.junit.jupiter.api.*;
-import visitor.EvaluatorInteger;
+import visitor.EvaluatorNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -79,7 +79,7 @@ public class TestFunction {
             f.setValue(new RealNumber("1.5"));
 
             // test bad assignment to string
-            EvaluatorInteger ev = new EvaluatorInteger();
+            EvaluatorNumber ev = new EvaluatorNumber(Calculator.Mode.INTEGER);
             f.getExpression().accept(ev);
             assertThrows(NotAnIntegerNumber.class,() -> ev.getResult());
         }catch (BadAssignment | NotARealNumber e){
@@ -110,7 +110,7 @@ public class TestFunction {
             f.setValue(new RealNumber("1.5"));
 
             // test bad assignment to string
-            EvaluatorInteger ev = new EvaluatorInteger();
+            EvaluatorNumber ev = new EvaluatorNumber(Calculator.Mode.INTEGER);
             f.getExpression().accept(ev);
             assertThrows(NotAnIntegerNumber.class,() -> ev.getResult());
         }catch (BadAssignment | NotARealNumber e){
@@ -132,11 +132,11 @@ public class TestFunction {
             // TEST variable as value
             MyNumber xValue = new IntegerNumber("12");
 
-            EvaluatorInteger v = new EvaluatorInteger();
+            EvaluatorNumber v = new EvaluatorNumber(Calculator.Mode.INTEGER);
 
             try {
                 f.setValue(xValue);
-                EvaluatorInteger ev = new EvaluatorInteger();
+                EvaluatorNumber ev = new EvaluatorNumber(Calculator.Mode.INTEGER);
                 f.getExpression().accept(ev);
                 assertEquals(new IntegerNumber("14"), ev.getResult());
             }catch(BadAssignment exception){

@@ -22,10 +22,7 @@ import java.util.ResourceBundle;
 
 public class FunctionController implements Initializable {
 
-    private final int canvas_size_x = 300;
-    private final int canvas_size_y = 300;
-
-    @FXML public final Pane pane = new Pane();
+    @FXML private Pane pane;
     public TextField input;
     private Calculator calculator;
 
@@ -51,15 +48,16 @@ public class FunctionController implements Initializable {
         path.setClip(
                 new Rectangle(
                         0, 0,
-                        pane.getWidth(),
-                        pane.getHeight()
+                        pane.getPrefWidth(),
+                        pane.getPrefHeight()
                 )
         );
         // Clear pane
         pane.getChildren().clear();
 
-        int center_pix_x = (int) (pane.getWidth()/2.0);
-        int center_pix_y = (int) (pane.getHeight()/2.0);
+        // get center of screen
+        int center_pix_x = (int) (pane.getPrefWidth()/2.0);
+        int center_pix_y = (int) (pane.getPrefHeight()/2.0);
 
         boolean first = true;
 
@@ -70,39 +68,40 @@ public class FunctionController implements Initializable {
         }
         Function f = calculator.getStoredFun().get(funName);
 
+
         double py = 0;
         for(int x = 0 ; x < (int) (pane.getWidth()) ; x++){
             double x_value = pixToValueX(x) - (center_pix_x*size_pix);
             try {
+                // compute function
                 f.setValue(new RealNumber(Double.toString(x_value)));
-
                 double y_value = Double.valueOf(calculator.evalReal(f).getValue().toPlainString());
                 f.clearValue();
+
                 int y = center_pix_y + valueToPixY(y_value + center_y);
 
                 if (first) {
                     path.getElements().add(new MoveTo(x,y));
                     first = false;
                 } else{
-
-                    if( (py > center_y+(size_pix*(double)center_pix_y)  &&  center_y-(size_pix*(double)center_pix_y) < y_value) ||
-                            (y_value > center_y+(size_pix*(double)center_pix_y)  && center_y-(size_pix*(double)center_pix_y) < py )){
-                        path.getElements().add(new MoveTo(x,y));
-                    }else{
-                        path.getElements().add(new LineTo(x,y));
-                    }
-
+//                    if( (py > center_y+(size_pix*(double)center_pix_y)  &&  center_y-(size_pix*(double)center_pix_y) < y_value) ||
+//                            (y_value > center_y+(size_pix*(double)center_pix_y)  && center_y-(size_pix*(double)center_pix_y) < py )){
+//                        path.getElements().add(new MoveTo(x,y));
+//                    }else{
+//                        path.getElements().add(new LineTo(x,y));
+//                    }
+                    path.getElements().add(new LineTo(x,y));
                 }
                 py = y_value;
 
-            }catch (NotARealNumber | BadAssignment e){
-
-            } catch (ComputeError computeError) {
-//                computeError.printStackTrace();
-            }
+            }catch (Exception ignored){}
         }
-
         pane.getChildren().add(path);
+    }
+
+    @FXML
+    private void ok(ActionEvent event){
+        drawCanvas();
     }
 
     @FXML
@@ -128,13 +127,13 @@ public class FunctionController implements Initializable {
 
     @FXML
     private void zoomIn(){
-        size_pix -= 0.01;
+        size_pix -= 0.005;
+        if(size_pix <= 0.01) size_pix = 0.01;
         drawCanvas();
     }
     @FXML
     private void zoomOut(){
         size_pix += 0.005;
-        if(size_pix <= 0.01) size_pix = 0.01;
         drawCanvas();
     }
 
