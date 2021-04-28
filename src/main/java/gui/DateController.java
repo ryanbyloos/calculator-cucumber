@@ -30,7 +30,10 @@ public class DateController extends MainController implements Initializable {
     public void getResult(Event e) throws IllegalConstruction {
         MyDate date1 = new MyDate(firstScreen.getText());
         MyDate date2 = new MyDate(secondScreen.getText());
-        String res = dateComboBox.getValue().equals("SUBTRACTION") ? date1.minus(date2).toString() : date1.plus(date2).toString();
+        if (dateComboBox.getValue()==null) {
+            dateComboBox.setValue("ADDITION");
+        }
+        String res = dateComboBox.getValue().equals("SUBTRACTION") ? date1.minus(date2).toString() : date1.plus(date2.toString()).toString();
         answerScreen.setText(res);
     }
 }
