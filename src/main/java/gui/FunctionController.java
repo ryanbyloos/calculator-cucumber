@@ -2,9 +2,6 @@ package gui;
 
 import calculator.Calculator;
 import calculator.RealNumber;
-import calculator.exceptions.BadAssignment;
-import calculator.exceptions.ComputeError;
-import calculator.exceptions.NotARealNumber;
 import function.Function;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

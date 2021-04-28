@@ -142,7 +142,7 @@ public class CalculatorController implements Initializable {
 
             FunctionController functionController = functionShow.getController();
             functionController.setCalculator(calculator);
-        }catch (IOException exception){
+        }catch (IOException ignored){
 
         }
     }

@@ -48,13 +48,20 @@ public class Variable implements Expression {
     }
 
     @Override
-    public Integer countDepth() { return 0; }
+    final public Integer countDepth() {
+        if(value == null) return 0;
+        return value.countDepth();
+    }
 
-    @Override
-    public Integer countOps() { return 0; }
+    final public Integer countOps() {
+        if(value == null) return 0;
+        return value.countOps();
+    }
 
-    @Override
-    public Integer countNbs() { return 1; }
+    final public Integer countNbs() {
+        if(value == null) return 0;
+        return value.countNbs();
+    }
 
     public Expression getValue() { return value; }
 }

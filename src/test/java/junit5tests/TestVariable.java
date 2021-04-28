@@ -1,14 +1,17 @@
 package junit5tests;
 
+import calculator.exceptions.IllegalConstruction;
 import calculator.exceptions.NotAnIntegerNumber;
 import calculator.operations.Divides;
 import calculator.Expression;
 import calculator.IntegerNumber;
+import calculator.operations.Plus;
 import function.Variable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,7 +40,7 @@ public class TestVariable {
     @Test
     public void testCountNbs() {
         //test whether a number contains 1 number
-        assertEquals(Integer.valueOf(1), var.countNbs());
+        assertEquals(Integer.valueOf(0), var.countNbs());
     }
 
     @Test
@@ -78,5 +81,22 @@ public class TestVariable {
         }catch (NotAnIntegerNumber e){
             fail();
         }
+    }
+
+    @Test
+    public void testVariable() throws IllegalConstruction {
+        List<Expression> elist = List.of(new IntegerNumber("2"),new IntegerNumber("3"));
+        Expression e = new Plus(elist);
+        Variable v = new Variable();
+
+        assertEquals(Integer.valueOf(0),v.countDepth());
+        assertEquals(Integer.valueOf(0),v.countOps());
+        assertEquals(Integer.valueOf(0),v.countNbs());
+
+        v.assignValue(e);
+
+        assertEquals(Integer.valueOf(1),v.countDepth());
+        assertEquals(Integer.valueOf(1),v.countOps());
+        assertEquals(Integer.valueOf(2),v.countNbs());
     }
 }

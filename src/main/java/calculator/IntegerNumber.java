@@ -1,6 +1,5 @@
 package calculator;
 
-import calculator.exceptions.ComputeError;
 import calculator.exceptions.DivisionByZeroError;
 import calculator.exceptions.NotAnIntegerNumber;
 import visitor.Visitor;
