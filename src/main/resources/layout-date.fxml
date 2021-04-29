@@ -14,9 +14,6 @@
             <CheckMenuItem onAction="#openConverterScene" text="Converter" />
             <CheckMenuItem selected="true" text="Date" />
         </Menu>
-        <Menu text="Help">
-            <MenuItem text="About calculator" />
-        </Menu>
     </MenuBar>
     <GridPane id="buttonGrid" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="ALWAYS">
         <columnConstraints>

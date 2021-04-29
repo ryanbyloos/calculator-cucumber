@@ -14,9 +14,6 @@
             <CheckMenuItem onAction="#openConverterScene" text="Converter" />
             <CheckMenuItem onAction="#openDateScene" text="Date" />
         </Menu>
-        <Menu text="Help">
-            <MenuItem text="About calculator" />
-        </Menu>
     </MenuBar>
     <HBox prefHeight="40" prefWidth="640">
         <TextField id="calculatorScreen" fx:id="calculatorScreen" prefHeight="40" prefWidth="320" />
