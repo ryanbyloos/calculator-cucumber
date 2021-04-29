@@ -57,13 +57,25 @@ public class ConverterController extends MainController implements Initializable
      */
     @Override
     public void getResult(Event e) throws IllegalConstruction {
-        String res;
-        String screenValue = calculatorScreen.getText();
-        if (unitComboBox.getValue().equals("Temperature"))
-            res = calculator.convert(new RealNumber(screenValue), Temperature.valueOf(fromComboBox.getValue()), Temperature.valueOf(toComboBox.getValue())).toString();
-        else
-            res = calculator.convert(new RealNumber(screenValue), Unit.valueOf(fromComboBox.getValue()), Unit.valueOf(toComboBox.getValue())).toString();
-        answerScreen.setText(res);
+        if (unitComboBox.getValue() == null || fromComboBox == null ||toComboBox == null )
+        {
+            showAlert("You need to select an unit type, a starting and end unit ");
+            return;
+        }
+        try
+        {
+            String res;
+            String screenValue = calculatorScreen.getText();
+            if (unitComboBox.getValue().equals("Temperature"))
+                res = calculator.convert(new RealNumber(screenValue), Temperature.valueOf(fromComboBox.getValue()), Temperature.valueOf(toComboBox.getValue())).toString();
+            else
+                res = calculator.convert(new RealNumber(screenValue), Unit.valueOf(fromComboBox.getValue()), Unit.valueOf(toComboBox.getValue())).toString();
+            answerScreen.setText(res);
+        } catch (Exception exception)
+        {
+            showAlert("Wrong Input");
+            return;
+        }
     }
 
     /**

@@ -40,7 +40,7 @@
         </rowConstraints>
     <DatePicker id="calculatorScreen" fx:id="firstDatePicker" prefHeight="40" prefWidth="420.0" GridPane.rowIndex="0"/>
     <DatePicker id="calculatorScreen" fx:id="secondDatePicker" prefHeight="40" prefWidth="420.0" GridPane.rowIndex="1"/>
-    <TextField id="calculatorScreen" fx:id="secondScreen" prefHeight="40" prefWidth="420.0" promptText="yyyy-mm-dd" GridPane.rowIndex="1"/>
+    <TextField id="calculatorScreen" fx:id="secondScreen" prefHeight="40" prefWidth="420.0" promptText="dd-mm-yyyy" GridPane.rowIndex="1"/>
     <Label id="answerScreen" fx:id="answerScreen" prefHeight="40" prefWidth="420.0" GridPane.rowIndex="2"/>
     </GridPane>
     <stylesheets>

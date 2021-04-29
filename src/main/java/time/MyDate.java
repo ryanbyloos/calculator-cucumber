@@ -10,7 +10,11 @@ import java.time.*;
 
 
 public class MyDate extends MyNumber {
-
+    /**
+     * Make from either
+     * a localDate
+     * or 3 long for years, months and day
+     */
     LocalDate lDate;
     long year;
     long months;
@@ -20,6 +24,9 @@ public class MyDate extends MyNumber {
         v.visit(this);
     }
 
+    /** Creates an MyDate Object with the specified LocalDate.
+     * @param ldate the LocalDate from which the MyDate is created.
+     */
     public MyDate(LocalDate ldate)
     {
         this.lDate =  ldate;
@@ -27,6 +34,11 @@ public class MyDate extends MyNumber {
         this.months = 0;
         this.days = 0;
     }
+    /** Creates an MyDate Object for addition or substraction .
+     * @param y the long value for the years.
+     * @param m the long value for the months.
+     * @param d the long value for the days.
+     */
     public MyDate(long y, long m , long d)
     {
         this.lDate = null;
@@ -34,17 +46,17 @@ public class MyDate extends MyNumber {
         this.months = m;
         this.days = d;
     }
+    /** Creates an MyDate Object for addition or substraction .
+     * @param string the String object used to generatate the MyDate object for the addition or substraction.
+     */
     public MyDate(String string)
     {
         //day-month-year
         String [] tab = string.split("-");
-        int day = Integer.parseInt(tab[0]);
-        int month = Integer.parseInt(tab[1]);
-        int years = Integer.parseInt(tab[2]);
-        this.lDate = LocalDate.of(day,month,years);
-        this.year   = 0;
-        this.months = 0;
-        this.days   = 0;
+        this.lDate = null;
+        this.year   = Long.parseLong(tab[2]);
+        this.months = Long.parseLong(tab[1]);
+        this.days   = Long.parseLong(tab[0]);
     }
 
     public LocalDate getlDate()
@@ -52,6 +64,10 @@ public class MyDate extends MyNumber {
         return this.lDate;
     }
 
+    /** Return an MyDate object resulting from an addition between 2 myDate object .
+     * @param n2 The myDate object used for the addition.
+     * @throws TemporalException if n2 localDate is not null, since adding 2 dates doesn't make sense compared to adding a certain number of days or months or years
+     */
     public MyDate plus(MyDate n2) throws TemporalException {
 
         if (n2.lDate == null)
@@ -67,19 +83,11 @@ public class MyDate extends MyNumber {
             throw new TemporalException();
         }
     }
-    public MyDate plus(String s) throws TemporalException {
-        String [] tab = s.split("-");
-        long years = Long.parseLong(tab[0]);
-        long month = Long.parseLong(tab[1]);
-        long day = Long.parseLong(tab[2]);
-        MyDate n2 = new MyDate(years,month,day);
-        LocalDate tmp = this.lDate;
-        tmp = tmp.plusYears(n2.year);
-        tmp = tmp.plusMonths(n2.months);
-        tmp = tmp.plusDays(n2.days);
-        return new MyDate( tmp);
-    }
 
+    /** Return an MyDate object resulting from an Substraction between 2 myDate object. It also does the time elapsed between 2 MyDate Objects
+     * @param n2 The myDate object used for the substraction.
+     *
+     */
     public MyDate minus(MyDate n2){
         if (n2.lDate == null)
         {
@@ -114,12 +122,12 @@ public class MyDate extends MyNumber {
             int y = this.lDate.getYear();
             int m = this.lDate.getMonthValue();
             int d = this.lDate.getDayOfMonth();
-            return( ""+y+"-"+m+"-"+d);
+            return( ""+d+"-"+m+"-"+y);
         }
         long y = this.year;
         long m = this.months;
         long d = this.days;
-        return( ""+y+"-"+m+"-"+d);
+        return( ""+d+"-"+m+"-"+y);
     }
     public MyDate times(MyDate n2) throws UselessComputation {
         throw new UselessComputation();
@@ -148,7 +156,6 @@ public class MyDate extends MyNumber {
         }
         return false;
     }
-
     @Override
     public MyNumber convertTo(Calculator.Mode m) throws ComputeError {
         throw new ComputeError("Cannot convert Date");

@@ -42,43 +42,43 @@ public enum Unit {
 
 
     /////////////////////////////Areas///////////////////////////////////////////////
-    SquareMeter ("Area", "Square Meter" , new BigDecimal("1")),
-    SquareKilometer ("Area","Square Kilometer",new BigDecimal("0.000001")),
-    SquareMiles ("Area","Square Mile",new BigDecimal("0.0000003861")),
-    SquareYard ("Area","Square Yard",new BigDecimal("1.19599")),
-    SquareFoot("Area","Square Foot",new BigDecimal("10.7639")),
-    SquareInch("Area","Square Inch", new BigDecimal("1550")),
+    SquareMeter ("Area", "SquareMeter" , new BigDecimal("1")),
+    SquareKilometer ("Area","SquareKilometer",new BigDecimal("0.000001")),
+    SquareMiles ("Area","SquareMiles",new BigDecimal("0.0000003861")),
+    SquareYard ("Area","SquareYard",new BigDecimal("1.19599")),
+    SquareFoot("Area","SquareFoot",new BigDecimal("10.7639")),
+    SquareInch("Area","SquareInch", new BigDecimal("1550")),
     Hectare("Area","Hectare",new BigDecimal("0.0001") ),
     Acre ("Area","Acre",new BigDecimal("0.000247105")),
 
     /////////////////////////////Speed///////////////////////////////////////////////
-    MeterSecond ("Speed", "Meter per Second" , new BigDecimal("1")),
-    KilometerHour ("Speed", "Kilometer per Hour" , new BigDecimal("3.6")),
-    MilesHour ("Speed","Milers per Hour",new BigDecimal("2.23694")),
+    MeterSecond ("Speed", "MeterSecond" , new BigDecimal("1")),
+    KilometerHour ("Speed", "KilometerHour" , new BigDecimal("3.6")),
+    MilesHour ("Speed","MilesHour",new BigDecimal("2.23694")),
     Knot ("Speed","Knot",new BigDecimal("1.94384")),
 
     /////////////////////////////Energy///////////////////////////////////////////////
     Joule ("Energy", "Joule" , new BigDecimal("1")),
     Kilocalorie ("Energy", "Kilocalorie" , new BigDecimal("0.000239006")),
-    Kilojoule ("Energy","Kilo joule",new BigDecimal("0.001")),
-    GramCalorie ("Energy","Gram Calorie",new BigDecimal("0.2369006")),
-    WattHour ("Energy","Watt Hour", new BigDecimal("0.000277778")),
-    KiloWattHour ("Energy","Kiliwatt Hour", new BigDecimal("0.000000277778")),
-    FootPound ("Energy","Foot-Pound", new BigDecimal("0.737562")),
+    Kilojoule ("Energy","Kilojoule",new BigDecimal("0.001")),
+    GramCalorie ("Energy","GramCalorie",new BigDecimal("0.2369006")),
+    WattHour ("Energy","WattHour", new BigDecimal("0.000277778")),
+    KiloWattHour ("Energy","KiloWattHour", new BigDecimal("0.000000277778")),
+    FootPound ("Energy","FootPound", new BigDecimal("0.737562")),
 
     /////////////////////////////Pressure///////////////////////////////////////////////
     Pascal ("Pressure", "Pascal", new BigDecimal("1")),
     Bar ("Pressure", "Bar", new BigDecimal("0.00001")),
-    Atmostphere ("Pressure", "Standard Atmostphere",new BigDecimal("0.0000098692")),
-    PoundPerSquareInch("Pressure", "Pound Per Square inch",new BigDecimal("0.0001485038")),
+    Atmostphere ("Pressure", "Atmostphere",new BigDecimal("0.0000098692")),
+    PoundPerSquareInch("Pressure", "PoundPerSquareInch",new BigDecimal("0.0001485038")),
 
     /////////////////////////////Power///////////////////////////////////////////////
     Watt("Power", "Watt", new BigDecimal("1")),
     Horsepower("Power", "Horsepower", new BigDecimal("0.001341022089595")),
     Kilowatt("Power", "Kilowatt", new BigDecimal("0.001")),
     Milliwatt("Power", "MilliWatt", new BigDecimal("1000")),
-    JouleSecond("Power","Joules Per Second", new BigDecimal("1")),
-    VoltAmpere ("Power", "Volt Amperes",new BigDecimal("1")),
+    JouleSecond("Power","JouleSecond", new BigDecimal("1")),
+    VoltAmpere ("Power", "VoltAmpere",new BigDecimal("1")),
 
     /////////////////////////////Time///////////////////////////////////////////////
     Minute("Time", "Minute", new BigDecimal("1")),
@@ -91,9 +91,9 @@ public enum Unit {
     /////////////////////////////Currency///////////////////////////////////////////////
     Euro("Currency", "Euro", new BigDecimal("1")),
     Dollar("Currency", "Dollar", new BigDecimal("1.18")),
-    JapYen("Currency", "Japanese Yen", new BigDecimal("129.28")),
-    PoundSterling("Currency", "Pound Sterling", new BigDecimal("0.85")),
-    ChineseYuan("Currency","Chinese Yuan", new BigDecimal("7.73"));
+    JapYen("Currency", "JapYen", new BigDecimal("129.28")),
+    PoundSterling("Currency", "PoundSterling", new BigDecimal("0.85")),
+    ChineseYuan("Currency","ChineseYuan", new BigDecimal("7.73"));
 
 
 
