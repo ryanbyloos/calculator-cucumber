@@ -63,8 +63,15 @@ public class EvaluatorNumber extends Evaluator{
         bf.getArgs().get(0).accept(this);
         BigDecimal d;
         try{
-            d = ((RealNumber)this.getResult()).getValue();
-            setComputedValue(new RealNumber(bf.op(d).toPlainString()));
+            switch (mode){
+                case INTEGER:
+                    setException(new ComputeError("Cannot use real function on integer"));
+                    break;
+                case REAL:
+                    d = ((RealNumber)this.getResult()).getValue();
+                    setComputedValue(new RealNumber(bf.op(d).toPlainString()));
+                    break;
+            }
         }catch (ComputeError e){
             setException(e);
         }

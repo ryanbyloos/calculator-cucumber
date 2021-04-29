@@ -98,7 +98,7 @@ public class CalculatorController extends MainController implements Initializabl
         try {
             Parser parser = new Parser(res);
             Expression expression = parser.getExpression(calculator);
-            if (expression instanceof Function){
+            if (expression instanceof Function && !((Function)expression).getVar().asValue() ){
                 answerScreen.setText("Function Added");
             }
             else if (expression != null)
