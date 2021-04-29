@@ -22,8 +22,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ *
+ */
 public class CalculatorController extends MainController implements Initializable {
-
 
     public Calculator calculator;
     private Stage funStage;
@@ -34,6 +36,10 @@ public class CalculatorController extends MainController implements Initializabl
     public Button integerTrigger;
 
 
+    /**
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.mainVBox = calculatorVBox;
@@ -41,12 +47,18 @@ public class CalculatorController extends MainController implements Initializabl
         modeComboBox.getItems().addAll(Calculator.Mode.values());
     }
 
+    /**
+     * @param e
+     */
     @FXML
     public void changeMode(Event e) {
         calculator = new Calculator((Calculator.Mode) ((ComboBox) e.getSource()).getValue());
         integerTrigger.setDisable(!integerTrigger.isDisable());
     }
 
+    /**
+     * @param e
+     */
     @FXML
     public void functionButtonClicked(Event e) {
         String function = ((Button) e.getSource()).getText() + "(";
@@ -58,6 +70,9 @@ public class CalculatorController extends MainController implements Initializabl
         calculatorScreen.setText(res);
     }
 
+    /**
+     * @param e
+     */
     @FXML
     public void inverseFunctionButtonClicked(Event e) {
         String screenValue = calculatorScreen.getText();
@@ -65,6 +80,10 @@ public class CalculatorController extends MainController implements Initializabl
         calculatorScreen.setText(res);
     }
 
+    /**
+     * @param e
+     * @throws IllegalConstruction
+     */
     @FXML
     public void getResult(Event e) throws IllegalConstruction {
         String screenValue = calculatorScreen.getText();
@@ -84,6 +103,9 @@ public class CalculatorController extends MainController implements Initializabl
         }
     }
 
+    /**
+     * @param e
+     */
     @FXML
     public void showFunction(Event e) {
         if (funStage != null) funStage.close();
@@ -113,6 +135,9 @@ public class CalculatorController extends MainController implements Initializabl
         }
     }
 
+    /**
+     * @param actionEvent
+     */
     public void defFun(ActionEvent actionEvent) {
         calculatorScreen.setText("name -> x+2");
     }

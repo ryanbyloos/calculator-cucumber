@@ -1,5 +1,6 @@
 package gui;
 
+import Converter.Temperature;
 import Converter.Unit;
 import calculator.Calculator;
 import calculator.RealNumber;
@@ -17,6 +18,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * The type Converter controller.
+ */
 public class ConverterController extends MainController implements Initializable {
 
     public Calculator calculator;
@@ -29,6 +33,10 @@ public class ConverterController extends MainController implements Initializable
     public VBox converterVBox;
     public Label answerScreen;
 
+    /**
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.mainVBox = converterVBox;
@@ -37,21 +45,35 @@ public class ConverterController extends MainController implements Initializable
             if (!typeOfUnit.contains(u.getType()))
                 typeOfUnit.add(u.getType());
         }
+        for (Temperature t : Temperature.values()) {
+            if (!typeOfUnit.contains(t.getType()))
+                typeOfUnit.add(t.getType());
+        }
         if (unitComboBox != null)
             unitComboBox.getItems().addAll(typeOfUnit);
-
         calculator = new Calculator(Calculator.Mode.REAL);
     }
 
+    /**
+     * @param e
+     * @throws IllegalConstruction
+     */
     @Override
     public void getResult(Event e) throws IllegalConstruction {
+        String res;
         String screenValue = calculatorScreen.getText();
-        calculatorScreen.setText(screenValue);
-
-        String res = calculator.convert(new RealNumber(screenValue), Unit.valueOf(fromComboBox.getValue()), Unit.valueOf(toComboBox.getValue())).toString();
+        if (unitComboBox.getValue().equals("Temperature"))
+            res = calculator.convert(new RealNumber(screenValue), Temperature.valueOf(fromComboBox.getValue()), Temperature.valueOf(toComboBox.getValue())).toString();
+        else
+            res = calculator.convert(new RealNumber(screenValue), Unit.valueOf(fromComboBox.getValue()), Unit.valueOf(toComboBox.getValue())).toString();
         answerScreen.setText(res);
     }
 
+    /**
+     * Unit choice.
+     *
+     * @param e the e
+     */
     @FXML
     public void unitChoice(Event e) {
         ArrayList<String> unitList = new ArrayList<>();
@@ -59,6 +81,11 @@ public class ConverterController extends MainController implements Initializable
         for (Unit u : Unit.values()) {
             if (u.getType().equals(unit)) {
                 unitList.add(u.getFullName());
+            }
+        }
+        for (Temperature t : Temperature.values()) {
+            if (t.getType().equals(unit)) {
+                unitList.add(t.getFullName());
             }
         }
         fromComboBox.getItems().clear();
