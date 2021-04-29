@@ -5,9 +5,9 @@ import java.math.BigDecimal;
 public enum Temperature {
 
     /////////////////////////////Temperature///////////////////////////////////////////////
-    Celsius("Temperature", "Degree Celius", new BigDecimal("1"), new BigDecimal("0")),
-    Fahrenheit("Temperature", "Degree Fahrenheit",new BigDecimal("1.8"), new BigDecimal("32")),
-    Kelvin ("Temperature", "Degree Kelvin",  new BigDecimal("1"),new BigDecimal("273.15"));
+    Celsius("Temperature", "Celsius", new BigDecimal("1"), new BigDecimal("0")),
+    Fahrenheit("Temperature", "Fahrenheit",new BigDecimal("1.8"), new BigDecimal("32")),
+    Kelvin ("Temperature", "Kelvin",  new BigDecimal("1"),new BigDecimal("273.15"));
 
 
 
