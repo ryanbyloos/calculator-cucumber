@@ -27,11 +27,22 @@
         </rowConstraints>
         <Button onAction="#clearScreen" text="C" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
         <Button onAction="#getResult" text="=" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-      <ComboBox fx:id="dateComboBox" prefWidth="150.0" promptText="ADDITION" />
+      <ComboBox fx:id="dateComboBox" prefWidth="150.0" promptText="ADDITION" onAction="#changeOperation" />
     </GridPane>
-    <TextField id="calculatorScreen" fx:id="firstScreen" prefHeight="40" prefWidth="420.0" promptText="yyyy-mm-dd" />
-    <TextField id="calculatorScreen" fx:id="secondScreen" prefHeight="40" prefWidth="420.0" promptText="yyyy-mm-dd" />
-    <Label id="answerScreen" fx:id="answerScreen" prefHeight="40" prefWidth="420.0" />
+    <GridPane>
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" prefWidth="420"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints prefHeight="40" vgrow="SOMETIMES"/>
+            <RowConstraints prefHeight="40" vgrow="SOMETIMES"/>
+            <RowConstraints prefHeight="40" vgrow="SOMETIMES"/>
+        </rowConstraints>
+    <DatePicker id="calculatorScreen" fx:id="firstDatePicker" prefHeight="40" prefWidth="420.0" GridPane.rowIndex="0"/>
+    <DatePicker id="calculatorScreen" fx:id="secondDatePicker" prefHeight="40" prefWidth="420.0" GridPane.rowIndex="1"/>
+    <TextField id="calculatorScreen" fx:id="secondScreen" prefHeight="40" prefWidth="420.0" promptText="yyyy-mm-dd" GridPane.rowIndex="1"/>
+    <Label id="answerScreen" fx:id="answerScreen" prefHeight="40" prefWidth="420.0" GridPane.rowIndex="2"/>
+    </GridPane>
     <stylesheets>
         <URL value="@style.css" />
     </stylesheets>

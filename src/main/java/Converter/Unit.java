@@ -84,7 +84,7 @@ public enum Unit {
     Minute("Time", "Minute", new BigDecimal("1")),
     Second("Time", "Second", new BigDecimal("60")),
     Hour("Time", "Hour", new BigDecimal("0.016666667")),
-    Day("Time", "Jour", new BigDecimal("0.000694")),
+    Day("Time", "Day", new BigDecimal("0.000694")),
     Week("Time","Week", new BigDecimal("0.000099")),
     Year ("Time", "Year",new BigDecimal("0.000002")),
 
