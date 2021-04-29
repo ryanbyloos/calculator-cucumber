@@ -54,7 +54,15 @@ public abstract class MainController {
      */
     @FXML
     public void removeCharacter(Event e) {
-        //TODO Remove a character or a function when pressing delete
+        String s = calculatorScreen.getText();
+        if (s.endsWith("sin(") || s.endsWith("cos(") || s.endsWith("tan(") || s.endsWith("exp(") || s.endsWith("log("))
+            calculatorScreen.setText(s.substring(0, s.length()-4));
+        else if (s.endsWith("asin(") || s.endsWith("acos(") || s.endsWith("atan(") || s.endsWith("sinh(") || s.endsWith("cosh(") || s.endsWith("tanh(") || s.endsWith("sqrt("))
+            calculatorScreen.setText(s.substring(0, s.length()-5));
+        else if (s.endsWith("asinh(") || s.endsWith("acosh(") || s.endsWith("atanh("))
+            calculatorScreen.setText(s.substring(0, s.length()-6));
+        else
+            calculatorScreen.setText(s.substring(0, s.length()-1));
     }
 
 
