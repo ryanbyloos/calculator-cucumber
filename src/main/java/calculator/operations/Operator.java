@@ -7,11 +7,21 @@ import visitor.Visitor;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Operator implements Expression {
+/**
+ * Class that applies mathematical operations on expressions
+ */
+public abstract class Operator implements Expression
+{
     private List<Expression> args;
 
-    // It is not allowed to create operation that have a null list of arguments.
-    // Note that it is allowed to have an EMPTY list of arguments.
+    /**
+     * Initialize an operator with an expression list
+     *
+     * It is not allowed to create operator that have a null list of arguments.
+     * Note that it is allowed to have an EMPTY list of arguments.
+     * @param elist List of operator's arguments
+     * @throws IllegalConstruction
+     */
     public /*constructor*/ Operator(List<Expression> elist)
             throws IllegalConstruction {
         if (elist == null) {
@@ -21,13 +31,17 @@ public abstract class Operator implements Expression {
         }
     }
 
-    public List<Expression> getArgs() {
-        return args;
-    }
-    public void setArgs(int i,Expression e){
-        args.set(i,e);
+    /**
+     * Add more arguments to the existing list of arguments args
+     * @param params list of expressions to add
+     */
+    public void addMoreParams(List<Expression> params) {
+        args.addAll(params);
     }
 
+    @Override
+    public abstract  void accept(Visitor v);
+    @Override
     final public Integer countDepth() {
         // use of Java 8 functional programming capabilities
         return 1 + args.stream()
@@ -35,7 +49,7 @@ public abstract class Operator implements Expression {
                 .max()
                 .getAsInt();
     }
-
+    @Override
     final public Integer countOps() {
         // use of Java 8 functional programming capabilities
         return 1 + args.stream()
@@ -43,7 +57,7 @@ public abstract class Operator implements Expression {
                 .reduce(Integer::sum)
                 .getAsInt();
     }
-
+    @Override
     final public Integer countNbs() {
         // use of Java 8 functional programming capabilities
         return args.stream()
@@ -51,13 +65,6 @@ public abstract class Operator implements Expression {
                 .reduce(Integer::sum)
                 .getAsInt();
     }
-
-    // add more arguments to the existing list of arguments args
-    public void addMoreParams(List<Expression> params) {
-        args.addAll(params);
-    }
-
-    public abstract  void accept(Visitor v);
 
     //Two Operation expressions are equal if their list of arguments is equal and they are the same operation
     @Override
@@ -73,4 +80,10 @@ public abstract class Operator implements Expression {
         return this.args.equals(other.getArgs());
     }
 
+    public List<Expression> getArgs() {
+        return args;
+    }
+    public void setArgs(int i,Expression e){
+        args.set(i,e);
+    }
 }

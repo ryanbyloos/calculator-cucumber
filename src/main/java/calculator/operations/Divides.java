@@ -7,8 +7,8 @@ import visitor.EvaluatorNumber;
 import java.util.ArrayList;
 import java.util.List;
 
-final public class Divides extends Operation {
-
+final public class Divides extends Operation
+{
     public /*constructor*/ Divides(List<Expression> elist) throws IllegalConstruction {
         super(elist);
         setUp(elist);
@@ -19,7 +19,8 @@ final public class Divides extends Operation {
         setUp(elist);
     }
 
-    public void setUp(List<Expression> elist) throws  IllegalConstruction{
+    private void setUp(List<Expression> elist) throws  IllegalConstruction{
+        // Detect if there is an divide by zero error
         EvaluatorNumber evaluator = new EvaluatorNumber(Calculator.Mode.REAL);
         for (int i = 1; i < elist.size(); i++) {
             elist.get(i).accept(evaluator);
@@ -28,7 +29,6 @@ final public class Divides extends Operation {
                     throw new DivisionByZeroError();
                 }
             }catch (VariableUnassignedError ignored) { } //because variable can be initialise later
-//            args = new ArrayList<>(elist);
         }
         symbol = "/";
         neutral = 1;

@@ -12,7 +12,6 @@ import java.util.List;
 
 final public class Plus extends Operation implements ComputeDate
 {
-
 	public /*constructor*/ Plus(List<Expression> elist) throws IllegalConstruction {
 		super(elist);
 		setUp();
