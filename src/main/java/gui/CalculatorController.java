@@ -4,6 +4,7 @@ import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
 import calculator.exceptions.IllegalConstruction;
+import calculator.exceptions.InvalidSyntax;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -73,13 +74,15 @@ public class CalculatorController extends MainController implements Initializabl
         parenthesisToAdd.append(")".repeat(Math.max(0, leftP - rightP)));
         String res = screenValue + parenthesisToAdd;
         calculatorScreen.setText(res);
-
-        Parser parser = new Parser(res);
-        Expression expression = parser.getExpression(calculator);
-        if (expression != null)
-            answerScreen.setText(calculator.eval(expression));
+        try {
+            Parser parser = new Parser(res);
+            Expression expression = parser.getExpression(calculator);
+            if (expression != null)
+                answerScreen.setText(calculator.eval(expression));
+        }catch (InvalidSyntax exception){
+            answerScreen.setText(exception.getMessage());
+        }
     }
-
 
     @FXML
     public void showFunction(Event e) {

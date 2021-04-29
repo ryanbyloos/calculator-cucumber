@@ -144,10 +144,15 @@ public class TestParser {
     }
 
     @Test
-    public void testParserFunDoesNotExist() {
+    public void testParserFunDoesNotExist() throws InvalidSyntax {
         Parser p = new Parser("funqwe(0)");
 
         Calculator c = new Calculator(Calculator.Mode.REAL);
         assertThrows(InvalidSyntax.class, () -> p.getExpression(c));
+    }
+
+    @Test
+    public void testParserInvalidSyntax() {
+        assertThrows(InvalidSyntax.class,() -> new Parser("f//fwe/ff/w/33/fe"));
     }
 }
