@@ -4,7 +4,7 @@ import calculator.Expression;
 import visitor.Visitor;
 
 /**
- *
+ *  Class which represent a variable that can hold an expression as value
  */
 public class Variable implements Expression {
     public final String varName = "X";
@@ -34,6 +34,10 @@ public class Variable implements Expression {
     @Override
     public String toString() { return varName; }
 
+    /**
+     * Return the complete string such as X : value
+     * @return
+     */
     public String completeString(){
         if (value == null) return varName;
         return varName+":"+ value;

@@ -61,8 +61,8 @@ public abstract class MainController {
             calculatorScreen.setText(s.substring(0, s.length()-5));
         else if (s.endsWith("asinh(") || s.endsWith("acosh(") || s.endsWith("atanh("))
             calculatorScreen.setText(s.substring(0, s.length()-6));
-        else
-            calculatorScreen.setText(s.substring(0, s.length()-1));
+        else if(!calculatorScreen.getText().isEmpty())
+            calculatorScreen.setText(s.substring(0, s.length() - 1));
     }
 
 

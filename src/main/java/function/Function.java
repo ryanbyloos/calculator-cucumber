@@ -13,7 +13,8 @@ import visitor.Visitor;
 public class Function implements Expression{
 
     /**
-     * Verify if a function contain only one variable.
+     * Visitor that verify if a function contain only one variable.
+     * And uniform the variables if more than one has been found.
      */
     private static class FunctionValidator extends Visitor {
         private Variable var;
@@ -61,11 +62,14 @@ public class Function implements Expression{
         public Variable getVar() { return var; }
     }
 
-
-
     private final Variable var;
     private final Expression e;
 
+    /**
+     * Initialise a function with an expression e.
+     * And standardizes the variables
+     * @param e the body of the function
+     */
     public Function(Expression e){
         this.e = e;
         // check if there are only the same var in e
@@ -74,11 +78,19 @@ public class Function implements Expression{
         this.var = v.getVar();
     }
 
+    /**
+     * Set a value to the function
+     * @param n value of variable
+     * @throws BadAssignment
+     */
     public void setValue(Expression n) throws BadAssignment{
         if (n == null) throw new BadAssignment();
         var.assignValue(n);
     }
 
+    /**
+     * Clear the value of variable
+     */
     public void clearValue(){ var.clear(); }
 
     @Override
