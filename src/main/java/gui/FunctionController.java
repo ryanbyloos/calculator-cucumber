@@ -9,10 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -56,6 +53,17 @@ public class FunctionController implements Initializable {
         int center_pix_x = (int) (pane.getPrefWidth()/2.0);
         int center_pix_y = (int) (pane.getPrefHeight()/2.0);
 
+        // draw AXIS
+        double ycp = center_pix_y-(center_y/size_pix);
+        double xcp = center_pix_x-(center_x/size_pix);
+        Line axisX = new Line(0, ycp, pane.getPrefWidth(), ycp);
+        Line axisY = new Line(xcp, 0, xcp, pane.getPrefHeight());
+
+        pane.getChildren().add(axisX);
+        pane.getChildren().add(axisY);
+
+
+        // draw function
         boolean first = true;
 
         String funName = input.getText();
@@ -65,8 +73,6 @@ public class FunctionController implements Initializable {
         }
         Function f = calculator.getStoredFun().get(funName);
 
-
-        double py = 0;
         for(int x = 0 ; x < (int) (pane.getWidth()) ; x++){
             double x_value = pixToValueX(x) - (center_pix_x*size_pix);
             try {
@@ -81,15 +87,8 @@ public class FunctionController implements Initializable {
                     path.getElements().add(new MoveTo(x,y));
                     first = false;
                 } else{
-//                    if( (py > center_y+(size_pix*(double)center_pix_y)  &&  center_y-(size_pix*(double)center_pix_y) < y_value) ||
-//                            (y_value > center_y+(size_pix*(double)center_pix_y)  && center_y-(size_pix*(double)center_pix_y) < py )){
-//                        path.getElements().add(new MoveTo(x,y));
-//                    }else{
-//                        path.getElements().add(new LineTo(x,y));
-//                    }
                     path.getElements().add(new LineTo(x,y));
                 }
-//                py = y_value;
 
             }catch (Exception ignored){}
         }

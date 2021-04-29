@@ -257,8 +257,9 @@ public class CreateTreeVisitor implements ExpressionVisitor{
     public Object visitDeffun(ExpressionParser.DeffunContext ctx) {
         String funName = ctx.getChild(0).getText();
         result = (Expression) ctx.getChild(2).accept(this);
-        calculator.addFunction(funName,new Function(result));
-        return null;
+        Function f = new Function(result);
+        calculator.addFunction(funName,f);
+        return f;
     }
 
     @Override

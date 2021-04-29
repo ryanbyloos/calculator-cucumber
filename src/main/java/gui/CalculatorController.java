@@ -2,9 +2,11 @@ package gui;
 
 import calculator.Calculator;
 import calculator.Expression;
+import calculator.Notation;
 import calculator.Parser;
 import calculator.exceptions.IllegalConstruction;
 import calculator.exceptions.InvalidSyntax;
+import function.Function;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import visitor.Printer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -95,7 +98,10 @@ public class CalculatorController extends MainController implements Initializabl
         try {
             Parser parser = new Parser(res);
             Expression expression = parser.getExpression(calculator);
-            if (expression != null)
+            if (expression instanceof Function){
+                answerScreen.setText("Function Added");
+            }
+            else if (expression != null)
                 answerScreen.setText(calculator.eval(expression));
         }catch (InvalidSyntax exception){
             answerScreen.setText(exception.getMessage());
@@ -112,12 +118,13 @@ public class CalculatorController extends MainController implements Initializabl
 
         StackPane secondaryLayout = new StackPane();
 
-        Scene secondScene = new Scene(secondaryLayout, 230, 100);
+        Scene secondScene = new Scene(secondaryLayout, 640, 400);
 
         // New window (Stage)
         funStage = new Stage();
         funStage.setTitle("Function");
         funStage.setScene(secondScene);
+        funStage.setResizable(false);
 
         funStage.show();
 

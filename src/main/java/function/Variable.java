@@ -32,9 +32,7 @@ public class Variable implements Expression {
     }
 
     @Override
-    public String toString() {
-        return varName;
-    }
+    public String toString() { return varName; }
 
     public String completeString(){
         if (value == null) return varName;

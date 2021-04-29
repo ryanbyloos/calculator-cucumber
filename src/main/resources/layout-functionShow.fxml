@@ -8,7 +8,8 @@
    <Pane id="paneScreen" fx:id="pane" prefHeight="452.0" prefWidth="640.0" />
    <HBox id="boxScreen" prefHeight="100.0" prefWidth="200.0">
       <children>
-         <TextField id="calculatorScreen" fx:id="input" prefHeight="30.0" prefWidth="327.0" />
+         <Label prefHeight="26.0" prefWidth="165.0" text="Function Name :" />
+         <TextField id="calculatorScreen" fx:id="input" prefHeight="26.0" prefWidth="238.0" />
          <Button mnemonicParsing="false" onAction="#ok" text="ok" />
          <Button mnemonicParsing="false" onAction="#moveLeft" text="&lt;" />
          <Button mnemonicParsing="false" onAction="#moveUp" text="/\" />

@@ -21,7 +21,7 @@ public class Printer extends Visitor{
         return eval;
     }
 
-    public void visit(MyNumber n) {  eval = n.toString();}
+    public void visit(MyNumber n) { eval = n.toString(); }
     @Override
     public void visit(Variable v) { eval = v.toString(); }
 
