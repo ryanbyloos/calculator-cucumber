@@ -4,7 +4,6 @@ import calculator.*;
 import calculator.exceptions.*;
 import visitor.EvaluatorNumber;
 
-import java.util.ArrayList;
 import java.util.List;
 
 final public class Divides extends Operation

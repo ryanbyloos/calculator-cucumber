@@ -12,7 +12,7 @@ import java.util.List;
  */
 public abstract class Operator implements Expression
 {
-    private List<Expression> args;
+    private final List<Expression> args;
 
     /**
      * Initialize an operator with an expression list

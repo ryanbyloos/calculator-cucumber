@@ -4,7 +4,6 @@ import calculator.exceptions.IllegalConstruction;
 import calculator.exceptions.InvalidSyntax;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CodePointCharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import parser.ExpressionLexer;
 import parser.ExpressionParser;

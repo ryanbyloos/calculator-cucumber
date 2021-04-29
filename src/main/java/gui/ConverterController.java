@@ -5,14 +5,11 @@ import Converter.Unit;
 import calculator.Calculator;
 import calculator.RealNumber;
 import calculator.exceptions.IllegalConstruction;
-import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;

@@ -78,7 +78,7 @@ public class TestConvert {
     public void testTemperature1()
     {
         String res = calc.convertToString(test2,Temperature.Celsius,Temperature.Kelvin);
-        assertEquals("273.15 Degree Kelvin",res);
+        assertEquals("273.15 Kelvin",res);
     }
 
 

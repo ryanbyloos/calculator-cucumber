@@ -89,7 +89,7 @@ public class FunctionController implements Initializable {
 //                    }
                     path.getElements().add(new LineTo(x,y));
                 }
-                py = y_value;
+//                py = y_value;
 
             }catch (Exception ignored){}
         }

@@ -117,7 +117,7 @@ public class Calculator {
 
 
     public BigDecimal convert(Expression e,Unit base, Unit aimed) throws IllegalConvertionArgument,ComputeError{
-        if(base.getType() != aimed.getType()){
+        if(!base.getType().equals(aimed.getType())){
             throw new IllegalConvertionArgument();
         }
 
@@ -127,7 +127,7 @@ public class Calculator {
         return eval;
     }
     public String convertToString(Expression e,Unit base, Unit aimed) throws IllegalConvertionArgument{
-        if(base.getType() != aimed.getType()){
+        if(!base.getType().equals(aimed.getType())){
             throw new IllegalConvertionArgument();
         }
 

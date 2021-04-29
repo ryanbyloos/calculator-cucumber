@@ -5,7 +5,6 @@ import calculator.Expression;
 import calculator.Parser;
 import calculator.exceptions.IllegalConstruction;
 import calculator.exceptions.InvalidSyntax;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
