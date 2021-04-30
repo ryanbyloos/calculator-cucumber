@@ -57,10 +57,12 @@ public class DateController extends MainController implements Initializable {
         if (dateComboBox.getValue().equals("TIME BETWEEN")) {
             secondDatePicker.setVisible(true);
             secondScreen.setVisible(false);
+            clearScreen(e);
         }
         else {
             secondDatePicker.setVisible(false);
             secondScreen.setVisible(true);
+            clearScreen(e);
         }
     }
 
@@ -71,17 +73,22 @@ public class DateController extends MainController implements Initializable {
      */
     @Override
     public void getResult(Event e) throws IllegalConstruction {
-        MyDate date1 = new MyDate(firstDatePicker.getValue());
-        MyDate date2;
-        if (dateComboBox.getValue()==null) {
-            dateComboBox.setValue("ADDITION");
-        }
-        if (dateComboBox.getValue().equals("TIME BETWEEN"))
-            date2 = new MyDate(secondDatePicker.getValue());
-        else
-            date2 = new MyDate(secondScreen.getText());
+        try {
+            MyDate date1 = new MyDate(firstDatePicker.getValue());
+            MyDate date2;
+            if (dateComboBox.getValue()==null) {
+                dateComboBox.setValue("ADDITION");
+            }
+            if (dateComboBox.getValue().equals("TIME BETWEEN"))
+                date2 = new MyDate(secondDatePicker.getValue());
+            else
+                date2 = new MyDate(secondScreen.getText());
 
-        String res = dateComboBox.getValue().equals("ADDITION") ? date1.plus(date2).toString() : date1.minus(date2).toString();
-        answerScreen.setText(res);
+            String res = dateComboBox.getValue().equals("ADDITION") ? date1.plus(date2).toString() : date1.minus(date2).toString();
+            answerScreen.setText(res);
+        }catch (Exception exception)
+        {
+            showAlert("Wrong Input");
+        }
     }
 }

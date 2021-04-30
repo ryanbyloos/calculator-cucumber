@@ -12,6 +12,7 @@ import Converter.Unit;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
+@SuppressWarnings("JavaDoc")
 public class Calculator {
     public enum Mode {INTEGER,REAL}
 
@@ -115,7 +116,12 @@ public class Calculator {
         return new RealNumber(v.getResult().toString());
     }
 
-
+    /**
+     * Convert an expression to a base unit to another from the same type
+     * @param e expression to convert
+     * @return BigDecimal that results from the convertion
+     * @throws ComputeError if an error was detected during the evaluation, IllegalConvertionArgument if the base unit and the aimed unit types are different
+     */
     public BigDecimal convert(Expression e,Unit base, Unit aimed) throws IllegalConvertionArgument,ComputeError{
         if(!base.getType().equals(aimed.getType())){
             throw new IllegalConvertionArgument();
@@ -126,6 +132,12 @@ public class Calculator {
         eval = eval.multiply(aimed.getratio());
         return eval;
     }
+    /**
+     * Get the string from a conversion
+     * @param e expression to convert
+     * @return String resulting from the conversion
+     * @throws IllegalConvertionArgument if the base unit and the aimed unit types are different
+     */
     public String convertToString(Expression e,Unit base, Unit aimed) throws IllegalConvertionArgument{
         if(!base.getType().equals(aimed.getType())){
             throw new IllegalConvertionArgument();
@@ -139,7 +151,12 @@ public class Calculator {
             return "ERROR : "+ce.getMessage();
         }
     }
-
+    /**
+     * Convert an expression to a base temperature unit to another temperature unit
+     * @param e expression to convert
+     * @return BigDecimal that results from the convertion
+     * @throws ComputeError if an error was detected during the evaluation
+     */
     public BigDecimal convert(Expression e, Temperature base, Temperature aimed) throws  ComputeError {
         BigDecimal eval = evalReal(e).getValue();
         eval = eval.subtract(base.getConstant());
@@ -149,7 +166,11 @@ public class Calculator {
 
         return eval;
     }
-
+    /**
+     * get The string from a temperature conversion
+     * @param e expression to convert
+     * @return String resulting from the conversion
+     */
     public String convertToString(Expression e, Temperature base, Temperature aimed) {
         try {
             RealNumber eval = new RealNumber(convert(e,base,aimed));
@@ -161,6 +182,12 @@ public class Calculator {
 
     public HashMap<String, Function> getStoredFun() { return storedFun; }
 
+    /**
+     * Eval an expression resulting in a date
+     * @param e expression to convert
+     * @return MyDate resulting from the evaluation
+     * @throws ComputeError if an error was detected during the evaluation
+     */
     public MyDate evalDate(Expression e)  throws ComputeError {
         // create a new visitor to evaluate expressions
         EvaluatorDate v = new EvaluatorDate();
@@ -175,4 +202,6 @@ public class Calculator {
      or to simplify some expression
      public Expression simplify(Expression e)
     */
+
+    public Mode getMode() { return mode; }
 }

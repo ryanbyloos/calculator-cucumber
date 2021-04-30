@@ -5,10 +5,7 @@ import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -94,8 +91,9 @@ public abstract class MainController {
         Stage stage = (Stage) mainVBox.getScene().getWindow();
         stage.setScene(converterScene);
         stage.setTitle("Converter");
+        stage.setHeight(360);
+        stage.setWidth(330);
     }
-
     /**
      * Change the current scene to the calculator scene.
      *
@@ -107,6 +105,8 @@ public abstract class MainController {
         Stage stage = (Stage) mainVBox.getScene().getWindow();
         stage.setScene(calculatorScene);
         stage.setTitle("Calculator");
+        stage.setHeight(380);
+        stage.setWidth(640);
     }
 
     /**
@@ -120,6 +120,14 @@ public abstract class MainController {
         Stage stage = (Stage) mainVBox.getScene().getWindow();
         stage.setScene(dateScene);
         stage.setTitle("Date calculator");
+        stage.setHeight(200);
+        stage.setWidth(340);
+    }
+    public void showAlert(String text)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText(text);
+        alert.showAndWait();
     }
 
     public void setConverterScene(Scene scene) {

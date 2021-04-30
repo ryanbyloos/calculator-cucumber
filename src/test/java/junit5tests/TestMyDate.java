@@ -141,14 +141,14 @@ public class TestMyDate {
         List<Expression> params2 =
                 new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1998,3,3)), new MyDate(0,1,1)));
         Plus op = new Plus(params2);
-        assertEquals("( 1998-3-3 + 0-1-1 )", op.toString());
+        assertEquals("( 3-3-1998 + 1-1-0 )", op.toString());
     }
     @Test
     public void test9_1() throws IllegalConstruction {
         List<Expression> params2 =
                 new ArrayList<>(Arrays.asList(new MyDate(LocalDate.of(1998,3,3)), new MyDate(LocalDate.of(1998,3,3))));
         Minus op1 = new Minus(params2);
-        assertEquals("( 1998-3-3 - 1998-3-3 )", op1.toString());
+        assertEquals("( 3-3-1998 - 3-3-1998 )", op1.toString());
     }
     @Test
     public void test10()  {

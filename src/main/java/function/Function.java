@@ -81,7 +81,7 @@ public class Function implements Expression{
     /**
      * Set a value to the function
      * @param n value of variable
-     * @throws BadAssignment
+     * @throws BadAssignment Assignation error
      */
     public void setValue(Expression n) throws BadAssignment{
         if (n == null) throw new BadAssignment();
