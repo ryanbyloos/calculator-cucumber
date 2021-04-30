@@ -54,8 +54,11 @@ public class CalculatorController extends MainController implements Initializabl
      */
     @FXML
     public void changeMode(Event e) {
-        calculator = new Calculator((Calculator.Mode) ((ComboBox) e.getSource()).getValue());
-        integerTrigger.setDisable(!integerTrigger.isDisable());
+        Calculator.Mode newMode = (Calculator.Mode) ((ComboBox) e.getSource()).getValue();
+        if(calculator.getMode() != newMode ) {
+            calculator = new Calculator(newMode);
+            integerTrigger.setDisable(!integerTrigger.isDisable());
+        }
     }
 
     /**

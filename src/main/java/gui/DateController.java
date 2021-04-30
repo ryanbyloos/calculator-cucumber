@@ -59,7 +59,7 @@ public class DateController extends MainController implements Initializable {
 
     /**
      * @param e
-     * @throws Exception,IllegalConstruction
+     * @throws IllegalConstruction
      */
     @Override
     public void getResult(Event e) throws IllegalConstruction {

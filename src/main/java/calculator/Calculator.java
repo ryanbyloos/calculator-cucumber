@@ -12,6 +12,7 @@ import Converter.Unit;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
+@SuppressWarnings("JavaDoc")
 public class Calculator {
     public enum Mode {INTEGER,REAL}
 
@@ -169,7 +170,6 @@ public class Calculator {
      * get The string from a temperature conversion
      * @param e expression to convert
      * @return String resulting from the conversion
-     * @throws ComputeError if an error was detected during the evaluation
      */
     public String convertToString(Expression e, Temperature base, Temperature aimed) {
         try {
@@ -202,4 +202,6 @@ public class Calculator {
      or to simplify some expression
      public Expression simplify(Expression e)
     */
+
+    public Mode getMode() { return mode; }
 }
