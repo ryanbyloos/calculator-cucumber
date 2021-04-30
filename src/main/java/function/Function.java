@@ -96,7 +96,13 @@ public class Function implements Expression{
     @Override
     public String toString() { return e.toString(); }
 
-    public String toString(MyNumber value) throws BadAssignment {
+    /**
+     * Returns a string from the function evaluate to an expression
+     * @param value value of the variable
+     * @return a string of the evaluated function
+     * @throws BadAssignment
+     */
+    public String toString(Expression value) throws BadAssignment {
         if(value == null) throw new BadAssignment();
 
         var.assignValue(value);

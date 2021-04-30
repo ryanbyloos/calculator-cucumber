@@ -35,8 +35,8 @@ public class Variable implements Expression {
     public String toString() { return varName; }
 
     /**
-     * Return the complete string such as X : value
-     * @return
+     * Return the complete string such as X : "value"
+     * @return X : "value"
      */
     public String completeString(){
         if (value == null) return varName;

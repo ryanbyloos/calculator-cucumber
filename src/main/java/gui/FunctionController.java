@@ -34,6 +34,9 @@ public class FunctionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) { }
 
+    /**
+     * Method that draw the function on screen with axis
+     */
     private void drawCanvas() {
         Path path = new Path();
         path.setStroke(Color.LIGHTGREEN);
@@ -78,11 +81,14 @@ public class FunctionController implements Initializable {
             try {
                 // compute function
                 f.setValue(new RealNumber(Double.toString(x_value)));
+                // cast to double to draw line
                 double y_value = Double.valueOf(calculator.evalReal(f).getValue().toPlainString());
-                f.clearValue();
+                f.clearValue(); // clear function value
 
+                // compute the pixel of y
                 int y = center_pix_y + valueToPixY(y_value + center_y);
 
+                // add line to path
                 if (first) {
                     path.getElements().add(new MoveTo(x,y));
                     first = false;
@@ -95,38 +101,63 @@ public class FunctionController implements Initializable {
         pane.getChildren().add(path);
     }
 
+    /**
+     * Method that refresh the canvas
+     */
     @FXML
     private void ok(ActionEvent event){
         drawCanvas();
     }
 
+    /**
+     * Method that apply a move left
+     */
     @FXML
     private void moveLeft(ActionEvent event){
         center_x+=5.0*size_pix;
         drawCanvas();
     }
+
+    /**
+     * Method that apply a move right
+     */
     @FXML
     private void moveRight(){
         center_x-=5.0*size_pix;
         drawCanvas();
     }
+
+    /**
+     * Method that apply a move up
+     */
     @FXML
     private void moveUp(ActionEvent event){
         center_y+=5.0*size_pix;
         drawCanvas();
     }
+
+    /**
+     * Method that apply a move down
+     */
     @FXML
     private void moveDown(){
         center_y-=5.0*size_pix;
         drawCanvas();
     }
 
+    /**
+     * Method that apply a zoom in
+     */
     @FXML
     private void zoomIn(){
         size_pix -= 0.005;
         if(size_pix <= 0.01) size_pix = 0.01;
         drawCanvas();
     }
+
+    /**
+     * Method that apply a zoom out
+     */
     @FXML
     private void zoomOut(){
         size_pix += 0.005;

@@ -18,6 +18,7 @@ public class EvaluatorNumber extends Evaluator{
 
     @Override
     public void visit(MyNumber n){
+        // it converts it into the type desired by the evaluator
         try {
             setComputedValue(n.convertTo(mode));
         }catch (ComputeError e){
@@ -27,6 +28,7 @@ public class EvaluatorNumber extends Evaluator{
 
     @Override
     public void visit(Variable v) {
+        // verify if variable as value
         if(!v.asValue()) setException(new VariableUnassignedError());
         else v.getValue().accept(this);
     }
