@@ -3,17 +3,17 @@ package calculator.operations.functions;
 import calculator.Expression;
 import calculator.exceptions.IllegalConstruction;
 import calculator.operations.Operator;
-import ch.obermuhlner.math.big.BigDecimalMath;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
 
+/**
+ * Main class for all the main functions that are used
+ */
 public abstract class BigFunction extends Operator {
     public MathContext mc = MathContext.DECIMAL128;
-    public final BigDecimal PI = BigDecimalMath.pi(mc);
-    public final BigDecimal E = BigDecimalMath.e(mc);
 
     public BigFunction(List<Expression> elist) throws IllegalConstruction {
         super(elist);
