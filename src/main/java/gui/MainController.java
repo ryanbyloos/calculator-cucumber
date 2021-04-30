@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- *
+ * It is the parent of all the controller of the project. It contains the methods that are used by all the controllers.
  */
 public abstract class MainController {
 
@@ -24,13 +24,16 @@ public abstract class MainController {
     public Label answerScreen;
 
     /**
-     * @param e
-     * @throws IllegalConstruction
+     * Call something in the model that computes the result, and show it on screen.
+     *
+     * @param e The event when the "=" button is pressed
      */
     public abstract void getResult(Event e) throws IllegalConstruction;
 
     /**
-     * @param e
+     * Exit the application
+     *
+     * @param e The event when the "exit" menu item is pressed
      */
     @FXML
     public void exitApplication(Event e) {
@@ -38,7 +41,9 @@ public abstract class MainController {
     }
 
     /**
-     * @param e
+     * Take what is written on the button and add it on screen.
+     *
+     * @param e The event when any non-special button is pressed
      */
     @FXML
     public void defaultButtonClicked(Event e) {
@@ -47,10 +52,12 @@ public abstract class MainController {
     }
 
     /**
-     * @param e
+     * Delete the character or the function at the end of the screen
+     *
+     * @param e The event when the "DEL" button is pressed
      */
     @FXML
-    public void removeCharacter(Event e) {
+    public void deleteButtonClicked(Event e) {
         String s = calculatorScreen.getText();
         if (s.endsWith("sin(") || s.endsWith("cos(") || s.endsWith("tan(") || s.endsWith("exp(") || s.endsWith("log("))
             calculatorScreen.setText(s.substring(0, s.length()-4));
@@ -62,9 +69,10 @@ public abstract class MainController {
             calculatorScreen.setText(s.substring(0, s.length() - 1));
     }
 
-
     /**
-     * @param e
+     * Clear the screens
+     *
+     * @param e The event when the "C" button is pressed
      */
     @FXML
     public void clearScreen(Event e) {
@@ -73,7 +81,9 @@ public abstract class MainController {
     }
 
     /**
-     * @param e
+     * Change the current scene to the converter scene.
+     *
+     * @param e The event when the "Converter" menu item is pressed
      */
     @FXML
     public void openConverterScene(Event e) {
@@ -81,18 +91,13 @@ public abstract class MainController {
         Stage stage = (Stage) mainVBox.getScene().getWindow();
         stage.setScene(converterScene);
         stage.setTitle("Converter");
-        stage.setHeight(360);
+        stage.setHeight(380);
         stage.setWidth(330);
     }
     /**
-     * @param scene
-     */
-    public void setConverterScene(Scene scene) {
-        converterScene = scene;
-    }
-
-    /**
-     * @param e
+     * Change the current scene to the calculator scene.
+     *
+     * @param e The event when the "Calculator" menu item is pressed
      */
     @FXML
     public void openCalculatorScene(Event e) {
@@ -105,14 +110,9 @@ public abstract class MainController {
     }
 
     /**
-     * @param scene
-     */
-    public void setCalculatorScene(Scene scene) {
-        calculatorScene = scene;
-    }
-
-    /**
-     * @param e
+     * Change the current scene to the date scene.
+     *
+     * @param e The event when the "Date" menu item is pressed
      */
     @FXML
     public void openDateScene(Event e) {
@@ -130,9 +130,12 @@ public abstract class MainController {
         alert.showAndWait();
     }
 
-    /**
-     * @param scene
-     */
+    public void setConverterScene(Scene scene) {
+        converterScene = scene;
+    }
+    public void setCalculatorScene(Scene scene) {
+        calculatorScene = scene;
+    }
     public void setDateScene(Scene scene) {
         dateScene = scene;
     }

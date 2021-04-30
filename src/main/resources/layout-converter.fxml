@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="converterVBox" prefHeight="360.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ConverterController">
+<VBox fx:id="converterVBox" prefHeight="380.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ConverterController">
     <MenuBar id="menuScreen" prefHeight="25.0" prefWidth="627.0">
         <Menu text="File">
             <MenuItem onAction="#exitApplication" text="Exit" />
@@ -37,7 +37,7 @@
         <ComboBox fx:id="toComboBox" promptText="to unit" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
         <Button onAction="#clearScreen" text="C" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
         <Button onAction="#defaultButtonClicked" text="6" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-        <Button onAction="#removeCharacter" text="DEL" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <Button onAction="#deleteButtonClicked" text="DEL" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
         <Button onAction="#getResult" text="=" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
         <Button onAction="#defaultButtonClicked" text="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
         <Button onAction="#defaultButtonClicked" text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />

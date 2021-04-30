@@ -18,7 +18,7 @@ public class CalculatorApp extends Application {
 
         FXMLLoader converterLoader = new FXMLLoader(getClass().getResource("/layout-converter.fxml"));
         Parent converterParent = converterLoader.load();
-        Scene converterScene = new Scene(converterParent, 330, 360);
+        Scene converterScene = new Scene(converterParent, 330, 380);
 
         FXMLLoader dateLoader = new FXMLLoader(getClass().getResource("/layout-date.fxml"));
         Parent dateParent = dateLoader.load();

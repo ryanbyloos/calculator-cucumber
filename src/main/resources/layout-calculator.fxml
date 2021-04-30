@@ -55,7 +55,7 @@
         <Button disable="${integerTrigger.disable}" onAction="#inverseFunctionButtonClicked" text="1/x" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
         <Button disable="${integerTrigger.disable}" text="PI" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
         <Button onAction="#clearScreen" text="C" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-        <Button onAction="#removeCharacter" text="DEL" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Button onAction="#deleteButtonClicked" text="DEL" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
         <Button onAction="#defaultButtonClicked" text="/" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
         <Button onAction="#defaultButtonClicked" text="(" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
         <Button onAction="#defaultButtonClicked" text=")" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" />

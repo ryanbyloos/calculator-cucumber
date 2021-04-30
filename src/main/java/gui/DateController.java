@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- *
+ * Controller used for the Date Scene
  */
 public class DateController extends MainController implements Initializable {
 
@@ -26,8 +26,7 @@ public class DateController extends MainController implements Initializable {
     public ComboBox<String> dateComboBox;
 
     /**
-     * @param url
-     * @param resourceBundle
+     * Initialize the Date scene, by getting the possible operations.
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -35,6 +34,11 @@ public class DateController extends MainController implements Initializable {
         dateComboBox.getItems().addAll("ADDITION", "SUBTRACTION", "TIME BETWEEN");
     }
 
+    /**
+     * Clear the screens
+     *
+     * @param e The event when the "C" button is pressed
+     */
     @Override
     public void clearScreen(Event e) {
         firstDatePicker.getEditor().clear();
@@ -43,6 +47,11 @@ public class DateController extends MainController implements Initializable {
         answerScreen.setText("");
     }
 
+    /**
+     * Changing the operation
+     *
+     * @param e The event when we choose an operation in the drop-down menu
+     */
     @FXML
     public void changeOperation(Event e){
         if (dateComboBox.getValue().equals("TIME BETWEEN")) {
@@ -58,8 +67,9 @@ public class DateController extends MainController implements Initializable {
     }
 
     /**
-     * @param e
-     * @throws IllegalConstruction
+     * Create MyDate objects that computes the result, and show it on screen.
+     *
+     * @param e The event when the "=" button is pressed
      */
     @Override
     public void getResult(Event e) throws IllegalConstruction {
