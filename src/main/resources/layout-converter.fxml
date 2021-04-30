@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="converterVBox" prefHeight="360.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ConverterController">
+<VBox fx:id="converterVBox" prefHeight="380.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ConverterController">
     <MenuBar id="menuScreen" prefHeight="25.0" prefWidth="627.0">
         <Menu text="File">
             <MenuItem onAction="#exitApplication" text="Exit" />

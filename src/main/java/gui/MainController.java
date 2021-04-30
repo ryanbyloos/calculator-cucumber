@@ -91,7 +91,7 @@ public abstract class MainController {
         Stage stage = (Stage) mainVBox.getScene().getWindow();
         stage.setScene(converterScene);
         stage.setTitle("Converter");
-        stage.setHeight(360);
+        stage.setHeight(380);
         stage.setWidth(330);
     }
     /**
