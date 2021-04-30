@@ -37,7 +37,7 @@
         <ComboBox fx:id="toComboBox" promptText="to unit" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
         <Button onAction="#clearScreen" text="C" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
         <Button onAction="#defaultButtonClicked" text="6" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-        <Button onAction="#removeCharacter" text="DEL" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <Button onAction="#deleteButtonClicked" text="DEL" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
         <Button onAction="#getResult" text="=" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
         <Button onAction="#defaultButtonClicked" text="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
         <Button onAction="#defaultButtonClicked" text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />

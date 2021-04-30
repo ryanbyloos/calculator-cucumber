@@ -8,7 +8,8 @@ import calculator.exceptions.IllegalConstruction;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -16,12 +17,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * The type Converter controller.
+ * Controller used for the Converter Scene
  */
 public class ConverterController extends MainController implements Initializable {
 
     public Calculator calculator;
-
 
     @FXML
     public ComboBox<String> unitComboBox;
@@ -31,8 +31,7 @@ public class ConverterController extends MainController implements Initializable
     public Label answerScreen;
 
     /**
-     * @param url
-     * @param resourceBundle
+     * Initialize the Calculator scene, by getting the different unit types.
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,8 +51,9 @@ public class ConverterController extends MainController implements Initializable
     }
 
     /**
-     * @param e
-     * @throws IllegalConstruction
+     * Use the calculator to compute the result, and show it on screen.
+     *
+     * @param e The event when the "=" button is pressed
      */
     @Override
     public void getResult(Event e) throws IllegalConstruction {
@@ -67,9 +67,9 @@ public class ConverterController extends MainController implements Initializable
     }
 
     /**
-     * Unit choice.
+     * Fill up drop down menus with the corresponding units.
      *
-     * @param e the e
+     * @param e The event when an unit type is chosen in a drop down menu.
      */
     @FXML
     public void unitChoice(Event e) {
